@@ -1,0 +1,151 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Python API Usage &mdash; foldkit 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=01f34227"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="API Reference" href="api.html" />
+    <link rel="prev" title="Installation" href="installation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            foldkit
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Python API Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">foldkit</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Python API Usage</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/tutorial.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <p>—</p>
+<p>## <strong>2️⃣ `tutorial.rst`</strong></p>
+<p>Create <cite>docs/source/tutorial.rst</cite>:</p>
+<p><a href="#id1"><span class="problematic" id="id2">``</span></a><a href="#id3"><span class="problematic" id="id4">`</span></a>rst
+Tutorial
+========</p>
+<p>This tutorial covers basic usage of FoldKit, including <strong>Python API</strong> and <strong>command-line interface (CLI)</strong>.</p>
+<p>—</p>
+<section id="python-api-usage">
+<h1>Python API Usage<a class="headerlink" href="#python-api-usage" title="Link to this heading"></a></h1>
+<p>Let’s say you have a directory that contains the results of an AlphaFold3 prediction for a protein complex. This protein complex is actually a TCR with the following chains: [“A”, “B”, “M”, “P”] (which is the TCRa, TCRb, MHCa, peptide). These results are stored in a directory:
+<cite>“structures/tcr_pmhc_1/”</cite>.`
+We can can load the results:
+<code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">import</span> <span class="pre">foldkit</span>
+<span class="pre">result_obj</span> <span class="pre">=</span> <span class="pre">foldkit.AF3Result.load_result(&quot;structures/tcr_pmhc_1/&quot;)</span>
+<span class="pre">`</span></code>
+This object has access to all of the confidence metadata, as well as the ability to compute specific statistics on the metadata.
+<code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">&gt;&gt;&gt;</span> <span class="pre">result_obj.chains</span>
+<span class="pre">[np.str_('A'),</span> <span class="pre">np.str_('B'),</span> <span class="pre">np.str_('M'),</span> <span class="pre">np.str_('P')]</span>
+<span class="pre">`</span></code>
+For example, the structure wide PTM:
+<code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">&gt;&gt;&gt;</span> <span class="pre">result_obj.get_ptm()</span>
+<span class="pre">0.81</span>
+<span class="pre">`</span></code>
+Or, just the average PTM for the TCRa chain:
+<code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">&gt;&gt;&gt;</span> <span class="pre">result_obj.get_ptm(&quot;A&quot;)</span>
+<span class="pre">0.82</span>
+<span class="pre">`</span></code>
+Here is the average interaction_pae (ipae) between the TCRb chain and the peptide:
+<code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">&gt;&gt;&gt;</span> <span class="pre">result_obj.get_ipae(chain1=&quot;B&quot;,</span> <span class="pre">chain2=&quot;P&quot;)</span>
+<span class="pre">np.float64(6.253699186991869)</span>
+<span class="pre">`</span></code></p>
+<p>By default, these methods compute the average. But maybe you want a different aggregation function? You can pass in a custom <cite>agg</cite>:
+<code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">&gt;&gt;&gt;</span> <span class="pre">result_obj.get_ipae(chain1=&quot;B&quot;,</span> <span class="pre">chain2=&quot;P&quot;,</span> <span class="pre">agg=np.min)</span>
+<span class="pre">np.float64(1.3)</span>
+<span class="pre">`</span></code></p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="installation.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="api.html" class="btn btn-neutral float-right" title="API Reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Jonathan Levine.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
