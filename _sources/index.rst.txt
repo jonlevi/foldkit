@@ -3,10 +3,18 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-FoldKit
-=======
+Welcome to FoldKit
+==================
 
-FoldKit is a Python toolkit for working with AlphaFold3 results.
+FoldKit is a Python package for working with AlphaFold3 results.
+
+Features:
+- Load AF3 results
+- Access per-chain and global confidence metrics
+- Export predictions to NPZ files
+
+Getting started
+---------------
 
 .. toctree::
    :maxdepth: 2

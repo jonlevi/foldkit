@@ -1,151 +1,605 @@
 
-
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" data-content_root="./">
-<head>
-  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Python API Usage &mdash; foldkit 0.1.0 documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
 
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Tutorial &#8212; foldkit 0.1.0 documentation</title>
   
-      <script src="_static/jquery.js?v=5d32c60e"></script>
-      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=01f34227"></script>
-      <script src="_static/doctools.js?v=9bcbadda"></script>
-      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="_static/js/theme.js"></script>
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="_static/documentation_options.js?v=01f34227"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'tutorial';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="API Reference" href="api.html" />
-    <link rel="prev" title="Installation" href="installation.html" /> 
-</head>
+    <link rel="prev" title="Installation" href="installation.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-<body class="wy-body-for-nav"> 
-  <div class="wy-grid-for-nav">
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
-          
-          
-          <a href="index.html" class="icon icon-home">
-            foldkit
-          </a>
-<div role="search">
-  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
-    <input type="hidden" name="check_keywords" value="yes" />
-    <input type="hidden" name="area" value="default" />
-  </form>
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
 </div>
-        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Python API Usage</a></li>
-<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
-</ul>
 
-        </div>
-      </div>
-    </nav>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">foldkit</a>
-      </nav>
+  
+    
+  
 
-      <div class="wy-nav-content">
-        <div class="rst-content">
-          <div role="navigation" aria-label="Page navigation">
-  <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Python API Usage</li>
-      <li class="wy-breadcrumbs-aside">
-            <a href="_sources/tutorial.rst.txt" rel="nofollow"> View page source</a>
-      </li>
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">foldkit 0.1.0 documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="#">
+    Tutorial
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="api.html">
+    API Reference
+  </a>
+</li>
+
   </ul>
-  <hr/>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/jonlevi/foldkit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
 </div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-           <div itemprop="articleBody">
-             
-  <p>—</p>
-<p>## <strong>2️⃣ `tutorial.rst`</strong></p>
-<p>Create <cite>docs/source/tutorial.rst</cite>:</p>
-<p><a href="#id1"><span class="problematic" id="id2">``</span></a><a href="#id3"><span class="problematic" id="id4">`</span></a>rst
-Tutorial
-========</p>
-<p>This tutorial covers basic usage of FoldKit, including <strong>Python API</strong> and <strong>command-line interface (CLI)</strong>.</p>
-<p>—</p>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="#">
+    Tutorial
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="api.html">
+    API Reference
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/jonlevi/foldkit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"></div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Tutorial</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="tutorial">
+<h1>Tutorial<a class="headerlink" href="#tutorial" title="Link to this heading">#</a></h1>
+<p>This tutorial covers basic usage of FoldKit, including the <strong>Python API</strong> and the <strong>command-line interface (CLI)</strong>.</p>
 <section id="python-api-usage">
-<h1>Python API Usage<a class="headerlink" href="#python-api-usage" title="Link to this heading"></a></h1>
-<p>Let’s say you have a directory that contains the results of an AlphaFold3 prediction for a protein complex. This protein complex is actually a TCR with the following chains: [“A”, “B”, “M”, “P”] (which is the TCRa, TCRb, MHCa, peptide). These results are stored in a directory:
-<cite>“structures/tcr_pmhc_1/”</cite>.`
-We can can load the results:
-<code class="docutils literal notranslate"><span class="pre">`</span>
-<span class="pre">import</span> <span class="pre">foldkit</span>
-<span class="pre">result_obj</span> <span class="pre">=</span> <span class="pre">foldkit.AF3Result.load_result(&quot;structures/tcr_pmhc_1/&quot;)</span>
-<span class="pre">`</span></code>
-This object has access to all of the confidence metadata, as well as the ability to compute specific statistics on the metadata.
-<code class="docutils literal notranslate"><span class="pre">`</span>
-<span class="pre">&gt;&gt;&gt;</span> <span class="pre">result_obj.chains</span>
-<span class="pre">[np.str_('A'),</span> <span class="pre">np.str_('B'),</span> <span class="pre">np.str_('M'),</span> <span class="pre">np.str_('P')]</span>
-<span class="pre">`</span></code>
-For example, the structure wide PTM:
-<code class="docutils literal notranslate"><span class="pre">`</span>
-<span class="pre">&gt;&gt;&gt;</span> <span class="pre">result_obj.get_ptm()</span>
-<span class="pre">0.81</span>
-<span class="pre">`</span></code>
-Or, just the average PTM for the TCRa chain:
-<code class="docutils literal notranslate"><span class="pre">`</span>
-<span class="pre">&gt;&gt;&gt;</span> <span class="pre">result_obj.get_ptm(&quot;A&quot;)</span>
-<span class="pre">0.82</span>
-<span class="pre">`</span></code>
-Here is the average interaction_pae (ipae) between the TCRb chain and the peptide:
-<code class="docutils literal notranslate"><span class="pre">`</span>
-<span class="pre">&gt;&gt;&gt;</span> <span class="pre">result_obj.get_ipae(chain1=&quot;B&quot;,</span> <span class="pre">chain2=&quot;P&quot;)</span>
-<span class="pre">np.float64(6.253699186991869)</span>
-<span class="pre">`</span></code></p>
-<p>By default, these methods compute the average. But maybe you want a different aggregation function? You can pass in a custom <cite>agg</cite>:
-<code class="docutils literal notranslate"><span class="pre">`</span>
-<span class="pre">&gt;&gt;&gt;</span> <span class="pre">result_obj.get_ipae(chain1=&quot;B&quot;,</span> <span class="pre">chain2=&quot;P&quot;,</span> <span class="pre">agg=np.min)</span>
-<span class="pre">np.float64(1.3)</span>
-<span class="pre">`</span></code></p>
+<h2>Python API Usage<a class="headerlink" href="#python-api-usage" title="Link to this heading">#</a></h2>
+<p>Suppose you have a directory containing the results of an AlphaFold3 prediction for a protein complex. For example, a TCR complex with chains: [“A”, “B”, “M”, “P”] (TCRa, TCRb, MHCa, peptide). The results are stored in:</p>
+<p><cite>structures/tcr_pmhc_1/</cite></p>
+<p>We can load the results using the factory method:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">foldkit</span>
+
+<span class="n">result_obj</span> <span class="o">=</span> <span class="n">foldkit</span><span class="o">.</span><span class="n">AF3Result</span><span class="o">.</span><span class="n">load_result</span><span class="p">(</span><span class="s2">&quot;structures/tcr_pmhc_1/&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition-note admonition">
+<p class="admonition-title">Note</p>
+<p>This object provides access to all confidence metadata and methods to compute chain-specific or global statistics.</p>
+</div>
+</section>
+</section>
+<section id="querying-chains-and-metrics">
+<h1>Querying Chains and Metrics<a class="headerlink" href="#querying-chains-and-metrics" title="Link to this heading">#</a></h1>
+<p>Check which chains are present:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">result_obj</span><span class="o">.</span><span class="n">chains</span>
+<span class="go">[np.str_(&#39;A&#39;), np.str_(&#39;B&#39;), np.str_(&#39;M&#39;), np.str_(&#39;P&#39;)]</span>
+</pre></div>
+</div>
+<p>Structure-wide PTM:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">result_obj</span><span class="o">.</span><span class="n">get_ptm</span><span class="p">()</span>
+<span class="go">0.81</span>
+</pre></div>
+</div>
+<p>Chain-specific PTM (e.g., TCRa):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">result_obj</span><span class="o">.</span><span class="n">get_ptm</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">)</span>
+<span class="go">0.82</span>
+</pre></div>
+</div>
+<p>Average interaction PAE (ipae) between TCRb and the peptide:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">result_obj</span><span class="o">.</span><span class="n">get_ipae</span><span class="p">(</span><span class="n">chain1</span><span class="o">=</span><span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="n">chain2</span><span class="o">=</span><span class="s2">&quot;P&quot;</span><span class="p">)</span>
+<span class="go">np.float64(6.253699186991869)</span>
+</pre></div>
+</div>
+<p>Custom aggregation functions (e.g., minimum instead of mean):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">result_obj</span><span class="o">.</span><span class="n">get_ipae</span><span class="p">(</span><span class="n">chain1</span><span class="o">=</span><span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="n">chain2</span><span class="o">=</span><span class="s2">&quot;P&quot;</span><span class="p">,</span> <span class="n">agg</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">)</span>
+<span class="go">np.float64(1.3)</span>
+</pre></div>
+</div>
+</section>
+<section id="advanced-metrics">
+<h1>Advanced Metrics<a class="headerlink" href="#advanced-metrics" title="Link to this heading">#</a></h1>
+<p>Other useful methods include:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">get_iptm(chain1=None,</span> <span class="pre">chain2=None)</span></code> — Interchain TM-score</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">get_pae(chain=None,</span> <span class="pre">tokens=None,</span> <span class="pre">agg=np.mean)</span></code> — Predicted alignment error</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">get_plddt(chain=None,</span> <span class="pre">atoms=None,</span> <span class="pre">agg=np.mean)</span></code> — Per-atom confidence scores</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">get_contact_probs(chain1=None,</span> <span class="pre">chain2=None,</span> <span class="pre">tokens1=None,</span> <span class="pre">tokens2=None,</span> <span class="pre">agg=np.max)</span></code> — Predicted contact probabilities</p></li>
+</ul>
+<div class="admonition-tip admonition">
+<p class="admonition-title">Tip</p>
+<p>You can pass specific chains, atom indices, or token indices to compute metrics for subsets of the structure.</p>
+</div>
+<section id="command-line-interface-cli-usage">
+<h2>Command-Line Interface (CLI) Usage<a class="headerlink" href="#command-line-interface-cli-usage" title="Link to this heading">#</a></h2>
+<p>FoldKit provides a CLI to export AlphaFold3 results into compressed formats. You can convert confidences into NPZ files and copy other data as-is (except <cite>_input_data.json</cite>, which is redundant).</p>
+<p>Basic usage:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>usage: foldkit [-h] [--verbose] {export-single-result,export-multi-result,batch-export-multi-result} ...
+
+positional arguments:
+  {export-single-result,export-multi-result,batch-export-multi-result}
+    export-single-result
+                        Export a single AlphaFold3 result directory to compressed format
+    export-multi-result
+                        Export multiseed/multisample AlphaFold3 results to compressed format.
+    batch-export-multi-result
+                        Export multiple AlphaFold3 results to compressed format.
+
+options:
+  -h, --help            show this help message and exit
+  --verbose, -v         Print detailed output.
+</pre></div>
+</div>
+<p>The CLI has three main entry points, depending on the data being exported:</p>
+<ol class="arabic">
+<li><p><strong>Export a single prediction directory</strong>
+One prediction corresponding to a single seed and sample.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>foldkit<span class="w"> </span>export-result<span class="w"> </span>/path/to/specific_structure_directory<span class="w"> </span>/path/to/outdir
+</pre></div>
+</div>
+</li>
+<li><p><strong>Export a single result with multiple seeds and/or samples</strong>
+N × K predictions corresponding to the same input.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>foldkit<span class="w"> </span>export-multi-result<span class="w"> </span>/path/to/specific_structure_parent_directory<span class="w"> </span>/path/to/outdir
+</pre></div>
+</div>
+</li>
+<li><p><strong>Batch export many results</strong>
+A directory containing many “prediction directories” as in (2).</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>foldkit<span class="w"> </span>-v<span class="w"> </span>batch-export-multi-result<span class="w"> </span>/path/to/directory_of_subdirectories/<span class="w"> </span>/path/to/outdir
+</pre></div>
+</div>
+</li>
+</ol>
+<div class="admonition-tip admonition">
+<p class="admonition-title">Tip</p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">--verbose</span></code> to print detailed output and track progress during batch exports.</p>
+</div>
+</section>
 </section>
 
 
-           </div>
-          </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="installation.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="api.html" class="btn btn-neutral float-right" title="API Reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-    </div>
-
-  <hr/>
-
-  <div role="contentinfo">
-    <p>&#169; Copyright 2025, Jonathan Levine.</p>
-  </div>
-
-  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    provided by <a href="https://readthedocs.org">Read the Docs</a>.
-   
-
-</footer>
-        </div>
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="installation.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Installation</p>
       </div>
-    </section>
-  </div>
-  <script>
-      jQuery(function () {
-          SphinxRtdTheme.Navigation.enable(true);
-      });
-  </script> 
+    </a>
+    <a class="right-next"
+       href="api.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">API Reference</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
-</body>
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Tutorial</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python-api-usage">Python API Usage</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#querying-chains-and-metrics">Querying Chains and Metrics</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-metrics">Advanced Metrics</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#command-line-interface-cli-usage">Command-Line Interface (CLI) Usage</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/tutorial.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2025, Jonathan Levine.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
 </html>
