@@ -1,0 +1,28 @@
+[project]
+name = "foldkit"
+version = "0.0.1"
+description = "Toolkit for working with AlphaFold3 results and confidence metadata"
+authors = [{name="Jonathan Levine", email="jonalevine1@gmail.com"}]
+readme = "README.md"
+long_description_content_type = "text/markdown"
+requires-python = ">=3.9"
+license = {text = "MIT"}
+keywords = ["protein", "protein design", "alphafold", "bioinformatics"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent"
+]
+
+dependencies = [
+    "numpy",
+    "biopython",
+    "tqdm"
+]
+
+[project.scripts]
+foldkit = "foldkit.cli:main"
+
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
