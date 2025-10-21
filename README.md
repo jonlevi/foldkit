@@ -45,3 +45,40 @@ By default, these methods compute the average. But maybe you want a different ag
 >>> result_obj.get_ipae(chain1="B", chain2="P", agg=np.min)
 np.float64(1.3)
 ```
+
+## folkdkit - CLI Tutorial
+```
+usage: foldkit [-h] [--verbose] {export-single-result,export-multi-result,batch-export-multi-result} ...
+
+Export AlphaFold3 result directories into compressed format.Converts confidences into npz format and copies over the rest of the data as is (except the _input_data.json which is not kept since it is redundant).
+
+positional arguments:
+  {export-single-result,export-multi-result,batch-export-multi-result}
+    export-single-result
+                        Export a single AlphaFold3 result directory to compressed format
+    export-multi-result
+                        Export multiseed/multisample AlphaFold3 results to compressed format.
+    batch-export-multi-result
+                        Export multiple AlphaFold3 results to compressed format.
+
+options:
+  -h, --help            show this help message and exit
+  --verbose, -v         Print detailed output.
+```
+There are 3 main entry points, depending on the data you are exporting:
+1) A single prediction directory (i.e. one prediction corresponding to a single seed and sample)
+2) A prediction directory (i.e. N*K predictions corresponding to the same input with N seeds and K samples)
+3) A directory of prediction directories (i.e. a directory containing many "prediction directories" like in (2).
+
+  ### 1- Export a single result (i.e. one single structure from a single seed and sample)
+  ```
+  foldkit export-result /path/to/specific_structure_directory /path/to/outdir
+  ```
+  ### 2- Export a single result with multiple seeds and/or samples
+  ```
+foldkit export-multi-result /path/to/specific_structure_parent_directory /data1/greenbab/users/levinej4/af3/foldkit/tests/test_data/test-m1
+  ```
+  ### 3- Batch export many results
+  ```
+  foldkit -v batch-export-multi-result  /path/to/directory_of_subdirectories/ /path/to/outdir
+  ```
