@@ -12,7 +12,9 @@ from .af3_result import AF3Result
 from .storage import save_af3_result, load_af3_result
 
 
-def export_single_result(input_directory: str, output_directory: str, verbose: bool, print_error: bool = True):
+def export_single_result(
+    input_directory: str, output_directory: str, verbose: bool, print_error: bool = True
+):
     """Export a single AlphaFold3 Result subdirectory to compressed format."""
     input_path = Path(input_directory)
     output_path = Path(output_directory)
