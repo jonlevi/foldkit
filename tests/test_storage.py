@@ -9,9 +9,9 @@ from numpy.testing import assert_array_equal
 def test_example():
     aa = foldkit.AF3Result.load_result("tests/test_data/structure1")
 
-    foldkit.save_af3_result(aa, "tests/test_data/structure1.npz")
+    foldkit.save_af3_result(aa, "tests/test_data_compressed/structure1.npz")
 
-    bb = foldkit.load_af3_result("tests/test_data/structure1.npz")
+    bb = foldkit.AF3Result.load_result("tests/test_data/",from_npz=True)
 
     assert aa.id == bb.id
     assert aa.chains == bb.chains

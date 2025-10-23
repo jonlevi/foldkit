@@ -3,9 +3,9 @@ foldkit.core
 Core functionality for working with AlphaFold3 results.
 
 Features:
-- Load AF3 results from structure (.cif) and metadata (.json).
+- Load AF3 results from metadata (.json).
 - Interface for global and local confidence metrics
-- Interface for predicted structure (TODO: coming soon!)
+- Not yet implemented: Interface for predicted structure from cif (TODO: coming soon!)
 """
 
 import json
@@ -29,15 +29,15 @@ class AF3Result:
 
     # Metadata
     id: str = None
-    cif_path: Path = None
+    # cif_path: Path = None
     summary_json_path: Path = None
     full_json_path: Path = None
 
     def _build_from_af3_output(
-        self, id: str, cif_path: Path, summary_json_path: Path, full_json_path: Path
+        self, id: str, summary_json_path: Path, full_json_path: Path
     ):
         self.id = id
-        self.cif_path = Path(cif_path)
+        # self.cif_path = Path(cif_path)
         self.summary_json_path = Path(summary_json_path)
         self.full_json_path = Path(full_json_path)
 
@@ -440,46 +440,76 @@ class AF3Result:
     # see https://github.com/google-deepmind/alphafold3/blob/main/docs/output.md
     # --------------------
     @staticmethod
-    def load_result(result_dir: str, id: Optional[str] = None) -> "AF3Result":
+    def load_result(
+        result_dir: str, id: Optional[str] = None, from_npz: bool = False
+    ) -> "AF3Result":
+
+        # # Find CIF
+        # cif_files = list(result_dir.glob("*.cif"))
+        # if len(cif_files) != 1:
+        #     raise FileNotFoundError(
+        #         f"Expected exactly one *.cif file, found {len(cif_files)}"
+        #     )
 
         result_dir = Path(result_dir)
         if not result_dir.is_dir():
-            raise FileNotFoundError(f"Result directory not found: {result_dir}")
-
-        # Find CIF
-        cif_files = list(result_dir.glob("*.cif"))
-        if len(cif_files) != 1:
             raise FileNotFoundError(
-                f"Expected exactly one *.cif file, found {len(cif_files)}"
+                f"Result directory not found: {result_dir} or is not a directory"
             )
 
-        # Find summary JSON
-        summary_files = list(result_dir.glob("*summary_confidences.json"))
-        if len(summary_files) != 1:
-            raise FileNotFoundError(
-                f"Expected exactly one *summary_confidences.json, found {len(summary_files)}"
+        if from_npz:
+            # Find npz
+            npz_files = list(result_dir.glob("*.npz"))
+            if len(npz_files) != 1:
+                raise FileNotFoundError(
+                    f"Expected exactly one *.npz, found {len(npz_files)}. For data not in .npz format, use flag 'from_npz=False'."
+                )
+            data = np.load(npz_files[0], allow_pickle=True)
+            obj = AF3Result()
+            obj.id = str(data["id"])
+
+            # Restore arrays
+            obj.chains = list(data["chains"])
+            obj.residue_chain_ids = data["residue_chain_ids"]
+            obj.atom_chain_ids = data["atom_chain_ids"]
+            obj.plddt = data["plddt"]
+            obj.pae = data["pae"]
+            obj.contact_probs = data["contact_probs"]
+            obj.global_ptm = float(data["global_ptm"])
+            obj.global_iptm = float(data["global_iptm"])
+            obj.chain_pair_iptm = data["chain_pair_iptm"]
+            obj.chain_ptm = data["chain_ptm"]
+
+            return obj
+        else:
+            # Find summary JSON
+            summary_files = list(result_dir.glob("*summary_confidences.json"))
+            if len(summary_files) != 1:
+                raise FileNotFoundError(
+                    f"Expected exactly one *summary_confidences.json, found {len(summary_files)}. For data in .npz format, use flag 'from_npz=True'."
+                )
+
+            # Find full JSON
+            full_files = [
+                f
+                for f in result_dir.glob("*confidences.json")
+                if not "summary" in f.name
+            ]
+            if len(full_files) != 1:
+                raise FileNotFoundError(
+                    f"Expected exactly one confidences.json (non-summary), found {len(full_files)}"
+                )
+
+            if not id:
+                id = Path(result_dir).name
+
+            res = AF3Result()
+            res._build_from_af3_output(
+                id=id,
+                summary_json_path=summary_files[0],
+                full_json_path=full_files[0],
             )
-
-        # Find full JSON
-        full_files = [
-            f for f in result_dir.glob("*confidences.json") if not "summary" in f.name
-        ]
-        if len(full_files) != 1:
-            raise FileNotFoundError(
-                f"Expected exactly one confidences.json (non-summary), found {len(full_files)}"
-            )
-
-        if not id:
-            id = Path(result_dir).name
-
-        res = AF3Result()
-        res._build_from_af3_output(
-            id=id,
-            cif_path=cif_files[0],
-            summary_json_path=summary_files[0],
-            full_json_path=full_files[0],
-        )
-        return res
+            return res
 
     #  TODO: Add structures
     # def _load_cif(self) -> None:

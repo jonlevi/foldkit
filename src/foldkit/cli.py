@@ -9,7 +9,7 @@ from pathlib import Path
 import shutil
 import tqdm
 from .af3_result import AF3Result
-from .storage import save_af3_result, load_af3_result
+from .storage import save_af3_result
 
 
 def export_single_result(

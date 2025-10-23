@@ -1,17 +1,21 @@
 # FoldKit
 
-A Python toolkit for working with AlphaFold3 results and storing them efficiently.
+A Python toolkit for working with and efficiently storing AlphaFold3 results. Contains both a CLI for importing/exporting results to foldkit format, and a python API for accessing metrics of folded structures.
 
 ## Installation
 `pip install foldkit`
 
 ## Use Cases
-There are two main use cases for this package
-(1) Convenient python interface for accessing AlphaFold3 prediction confidence metrics. This is particularly useful for metrics across chains in protein complexes, as they have been shown to be predictive of binding and are useful criteria for protein design and specificity predictions
+There are two main use cases for this package:
 
-(2) Efficient Storage of AlphaFold3 confidence results. The default JSON formats for AF3 results are large, and can take up a lot of unnecessary space. Foldkit has a CLI for exporting the AF3 confidence JSONs to space-efficient .npz files. These .npz files can also be used as inputs to the python interface in (1)
+(1) Convenient python interface for accessing AlphaFold3 prediction confidence metrics. This is particularly useful for pulling out inter-chain metrics from predicted protein complexes, as they have been shown to be predictive of binding and are useful criteria for protein design and specificity predictions.
 
-## foldkit - Python Interface Tutorial
+(2) Efficient Storage of AlphaFold3 results. The default JSON formats for AF3 confidence results are large, and can take up a lot of unnecessary space. Foldkit has a CLI for exporting the AF3 confidence JSONs to space-efficient .npz files, removing other unnecessary files, and copying over the rest. These .npz files can also be used as alternative inputs to the python interface in (1) for easy use. 
+
+## How much more efficient is "space-efficient"
+Early benchmarking shows that a single AF3 output directory for a four-chain protein is around 7.8M, while the foldkit exported version is 1.9M. This may seem like a small difference, but can scale over a large protein design of co-folding campaign over a large dataset. For example, a parent directory of ~1000 AF3 folded complexes, each with 4 seeds and 5 samples, the total space to store the results goes from 157G --> 38G.
+
+## Python Interface Tutorial
 Let's say you have a directory that contains the results of an AlphaFold3 prediction for a protein complex. This protein complex is actually a TCR with the following chains: ["A", "B", "M", "P"] (which is the TCRa, TCRb, MHCa, peptide). These results are stored in a directory:
 `"structures/tcr_pmhc_1/"`.`
 We can can load the results:
@@ -44,6 +48,13 @@ By default, these methods compute the average. But maybe you want a different ag
 ```
 >>> result_obj.get_ipae(chain1="B", chain2="P", agg=np.min)
 np.float64(1.3)
+```
+
+### Loading from .npz format
+From the CLI, let's say you had previously exported the result of a AF3 run, so that the result from before
+at `"structures/tcr_pmhc_1/"` is now at `"structures_compressed/tcr_pmhc_1/"`. This second directory will have a .npz file in it instead of JSON files. You can load it in a very similar way by adding the `from_npz=True` flag
+```
+result_obj = foldkit.AF3Result.load_result("structures/tcr_pmhc_1/", from_npz=True)
 ```
 
 ## folkdkit - CLI Tutorial

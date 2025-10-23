@@ -1,6 +1,6 @@
 [project]
 name = "foldkit"
-version = "0.1.1"
+version = "0.1.2"
 description = "Toolkit for working with AlphaFold3 results and confidence metadata"
 authors = [{name="Jonathan Levine", email="jonalevine1@gmail.com"}]
 readme = "README.md"
