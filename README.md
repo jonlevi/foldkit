@@ -120,8 +120,12 @@ git checkout gh-pages
 `make html`
 `cd ..`
 
+
+
 # 3️⃣ Copy the built HTML to the root (overwrite existing)
 `rsync -av --delete docs/build/html/` .
+or
+`cp -r docs/build/html/* .`
 
 # 4️⃣ Add & commit
 `git add .`

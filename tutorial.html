@@ -428,6 +428,14 @@
 <p class="admonition-title">Tip</p>
 <p>You can pass specific chains, atom indices, or token indices to compute metrics for subsets of the structure.</p>
 </div>
+</section>
+<section id="loading-from-npz-format">
+<h1>Loading from .npz format<a class="headerlink" href="#loading-from-npz-format" title="Link to this heading">#</a></h1>
+<p>From the CLI, let’s say you had previously exported the result of a AF3 run, so that the result from before
+at <cite>“structures/tcr_pmhc_1/”</cite> is now at <cite>“structures_compressed/tcr_pmhc_1/”</cite>. This second directory will have a .npz file in it instead of JSON files. You can load it in a very similar way by adding the <cite>from_npz=True</cite> flag</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">result_obj</span> <span class="o">=</span> <span class="n">foldkit</span><span class="o">.</span><span class="n">AF3Result</span><span class="o">.</span><span class="n">load_result</span><span class="p">(</span><span class="s2">&quot;structures/tcr_pmhc_1/&quot;</span><span class="p">,</span> <span class="n">from_npz</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
 <section id="command-line-interface-cli-usage">
 <h2>Command-Line Interface (CLI) Usage<a class="headerlink" href="#command-line-interface-cli-usage" title="Link to this heading">#</a></h2>
 <p>FoldKit provides a CLI to export AlphaFold3 results into compressed formats. You can convert confidences into NPZ files and copy other data as-is (except <cite>_input_data.json</cite>, which is redundant).</p>
@@ -528,7 +536,8 @@ A directory containing many “prediction directories” as in (2).</p>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#querying-chains-and-metrics">Querying Chains and Metrics</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-metrics">Advanced Metrics</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-metrics">Advanced Metrics</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-from-npz-format">Loading from .npz format</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#command-line-interface-cli-usage">Command-Line Interface (CLI) Usage</a></li>
 </ul>
 </li>

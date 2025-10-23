@@ -391,11 +391,6 @@
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="foldkit.af3_result.AF3Result.cif_path">
-<span class="sig-name descname"><span class="pre">cif_path</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#foldkit.af3_result.AF3Result.cif_path" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
 <dt class="sig sig-object py" id="foldkit.af3_result.AF3Result.contact_probs">
 <span class="sig-name descname"><span class="pre">contact_probs</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code><span class="pre">[</span><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code><span class="pre">]</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#foldkit.af3_result.AF3Result.contact_probs" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
@@ -592,10 +587,27 @@ If None, returns the global score across all chains in the structure.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="foldkit.af3_result.AF3Result.load_result">
-<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">load_result</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#foldkit.af3_result.AF3Result.load_result" title="Link to this definition">#</a></dt>
-<dd><dl class="field-list simple">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">load_result</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">from_npz</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#foldkit.af3_result.AF3Result.load_result" title="Link to this definition">#</a></dt>
+<dd><p>Factory method to create the AF3 Result object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>result_dir</strong> (<em>str</em>) – Path containing the results. Should eiter have the confidence JSONs or a confidences .npz file</p></li>
+<li><p><strong>id</strong> (<em>str</em><em>, </em><em>optional</em>)</p></li>
+<li><p><strong>from_npz</strong> (<em>bool</em><em>, </em><em>default=False</em>) – Loads from a .npz file if True. Loads from JSON files if False</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>result object</p>
+</dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#foldkit.af3_result.AF3Result" title="foldkit.af3_result.AF3Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">AF3Result</span></code></a></span></p>
+<dd class="field-odd"><p><a class="reference internal" href="#foldkit.af3_result.AF3Result" title="foldkit.af3_result.AF3Result">AF3Result</a></p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>FileNotFoundError</strong> – If directory parsing files</p></li>
+<li><p><strong>ValueError</strong> – If parsing confidences failed based on the data in directory</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
@@ -636,47 +648,43 @@ If None, returns the global score across all chains in the structure.</p>
 <td><p>str</p></td>
 <td><p>Unique identifier for this result</p></td>
 </tr>
-<tr class="row-odd"><td><p>cif_path</p></td>
-<td><p>Path</p></td>
-<td><p>Path to the structure CIF file</p></td>
-</tr>
-<tr class="row-even"><td><p>summary_json_path</p></td>
+<tr class="row-odd"><td><p>summary_json_path</p></td>
 <td><p>Path</p></td>
 <td><p>Path to the summary confidences JSON file</p></td>
 </tr>
-<tr class="row-odd"><td><p>full_json_path</p></td>
+<tr class="row-even"><td><p>full_json_path</p></td>
 <td><p>Path</p></td>
 <td><p>Path to the full confidences JSON file</p></td>
 </tr>
-<tr class="row-even"><td><p>chains</p></td>
+<tr class="row-odd"><td><p>chains</p></td>
 <td><p>list[str]</p></td>
 <td><p>List of chain IDs in the structure</p></td>
 </tr>
-<tr class="row-odd"><td><p>plddt</p></td>
+<tr class="row-even"><td><p>plddt</p></td>
 <td><p>np.ndarray</p></td>
 <td><p>Per-atom pLDDT confidence scores</p></td>
 </tr>
-<tr class="row-even"><td><p>pae</p></td>
+<tr class="row-odd"><td><p>pae</p></td>
 <td><p>np.ndarray</p></td>
 <td><p>Predicted Alignment Error matrix</p></td>
 </tr>
-<tr class="row-odd"><td><p>contact_probs</p></td>
+<tr class="row-even"><td><p>contact_probs</p></td>
 <td><p>np.ndarray</p></td>
 <td><p>Predicted contact probabilities</p></td>
 </tr>
-<tr class="row-even"><td><p>global_ptm</p></td>
+<tr class="row-odd"><td><p>global_ptm</p></td>
 <td><p>float</p></td>
 <td><p>Global predicted TM-score</p></td>
 </tr>
-<tr class="row-odd"><td><p>global_iptm</p></td>
+<tr class="row-even"><td><p>global_iptm</p></td>
 <td><p>float</p></td>
 <td><p>Global inter-chain predicted TM-score</p></td>
 </tr>
-<tr class="row-even"><td><p>chain_ptm</p></td>
+<tr class="row-odd"><td><p>chain_ptm</p></td>
 <td><p>np.ndarray</p></td>
 <td><p>Per-chain predicted TM scores</p></td>
 </tr>
-<tr class="row-odd"><td><p>chain_pair_iptm</p></td>
+<tr class="row-even"><td><p>chain_pair_iptm</p></td>
 <td><p>np.ndarray</p></td>
 <td><p>Per-chain pair iPTM scores</p></td>
 </tr>
@@ -711,7 +719,7 @@ foldkit<span class="w"> </span>export-directory<span class="w"> </span>path/to/r
 </div>
 <dl class="py function">
 <dt class="sig sig-object py" id="foldkit.cli.export_single_result">
-<span class="sig-prename descclassname"><span class="pre">foldkit.cli.</span></span><span class="sig-name descname"><span class="pre">export_single_result</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#foldkit.cli.export_single_result" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">foldkit.cli.</span></span><span class="sig-name descname"><span class="pre">export_single_result</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">print_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#foldkit.cli.export_single_result" title="Link to this definition">#</a></dt>
 <dd><p>Export a single AlphaFold3 Result subdirectory to compressed format.</p>
 </dd></dl>
 
@@ -778,7 +786,6 @@ foldkit<span class="w"> </span>export-directory<span class="w"> </span>path/to/r
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#foldkit.af3_result.AF3Result.chain_pair_iptm"><code class="docutils literal notranslate"><span class="pre">AF3Result.chain_pair_iptm</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#foldkit.af3_result.AF3Result.chain_ptm"><code class="docutils literal notranslate"><span class="pre">AF3Result.chain_ptm</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#foldkit.af3_result.AF3Result.chains"><code class="docutils literal notranslate"><span class="pre">AF3Result.chains</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#foldkit.af3_result.AF3Result.cif_path"><code class="docutils literal notranslate"><span class="pre">AF3Result.cif_path</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#foldkit.af3_result.AF3Result.contact_probs"><code class="docutils literal notranslate"><span class="pre">AF3Result.contact_probs</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#foldkit.af3_result.AF3Result.full_json_path"><code class="docutils literal notranslate"><span class="pre">AF3Result.full_json_path</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#foldkit.af3_result.AF3Result.get_contact_probs"><code class="docutils literal notranslate"><span class="pre">AF3Result.get_contact_probs()</span></code></a></li>

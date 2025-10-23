@@ -76,6 +76,16 @@ Other useful methods include:
     You can pass specific chains, atom indices, or token indices to compute metrics for subsets of the structure.
 
 
+Loading from .npz format
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+From the CLI, let's say you had previously exported the result of a AF3 run, so that the result from before
+at `"structures/tcr_pmhc_1/"` is now at `"structures_compressed/tcr_pmhc_1/"`. This second directory will have a .npz file in it instead of JSON files. You can load it in a very similar way by adding the `from_npz=True` flag
+
+.. code-block:: python
+
+    >>> result_obj = foldkit.AF3Result.load_result("structures/tcr_pmhc_1/", from_npz=True)
+
+
 Command-Line Interface (CLI) Usage
 ----------------------------------
 

@@ -346,6 +346,10 @@
 - Load AF3 results
 - Access per-chain and global confidence metrics
 - Export predictions to NPZ files</p>
+</section>
+<section id="how-efficient">
+<h1>How Efficient?<a class="headerlink" href="#how-efficient" title="Link to this heading">#</a></h1>
+<p>Early benchmarking shows that a single AF3 output directory for a four-chain protein is around 7.8M, while the foldkit exported version is 1.9M. This may seem like a small difference, but can scale over a large protein design of co-folding campaign over a large dataset. For example, a parent directory of ~1000 AF3 folded complexes, each with 4 seeds and 5 samples, the total space to store the results goes from 157G –&gt; 38G.</p>
 <section id="getting-started">
 <h2>Getting started<a class="headerlink" href="#getting-started" title="Link to this heading">#</a></h2>
 <div class="toctree-wrapper compound">
@@ -360,7 +364,8 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="tutorial.html#querying-chains-and-metrics">Querying Chains and Metrics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tutorial.html#advanced-metrics">Advanced Metrics</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html#advanced-metrics">Advanced Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html#loading-from-npz-format">Loading from .npz format</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="tutorial.html#command-line-interface-cli-usage">Command-Line Interface (CLI) Usage</a></li>
 </ul>
 </li>
@@ -412,8 +417,13 @@
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Welcome to FoldKit</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#how-efficient">How Efficient?</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started">Getting started</a></li>
 </ul>
+</li>
+</ul>
+
   </nav></div>
 
   <div class="sidebar-secondary-item">

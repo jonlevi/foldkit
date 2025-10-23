@@ -444,6 +444,32 @@ class AF3Result:
         result_dir: str, id: Optional[str] = None, from_npz: bool = False
     ) -> "AF3Result":
 
+        """
+        Factory method to create the AF3 Result object.
+
+        Parameters
+        ----------
+        result_dir: str
+            Path containing the results. Should eiter have the confidence JSONs or a confidences .npz file
+
+        id: str, optional
+
+        from_npz: bool, default=False
+            Loads from a .npz file if True. Loads from JSON files if False
+            
+        Returns
+        -------
+        AF3Result
+           result object
+
+        Raises
+        ------
+        FileNotFoundError
+            If directory parsing files
+        ValueError
+            If parsing confidences failed based on the data in directory
+        """
+
         # # Find CIF
         # cif_files = list(result_dir.glob("*.cif"))
         # if len(cif_files) != 1:
