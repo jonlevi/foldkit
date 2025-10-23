@@ -116,16 +116,16 @@ twine upload dist/* -u __token__ -p <API TOKEN>
 git checkout gh-pages
 
 # 2️⃣ Build the HTML
-cd docs
-make html
-cd ..
+`cd docs`
+`make html`
+`cd ..`
 
 # 3️⃣ Copy the built HTML to the root (overwrite existing)
-rsync -av --delete docs/build/html/ .
+`rsync -av --delete docs/build/html/` .
 
 # 4️⃣ Add & commit
-git add .
-git commit -m "Update docs"
+`git add .`
+`git commit -m "Update docs"`
 
 # 5️⃣ Push to GitHub
-git push origin gh-pages
+`git push origin gh-pages`
