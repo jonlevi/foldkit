@@ -26,9 +26,6 @@ The following attributes are available on each **AF3Result** instance:
    * - id
      - str
      - Unique identifier for this result
-   * - cif_path
-     - Path
-     - Path to the structure CIF file
    * - summary_json_path
      - Path
      - Path to the summary confidences JSON file
