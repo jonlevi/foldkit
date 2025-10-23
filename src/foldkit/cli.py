@@ -12,7 +12,7 @@ from .af3_result import AF3Result
 from .storage import save_af3_result, load_af3_result
 
 
-def export_single_result(input_directory: str, output_directory: str, verbose: bool):
+def export_single_result(input_directory: str, output_directory: str, verbose: bool, print_error: bool = True):
     """Export a single AlphaFold3 Result subdirectory to compressed format."""
     input_path = Path(input_directory)
     output_path = Path(output_directory)
@@ -30,7 +30,8 @@ def export_single_result(input_directory: str, output_directory: str, verbose: b
         if verbose:
             print(f"✅ Copied non Confidence Data to : {output_path}")
     except Exception as e:
-        print(f"❌ Failed to export {input_path}: {e}")
+        if print_error:
+            print(f"❌ Failed to export {input_path}: {e}")
 
 
 def export_multi_result(input_directory: str, output_directory: str, verbose: bool):
@@ -39,8 +40,13 @@ def export_multi_result(input_directory: str, output_directory: str, verbose: bo
     output_path = Path(output_directory)
     output_path.mkdir(parents=True, exist_ok=True)
 
-    # First, save the top level results to the top level
-    export_single_result(input_path, output_path, verbose)
+    # First, if needed, save the top level results to the top level
+    try:
+        export_single_result(input_path, output_path, verbose, print_error=verbose)
+    except:
+        if verbose:
+            print("No top level results found -- moving to subdirectories")
+        pass
 
     # Second, save each subdirectory
     subdirectories = [p for p in input_path.iterdir() if p.is_dir()]
