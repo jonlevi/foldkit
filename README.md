@@ -93,3 +93,39 @@ foldkit export-multi-result /path/to/specific_structure_parent_directory /data1/
   ```
   foldkit -v batch-export-multi-result  /path/to/directory_of_subdirectories/ /path/to/outdir
   ```
+
+
+## Contributing
+Run pytests from top level:
+```
+PYTHONPATH=src pytest tests/ -vvv
+```
+
+Build:
+```
+python -m build
+```
+
+Deploy:
+```
+twine upload dist/* -u __token__ -p <API TOKEN>
+```
+
+## Sphinx Documentation
+# 1️⃣ Make sure you're on gh-pages branch
+git checkout gh-pages
+
+# 2️⃣ Build the HTML
+cd docs
+make html
+cd ..
+
+# 3️⃣ Copy the built HTML to the root (overwrite existing)
+rsync -av --delete docs/build/html/ .
+
+# 4️⃣ Add & commit
+git add .
+git commit -m "Update docs"
+
+# 5️⃣ Push to GitHub
+git push origin gh-pages
