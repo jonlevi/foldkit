@@ -18,6 +18,8 @@ import shutil
 import numpy as np
 import pandas as pd
 
+from .ipsae import ipsae, read_pdb
+
 
 class AF3Result:
     # Confidence data
@@ -33,15 +35,15 @@ class AF3Result:
 
     # Metadata
     id: str = None
-    # cif_path: Path = None
+    cif_path: Path = None
     summary_json_path: Path = None
     full_json_path: Path = None
 
     def _build_from_af3_output(
-        self, id: str, summary_json_path: Path, full_json_path: Path
+        self, id: str, summary_json_path: Path, full_json_path: Path, cif_path: Path
     ):
         self.id = id
-        # self.cif_path = Path(cif_path)
+        self.cif_path = Path(cif_path)
         self.summary_json_path = Path(summary_json_path)
         self.full_json_path = Path(full_json_path)
 
@@ -438,6 +440,19 @@ class AF3Result:
             sub_plddt = self.plddt
 
         return agg(sub_plddt)
+    
+
+    def get_ipsae(self, pae_cutoff):
+        with open(self.cif_path, "r") as f:
+            residues, _, _, chains = read_pdb(f, "cif")
+        # chains should be the same as residue_chain_ids
+        # leaving this alone until we can fully integrate the cif reading
+        return ipsae(
+            residues=residues,
+            chains=chains,
+            pae_matrix=self.pae,
+            pae_cutoff=pae_cutoff, 
+        )
 
     # --------------------
     # Object Creation Factory Method
@@ -578,10 +593,12 @@ class AF3Result:
                 )
             
             sample_stem = f"{id_stem}_seed{seed}_sample{sample_num}"
+            structure_dst = None
             if copy_structures: # should be save path
+                structure_dst = Path(copy_structures) / f"{sample_stem}.cif"
                 shutil.copy2(
                     src=structure_file,
-                    dst=Path(copy_structures) / f"{sample_stem}.cif", 
+                    dst=structure_dst, 
                 )
 
             res = AF3Result()
@@ -589,6 +606,7 @@ class AF3Result:
                 id=sample_stem,
                 summary_json_path=summary_file,
                 full_json_path=full_file,
+                cif_path=structure_dst,
             )
             yield res
     
