@@ -9,10 +9,16 @@ Features:
 """
 
 import json
-from typing import Optional, Callable
+import re
+from typing import Optional, Callable, Generator
 from pathlib import Path
+import logging
+import shutil
+
 import numpy as np
 import pandas as pd
+
+from .ipsae import ipsae, read_pdb
 
 
 class AF3Result:
@@ -29,15 +35,15 @@ class AF3Result:
 
     # Metadata
     id: str = None
-    # cif_path: Path = None
+    cif_path: Path = None
     summary_json_path: Path = None
     full_json_path: Path = None
 
     def _build_from_af3_output(
-        self, id: str, summary_json_path: Path, full_json_path: Path
+        self, id: str, summary_json_path: Path, full_json_path: Path, cif_path: Path
     ):
         self.id = id
-        # self.cif_path = Path(cif_path)
+        self.cif_path = Path(cif_path)
         self.summary_json_path = Path(summary_json_path)
         self.full_json_path = Path(full_json_path)
 
@@ -434,6 +440,19 @@ class AF3Result:
             sub_plddt = self.plddt
 
         return agg(sub_plddt)
+    
+
+    def get_ipsae(self, pae_cutoff):
+        with open(self.cif_path, "r") as f:
+            residues, _, _, chains = read_pdb(f, "cif")
+        # chains should be the same as residue_chain_ids
+        # leaving this alone until we can fully integrate the cif reading
+        return ipsae(
+            residues=residues,
+            chains=chains,
+            pae_matrix=self.pae,
+            pae_cutoff=pae_cutoff, 
+        )
 
     # --------------------
     # Object Creation Factory Method
@@ -510,6 +529,123 @@ class AF3Result:
                 full_json_path=full_files[0],
             )
             return res
+    
+    @staticmethod
+    def load_raw_webserver_result(
+        result_dir: str, seed: int = None, id_stem: str = None, copy_structures: str = None
+    ) -> "AF3Result":
+        """Generate an AF3Result file for each of the 5 samples from a run on the AF3 webserver.
+
+        Inputs:
+        result_dir: path to directory storing results.
+        seed: Model seed. If unset, will try to infer these from a request file in result_dir.
+        id_stem: Job name. If unset, will try to infer these from a request file in result_dir.
+        copy_structures: directory to copy structure files to, if desired.
+        """
+        
+        result_dir = Path(result_dir)
+        if not result_dir.is_dir():
+            raise FileNotFoundError(
+                f"Result directory not found: {result_dir} or is not a directory"
+            )
+
+        # load from webserver results
+        summary_files = list(result_dir.glob("*summary_confidences*.json"))
+        if seed is None or id_stem is None:
+            request_files = list(result_dir.glob("*request*.json"))
+            if len(request_files) > 1: 
+                logging.error("More than 1 request JSON.")
+            with open(request_files[0], "r") as request_json:
+                # print(json.load(request_json))
+                request_json = json.load(request_json)
+                if len(request_json) > 1: 
+                    logging.error("Request JSON has information for more than 1 run.")
+                request_json = request_json[0]
+                id_stem = request_json["name"]
+                if len(request_json["modelSeeds"]) > 1: 
+                    logging.error("Request JSON has more than 1 seed.")
+                seed = request_json["modelSeeds"][0]
+
+        num_samples = len(summary_files) # usually this is 5
+
+        # Find full JSON
+        full_files = list(result_dir.glob("*full_data*.json"))
+        if len(full_files) != num_samples:
+            raise FileNotFoundError(
+                f"Expected exactly {num_samples} full_data*.json (non-summary), found {len(full_files)}"
+            )
+        structure_files = list(result_dir.glob("*.cif"))
+        if len(structure_files) != num_samples:
+            raise FileNotFoundError(
+                f"Expected exactly {num_samples} *.cif files, found {len(structure_files)}"
+            )
+
+        # if not id:
+        #     id = Path(result_dir).name
+
+        for summary_file, full_file, structure_file in zip(sorted(summary_files), sorted(full_files), sorted(structure_files)):
+            
+            if match := re.search(r"summary_confidences_(\d)\.json", summary_file.name):
+                sample_num = int(match.group(1))
+            else:
+                raise ValueError(
+                    f"Improperly formatted summary_confidences filename:\n{summary_file.name}"
+                )
+            
+            sample_stem = f"{id_stem}_seed{seed}_sample{sample_num}"
+            structure_dst = None
+            if copy_structures: # should be save path
+                structure_dst = Path(copy_structures) / f"{sample_stem}.cif"
+                shutil.copy2(
+                    src=structure_file,
+                    dst=structure_dst, 
+                )
+
+            res = AF3Result()
+            res._build_from_af3_output(
+                id=sample_stem,
+                summary_json_path=summary_file,
+                full_json_path=full_file,
+                cif_path=structure_dst,
+            )
+            yield res
+    
+
+    @staticmethod
+    def load_stored_webserver_results(
+        result_dir: str
+    ): # -> "AF3Result":
+
+        result_dir = Path(result_dir)
+        if not result_dir.is_dir():
+            raise FileNotFoundError(
+                f"Result directory not found: {result_dir} or is not a directory"
+            )
+
+        # Find npz
+        npz_files = list(result_dir.glob("*.npz"))
+        if len(npz_files) < 1:
+            raise FileNotFoundError(
+                f"Expected at least one *.npz, found {len(npz_files)}."
+            )
+        for npz_file in npz_files:
+            data = np.load(npz_file, allow_pickle=True)
+            obj = AF3Result()
+            obj.id = str(data["id"])
+
+            # Restore arrays
+            obj.chains = list(data["chains"])
+            obj.residue_chain_ids = data["residue_chain_ids"]
+            obj.atom_chain_ids = data["atom_chain_ids"]
+            obj.plddt = data["plddt"]
+            obj.pae = data["pae"]
+            obj.contact_probs = data["contact_probs"]
+            obj.global_ptm = float(data["global_ptm"])
+            obj.global_iptm = float(data["global_iptm"])
+            obj.chain_pair_iptm = data["chain_pair_iptm"]
+            obj.chain_ptm = data["chain_ptm"]
+
+            yield obj
 
     #  TODO: Add structures
     # def _load_cif(self) -> None:

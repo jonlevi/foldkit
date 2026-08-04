@@ -11,6 +11,7 @@ def save_af3_result(af3_result: AF3Result, path: str):
     np.savez_compressed(
         path,
         id=af3_result.id,
+        cif_path=af3_result.cif_path,
         chains=np.array(af3_result.chains),
         residue_chain_ids=af3_result.residue_chain_ids,
         atom_chain_ids=af3_result.atom_chain_ids,
