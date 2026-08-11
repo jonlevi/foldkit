@@ -567,6 +567,9 @@ python -m build
 ## Publish to PyPI
 
 ```bash
+pip install --upgrade build twine
+python -m build
+twine check dist/*
 twine upload dist/* -u __token__ -p <API TOKEN>
 ```
 
