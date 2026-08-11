@@ -15,6 +15,7 @@ classifiers = [
 
 dependencies = [
     "numpy",
+    "pandas",
     "biopython",
     "tqdm",
     "argcomplete"
