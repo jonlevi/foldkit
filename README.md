@@ -5,8 +5,11 @@ foldkit is a Python toolkit for working with and efficiently storing AlphaFold3 
 It provides:
 
 🐍 A Python API for easily accessing AF3 confidence metrics and structural ensembles
+
 🧬 Convenient access to ensemble-level metrics across seeds and samples
+
 📦 An efficient storage format that substantially reduces the size of AF3 output directories
+
 🖥️ A command-line interface (CLI) for converting raw AF3 results into the compressed FoldKit format
 
 
