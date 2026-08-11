@@ -25,6 +25,14 @@ dev = [
     "pytest"
 ]
 
+docs = [
+    "sphinx",
+    "pydata-sphinx-theme",
+    "sphinx-copybutton",
+    "sphinx-autodoc-typehints",
+    "sphinx-design"
+]
+
 [project.scripts]
 foldkit = "foldkit.cli:main"
 
