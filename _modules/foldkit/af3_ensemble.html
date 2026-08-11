@@ -1,0 +1,1376 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" data-theme="auto">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>foldkit.af3_ensemble &#8212; FoldKit</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "auto";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "auto";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=720ed60b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=741d8101" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+
+    <script src="../../_static/documentation_options.js?v=92734c54"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/foldkit/af3_ensemble';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="0.1.3" />
+  
+    
+    <script src="../../_static/searchtools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script src="../../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="auto">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">FoldKit</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../tutorial.html">
+    Tutorial
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../api.html">
+    API Reference
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/jonlevi/foldkit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/jonlevi/foldkit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/foldkit/" title="PyPI" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-custom fa-lg" data-prefix="fa-custom" data-icon="pypi" aria-hidden="true"></i><span class="visually-hidden">PyPI</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../tutorial.html">
+    Tutorial
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../api.html">
+    API Reference
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/jonlevi/foldkit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/jonlevi/foldkit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/foldkit/" title="PyPI" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-custom fa-lg" data-prefix="fa-custom" data-icon="pypi" aria-hidden="true"></i><span class="visually-hidden">PyPI</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">foldkit.af3_ensemble</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for foldkit.af3_ensemble</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">foldkit.core</span>
+<span class="sd">Core object for an ensemble of multiple AlphaFold3 results, with the same sequence but varying seeds/samples</span>
+
+<span class="sd">Features:</span>
+<span class="sd">- Load Ensemble of AF3 results from directory of multiple results.</span>
+<span class="sd">- Interface for aggregation of results across the ensemble</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Callable</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tqdm</span><span class="w"> </span><span class="kn">import</span> <span class="n">tqdm</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">.af3_result</span><span class="w"> </span><span class="kn">import</span> <span class="n">AF3Result</span>
+
+<span class="n">SEED_SAMPLE_REGEX</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;seed-(\d+)_sample-(\d+)&quot;</span>
+
+
+<div class="viewcode-block" id="AF3Ensemble">
+<a class="viewcode-back" href="../../generated/foldkit.af3_ensemble.AF3Ensemble.html#foldkit.af3_ensemble.AF3Ensemble">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">AF3Ensemble</span><span class="p">:</span>
+
+<div class="viewcode-block" id="AF3Ensemble.__init__">
+<a class="viewcode-back" href="../../generated/foldkit.af3_ensemble.AF3Ensemble.html#foldkit.af3_ensemble.AF3Ensemble.__init__">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># store individual results mapped by seed/sample name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">af3_results</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">AF3Result</span><span class="p">]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">af3_ranking_scores</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">seeds</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">samples</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># Metadata</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">top_level_directory</span><span class="p">:</span> <span class="n">Path</span> <span class="o">=</span> <span class="kc">None</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_build_from_af3_output</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">top_level_directory</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">compressed</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="nb">id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">top_level_directory</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">top_level_directory</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_extract_result_objects</span><span class="p">(</span><span class="n">compressed</span><span class="o">=</span><span class="n">compressed</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_extract_result_objects</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">compressed</span><span class="p">:</span> <span class="nb">bool</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">af3_results</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Error: Already initialized. Skipping...&quot;</span><span class="p">)</span>
+            <span class="k">return</span>
+
+        <span class="n">seeds</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="n">samples</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="n">ranking_files</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">top_level_directory</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;*ranking_scores.csv&quot;</span><span class="p">))</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">ranking_files</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Could not find ranking_scores.csv file&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">ranking_files</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
+                <span class="s2">&quot;Found multiple ranking_scores.csv files and don&#39;t know which to use.&quot;</span>
+            <span class="p">)</span>
+
+        <span class="n">ranking_file</span> <span class="o">=</span> <span class="n">ranking_files</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">rankings</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">ranking_file</span><span class="p">)</span>
+        <span class="n">subdirectories</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">top_level_directory</span><span class="o">.</span><span class="n">iterdir</span><span class="p">()</span> <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">is_dir</span><span class="p">()]</span>
+        <span class="k">for</span> <span class="n">subdir</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">subdirectories</span><span class="p">):</span>
+            <span class="n">match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">SEED_SAMPLE_REGEX</span><span class="p">,</span> <span class="n">subdir</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">match</span><span class="p">:</span>
+                <span class="n">seed</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+                <span class="n">seeds</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+                <span class="n">sample</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+                <span class="n">samples</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="n">compressed</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">af3_results</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;seed-</span><span class="si">{</span><span class="n">seed</span><span class="si">}</span><span class="s2">_sample-</span><span class="si">{</span><span class="n">sample</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+                        <span class="n">AF3Result</span><span class="o">.</span><span class="n">load_compressed_result</span><span class="p">(</span><span class="n">subdir</span><span class="p">)</span>
+                    <span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">af3_results</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;seed-</span><span class="si">{</span><span class="n">seed</span><span class="si">}</span><span class="s2">_sample-</span><span class="si">{</span><span class="n">sample</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+                        <span class="n">AF3Result</span><span class="o">.</span><span class="n">load_af3_result</span><span class="p">(</span><span class="n">subdir</span><span class="p">,</span> <span class="n">subdir</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+                    <span class="p">)</span>
+
+                <span class="n">ranking</span> <span class="o">=</span> <span class="n">rankings</span><span class="p">[</span>
+                    <span class="p">(</span><span class="n">rankings</span><span class="p">[</span><span class="s2">&quot;seed&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">seed</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">rankings</span><span class="p">[</span><span class="s2">&quot;sample&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">sample</span><span class="p">)</span>
+                <span class="p">]</span>
+                <span class="k">assert</span> <span class="p">(</span>
+                    <span class="nb">len</span><span class="p">(</span><span class="n">ranking</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
+                <span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;ranking CSV does not contain one row for seed=</span><span class="si">{</span><span class="n">seed</span><span class="si">}</span><span class="s2"> and sample=</span><span class="si">{</span><span class="n">sample</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">af3_ranking_scores</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;seed-</span><span class="si">{</span><span class="n">seed</span><span class="si">}</span><span class="s2">_sample-</span><span class="si">{</span><span class="n">sample</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span>
+                    <span class="n">ranking</span><span class="p">[</span><span class="s2">&quot;ranking_score&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;Unable to extract seed and sample information from directory name: </span><span class="si">{</span><span class="n">subdir</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">. Subdirectories should have names that fit the pattern `seed-X_sample-Y`&quot;</span>
+                <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">af3_results</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">seeds</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">seeds</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">samples</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">samples</span><span class="p">))</span>
+
+<div class="viewcode-block" id="AF3Ensemble.get_result_by_seed_and_sample">
+<a class="viewcode-back" href="../../generated/foldkit.af3_ensemble.AF3Ensemble.html#foldkit.af3_ensemble.AF3Ensemble.get_result_by_seed_and_sample">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_result_by_seed_and_sample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">seed</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">sample</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AF3Result</span><span class="p">:</span>
+        <span class="n">seed</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+        <span class="n">sample</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">seed</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">seeds</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Seed </span><span class="si">{</span><span class="n">seed</span><span class="si">}</span><span class="s2"> not in ensemble (seeds: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">seeds</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">sample</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">samples</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Sample </span><span class="si">{</span><span class="n">sample</span><span class="si">}</span><span class="s2"> not in ensemble (samples: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">samples</span><span class="si">}</span><span class="s2">)&quot;</span>
+            <span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">af3_results</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;seed-</span><span class="si">{</span><span class="n">seed</span><span class="si">}</span><span class="s2">_sample-</span><span class="si">{</span><span class="n">sample</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="AF3Ensemble.get_top_ranked_result">
+<a class="viewcode-back" href="../../generated/foldkit.af3_ensemble.AF3Ensemble.html#foldkit.af3_ensemble.AF3Ensemble.get_top_ranked_result">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_top_ranked_result</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AF3Result</span><span class="p">:</span>
+        <span class="n">top_structure</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">af3_ranking_scores</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">af3_ranking_scores</span><span class="o">.</span><span class="n">get</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">af3_results</span><span class="p">[</span><span class="n">top_structure</span><span class="p">]</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_get_all</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Call `method_name` on every AF3Result in the ensemble and collect</span>
+<span class="sd">        the results into a dict keyed by result id.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        method_name : str</span>
+<span class="sd">            Name of the method to call on each `AF3Result` (e.g. &quot;get_ptm&quot;).</span>
+<span class="sd">        **kwargs</span>
+<span class="sd">            Forwarded to the underlying method call.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        dict[str, float]</span>
+<span class="sd">            One value per member of the ensemble.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="n">id_</span><span class="p">:</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">af3_result</span><span class="p">,</span> <span class="n">method_name</span><span class="p">)(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">id_</span><span class="p">,</span> <span class="n">af3_result</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">af3_results</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+        <span class="p">}</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_get_ensemble</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">method_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">ensemble_agg</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Call `method_name` on every AF3Result in the ensemble and aggregate</span>
+<span class="sd">        the resulting values with `ensemble_agg`.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        method_name : str</span>
+<span class="sd">            Name of the method to call on each `AF3Result` (e.g. &quot;get_ptm&quot;).</span>
+<span class="sd">        ensemble_agg : callable, default=np.mean</span>
+<span class="sd">            Aggregation function to apply across the ensemble of values.</span>
+<span class="sd">        **kwargs</span>
+<span class="sd">            Forwarded to the underlying method call.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        float</span>
+<span class="sd">            Ensemble-aggregated score.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_all</span><span class="p">(</span><span class="n">method_name</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span>
+        <span class="k">return</span> <span class="n">ensemble_agg</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+
+    <span class="c1"># ------------------------------------------------------------------</span>
+    <span class="c1"># ptm</span>
+    <span class="c1"># ------------------------------------------------------------------</span>
+
+<div class="viewcode-block" id="AF3Ensemble.get_all_ptm">
+<a class="viewcode-back" href="../../generated/foldkit.af3_ensemble.AF3Ensemble.html#foldkit.af3_ensemble.AF3Ensemble.get_all_ptm">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_all_ptm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">chain</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the ptm score.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        chain : str, optional</span>
+<span class="sd">            If provided, computes the ptm for this specific chain.</span>
+<span class="sd">            If None, returns the global score across all chains in the structure.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        dict[str, float]</span>
+<span class="sd">            ptm scores for each AF3 Result.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            If `chain` is invalid based on the data</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_all</span><span class="p">(</span><span class="s2">&quot;get_ptm&quot;</span><span class="p">,</span> <span class="n">chain</span><span class="o">=</span><span class="n">chain</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="AF3Ensemble.get_ensemble_ptm">
+<a class="viewcode-back" href="../../generated/foldkit.af3_ensemble.AF3Ensemble.html#foldkit.af3_ensemble.AF3Ensemble.get_ensemble_ptm">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_ensemble_ptm</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">chain</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">ensemble_agg</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the ensemble aggregated ptm score.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        chain : str, optional</span>
+<span class="sd">            If provided, computes the ptm for this specific chain.</span>
+<span class="sd">            If None, returns the global score across all chains in the structure.</span>
+<span class="sd">        ensemble_agg : callable, default=np.mean</span>
+<span class="sd">            Aggregation function to apply to the ensemble of values.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        float</span>
+<span class="sd">            ensemble aggregated ptm score.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            If `chain` is invalid based on the data</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_ensemble</span><span class="p">(</span><span class="s2">&quot;get_ptm&quot;</span><span class="p">,</span> <span class="n">ensemble_agg</span><span class="o">=</span><span class="n">ensemble_agg</span><span class="p">,</span> <span class="n">chain</span><span class="o">=</span><span class="n">chain</span><span class="p">)</span></div>
+
+
+    <span class="c1"># ------------------------------------------------------------------</span>
+    <span class="c1"># iptm</span>
+    <span class="c1"># ------------------------------------------------------------------</span>
+
+<div class="viewcode-block" id="AF3Ensemble.get_all_iptm">
+<a class="viewcode-back" href="../../generated/foldkit.af3_ensemble.AF3Ensemble.html#foldkit.af3_ensemble.AF3Ensemble.get_all_iptm">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_all_iptm</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">chain1</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">chain2</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the interchain ptm (iptm) score for all members of the ensemble.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        chain1, chain2 : str, optional</span>
+<span class="sd">            If provided, computes the iptm for this specific pair of chains.</span>
+<span class="sd">            Otherwise, returns the global iptm score for all pairs of chains</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        dict[str, float]</span>
+<span class="sd">            iptm scores for each AF3 Result.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            If `chain1` or `chain2` is invalid based on the data</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_all</span><span class="p">(</span><span class="s2">&quot;get_iptm&quot;</span><span class="p">,</span> <span class="n">chain1</span><span class="o">=</span><span class="n">chain1</span><span class="p">,</span> <span class="n">chain2</span><span class="o">=</span><span class="n">chain2</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="AF3Ensemble.get_ensemble_iptm">
+<a class="viewcode-back" href="../../generated/foldkit.af3_ensemble.AF3Ensemble.html#foldkit.af3_ensemble.AF3Ensemble.get_ensemble_iptm">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_ensemble_iptm</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">chain1</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">chain2</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">ensemble_agg</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the ensemble aggregated interchain ptm (iptm) score.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        chain1, chain2 : str, optional</span>
+<span class="sd">            If provided, computes the iptm for this specific pair of chains.</span>
+<span class="sd">            Otherwise, returns the global iptm score for all pairs of chains</span>
+<span class="sd">        ensemble_agg : callable, default=np.mean</span>
+<span class="sd">            Aggregation function to apply to the ensemble of values.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        float</span>
+<span class="sd">            ensemble aggregated iptm score.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            If `chain` is invalid based on the data</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_ensemble</span><span class="p">(</span>
+            <span class="s2">&quot;get_iptm&quot;</span><span class="p">,</span> <span class="n">ensemble_agg</span><span class="o">=</span><span class="n">ensemble_agg</span><span class="p">,</span> <span class="n">chain1</span><span class="o">=</span><span class="n">chain1</span><span class="p">,</span> <span class="n">chain2</span><span class="o">=</span><span class="n">chain2</span>
+        <span class="p">)</span></div>
+
+
+    <span class="c1"># ------------------------------------------------------------------</span>
+    <span class="c1"># pae</span>
+    <span class="c1"># ------------------------------------------------------------------</span>
+
+<div class="viewcode-block" id="AF3Ensemble.get_all_pae">
+<a class="viewcode-back" href="../../generated/foldkit.af3_ensemble.AF3Ensemble.html#foldkit.af3_ensemble.AF3Ensemble.get_all_pae">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_all_pae</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">chain</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">tokens</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">agg</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the pae (predicted alignment error) score.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        chain : str, optional</span>
+<span class="sd">            If provided, computes the pae for this specific chain.</span>
+<span class="sd">            If None, returns the score across all tokens (residues) in the structure.</span>
+<span class="sd">        tokens : list[int], optional</span>
+<span class="sd">            If provided, computes the pae for specific tokens.</span>
+<span class="sd">            If None, returns the score across all tokens (residues) in the structure.</span>
+<span class="sd">            Cannot be used in combination with &quot;chain&quot;</span>
+<span class="sd">        agg : callable, default=np.mean</span>
+<span class="sd">            Aggregation function to apply to the selected values.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        dict[str, float]</span>
+<span class="sd">            Full ensemble of pae scores, aggregated across PAE matrix.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            If both `chain` and `tokens` are provided, or if either argument is invalid based on the data</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_all</span><span class="p">(</span><span class="s2">&quot;get_pae&quot;</span><span class="p">,</span> <span class="n">chain</span><span class="o">=</span><span class="n">chain</span><span class="p">,</span> <span class="n">tokens</span><span class="o">=</span><span class="n">tokens</span><span class="p">,</span> <span class="n">agg</span><span class="o">=</span><span class="n">agg</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="AF3Ensemble.get_ensemble_pae">
+<a class="viewcode-back" href="../../generated/foldkit.af3_ensemble.AF3Ensemble.html#foldkit.af3_ensemble.AF3Ensemble.get_ensemble_pae">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_ensemble_pae</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">chain</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">tokens</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">agg</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">,</span>
+        <span class="n">ensemble_agg</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the ensemble-aggregated pae (predicted alignment error) score.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        chain : str, optional</span>
+<span class="sd">            If provided, computes the pae for this specific chain.</span>
+<span class="sd">            If None, returns the score across all tokens (residues) in the structure.</span>
+<span class="sd">        tokens : list[int], optional</span>
+<span class="sd">            If provided, computes the pae for specific tokens.</span>
+<span class="sd">            If None, returns the score across all tokens (residues) in the structure.</span>
+<span class="sd">            Cannot be used in combination with &quot;chain&quot;</span>
+<span class="sd">        agg : callable, default=np.mean</span>
+<span class="sd">            Aggregation function to apply to the selected values.</span>
+<span class="sd">        ensemble_agg : callable, default=np.mean</span>
+<span class="sd">            Aggregation function to apply to the ensemble of values.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        float</span>
+<span class="sd">            Ensemble aggregated pae score, aggregated across PAE matrix per</span>
+<span class="sd">            structure and then aggregated across ensemble.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            If both `chain` and `tokens` are provided, or if either argument is invalid based on the data</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_ensemble</span><span class="p">(</span>
+            <span class="s2">&quot;get_pae&quot;</span><span class="p">,</span>
+            <span class="n">ensemble_agg</span><span class="o">=</span><span class="n">ensemble_agg</span><span class="p">,</span>
+            <span class="n">chain</span><span class="o">=</span><span class="n">chain</span><span class="p">,</span>
+            <span class="n">tokens</span><span class="o">=</span><span class="n">tokens</span><span class="p">,</span>
+            <span class="n">agg</span><span class="o">=</span><span class="n">agg</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+    <span class="c1"># ------------------------------------------------------------------</span>
+    <span class="c1"># ipae</span>
+    <span class="c1"># ------------------------------------------------------------------</span>
+
+<div class="viewcode-block" id="AF3Ensemble.get_all_ipae">
+<a class="viewcode-back" href="../../generated/foldkit.af3_ensemble.AF3Ensemble.html#foldkit.af3_ensemble.AF3Ensemble.get_all_ipae">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_all_ipae</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">chain1</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">chain2</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">tokens1</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">tokens2</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">agg</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the interface pae (predicted alignment error) score.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        chain1, chain2 : str, optional</span>
+<span class="sd">            If provided, computes the ipae for this specific pair of chains.</span>
+<span class="sd">            Only optional if `tokens1` and `tokens2` are provided</span>
+<span class="sd">        tokens1, tokens2 : list[int], optional</span>
+<span class="sd">            If provided, computes the ipae for this specific pair of token lists.</span>
+<span class="sd">            Only optional if `chain1` and `chain2` are provided</span>
+<span class="sd">        agg : callable, default=np.mean</span>
+<span class="sd">            Aggregation function to apply to the selected values.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        dict[str, float]</span>
+<span class="sd">            Aggregated ipae score for each structure in the ensemble.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            If neither `chain` and `tokens` are provided, both are provided, or if either argument is invalid based on the data</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_all</span><span class="p">(</span>
+            <span class="s2">&quot;get_ipae&quot;</span><span class="p">,</span>
+            <span class="n">chain1</span><span class="o">=</span><span class="n">chain1</span><span class="p">,</span>
+            <span class="n">chain2</span><span class="o">=</span><span class="n">chain2</span><span class="p">,</span>
+            <span class="n">tokens1</span><span class="o">=</span><span class="n">tokens1</span><span class="p">,</span>
+            <span class="n">tokens2</span><span class="o">=</span><span class="n">tokens2</span><span class="p">,</span>
+            <span class="n">agg</span><span class="o">=</span><span class="n">agg</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="AF3Ensemble.get_ensemble_ipae">
+<a class="viewcode-back" href="../../generated/foldkit.af3_ensemble.AF3Ensemble.html#foldkit.af3_ensemble.AF3Ensemble.get_ensemble_ipae">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_ensemble_ipae</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">chain1</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">chain2</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">tokens1</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">tokens2</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">agg</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">,</span>
+        <span class="n">ensemble_agg</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the ensemble aggregated interface pae (predicted alignment error) score.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        chain1, chain2 : str, optional</span>
+<span class="sd">            If provided, computes the ipae for this specific pair of chains.</span>
+<span class="sd">            Only optional if `tokens1` and `tokens2` are provided</span>
+<span class="sd">        tokens1, tokens2 : list[int], optional</span>
+<span class="sd">            If provided, computes the ipae for this specific pair of token lists.</span>
+<span class="sd">            Only optional if `chain1` and `chain2` are provided</span>
+<span class="sd">        agg : callable, default=np.mean</span>
+<span class="sd">            Aggregation function to apply to the selected values.</span>
+<span class="sd">        ensemble_agg : callable, default=np.mean</span>
+<span class="sd">            Aggregation function to apply to the ensemble of values.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        float</span>
+<span class="sd">            Ensemble aggregated ipae score.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            If neither `chain` and `tokens` are provided, both are provided, or if either argument is invalid based on the data</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_ensemble</span><span class="p">(</span>
+            <span class="s2">&quot;get_ipae&quot;</span><span class="p">,</span>
+            <span class="n">ensemble_agg</span><span class="o">=</span><span class="n">ensemble_agg</span><span class="p">,</span>
+            <span class="n">chain1</span><span class="o">=</span><span class="n">chain1</span><span class="p">,</span>
+            <span class="n">chain2</span><span class="o">=</span><span class="n">chain2</span><span class="p">,</span>
+            <span class="n">tokens1</span><span class="o">=</span><span class="n">tokens1</span><span class="p">,</span>
+            <span class="n">tokens2</span><span class="o">=</span><span class="n">tokens2</span><span class="p">,</span>
+            <span class="n">agg</span><span class="o">=</span><span class="n">agg</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+    <span class="c1"># ------------------------------------------------------------------</span>
+    <span class="c1"># ipsae</span>
+    <span class="c1"># ------------------------------------------------------------------</span>
+
+<div class="viewcode-block" id="AF3Ensemble.get_all_ipsae">
+<a class="viewcode-back" href="../../generated/foldkit.af3_ensemble.AF3Ensemble.html#foldkit.af3_ensemble.AF3Ensemble.get_all_ipsae">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_all_ipsae</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">chain1</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">chain2</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">pae_cutoff</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">d0</span><span class="o">=</span><span class="s2">&quot;d0res&quot;</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the ipase score for all members of the ensemble.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        chain1, chain2 : str</span>
+<span class="sd">            Computes the ipsae for this specific pair of chains.</span>
+<span class="sd">        pae_cutoff : float, default=10</span>
+<span class="sd">            PAE cutoff (in Angstroms) passed through to the ipSAE calculation.</span>
+<span class="sd">        d0: str, default=d0res</span>
+<span class="sd">            d0 used for calculation. Options are:</span>
+<span class="sd">            d0res: d0 determined by number of residues in 2nd chain with PAE&lt;cutoff</span>
+<span class="sd">            d0chn: sum of chain lengths</span>
+<span class="sd">            d0dom: d0 = total number of residues in both chains with any interchain PAE&lt;cutoff</span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        dict[str, float]</span>
+<span class="sd">            ipsae scores for each AF3 Result.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            If `chain1` or `chain2` is invalid based on the data</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_all</span><span class="p">(</span>
+            <span class="s2">&quot;get_ipsae&quot;</span><span class="p">,</span> <span class="n">chain1</span><span class="o">=</span><span class="n">chain1</span><span class="p">,</span> <span class="n">chain2</span><span class="o">=</span><span class="n">chain2</span><span class="p">,</span> <span class="n">pae_cutoff</span><span class="o">=</span><span class="n">pae_cutoff</span><span class="p">,</span> <span class="n">d0</span><span class="o">=</span><span class="n">d0</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="AF3Ensemble.get_ensemble_ipsae">
+<a class="viewcode-back" href="../../generated/foldkit.af3_ensemble.AF3Ensemble.html#foldkit.af3_ensemble.AF3Ensemble.get_ensemble_ipsae">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_ensemble_ipsae</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">chain1</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">chain2</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">pae_cutoff</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+        <span class="n">d0</span><span class="o">=</span><span class="s2">&quot;d0res&quot;</span><span class="p">,</span>
+        <span class="n">ensemble_agg</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the ensemble aggregated ipsae score.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        chain1, chain2 : str</span>
+<span class="sd">            Computes the ipsae for this specific pair of chains.</span>
+<span class="sd">        pae_cutoff : float, default=10</span>
+<span class="sd">            PAE cutoff (in Angstroms) passed through to the ipSAE calculation.</span>
+<span class="sd">        d0: str, default=d0res</span>
+<span class="sd">            d0 used for calculation. Options are:</span>
+<span class="sd">            d0res: d0 determined by number of residues in 2nd chain with PAE&lt;cutoff</span>
+<span class="sd">            d0chn: sum of chain lengths</span>
+<span class="sd">            d0dom: d0 = total number of residues in both chains with any interchain PAE&lt;cutoff</span>
+<span class="sd">        ensemble_agg : callable, default=np.mean</span>
+<span class="sd">            Aggregation function to apply to the ensemble of values.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        float</span>
+<span class="sd">            ensemble aggregated ipsae score.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            If `chain` is invalid based on the data</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_ensemble</span><span class="p">(</span>
+            <span class="s2">&quot;get_ipsae&quot;</span><span class="p">,</span>
+            <span class="n">ensemble_agg</span><span class="o">=</span><span class="n">ensemble_agg</span><span class="p">,</span>
+            <span class="n">chain1</span><span class="o">=</span><span class="n">chain1</span><span class="p">,</span>
+            <span class="n">chain2</span><span class="o">=</span><span class="n">chain2</span><span class="p">,</span>
+            <span class="n">pae_cutoff</span><span class="o">=</span><span class="n">pae_cutoff</span><span class="p">,</span>
+            <span class="n">d0</span><span class="o">=</span><span class="n">d0</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+    <span class="c1"># ------------------------------------------------------------------</span>
+    <span class="c1"># contact probabilities</span>
+    <span class="c1"># ------------------------------------------------------------------</span>
+
+<div class="viewcode-block" id="AF3Ensemble.get_all_contact_probs">
+<a class="viewcode-back" href="../../generated/foldkit.af3_ensemble.AF3Ensemble.html#foldkit.af3_ensemble.AF3Ensemble.get_all_contact_probs">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_all_contact_probs</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">chain1</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">chain2</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">tokens1</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">tokens2</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">agg</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the contact probs score for each structure in the ensemble.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        chain1, chain2 : str, optional</span>
+<span class="sd">            If provided, computes the contact probs for this specific pair of chains.</span>
+<span class="sd">            Only optional if `tokens1` and `tokens2` are provided</span>
+<span class="sd">        tokens1, tokens2 : list[int], optional</span>
+<span class="sd">            If provided, computes the contact probs for this specific pair of token lists.</span>
+<span class="sd">            Only optional if `chain1` and `chain2` are provided</span>
+<span class="sd">        agg : callable, default=np.mean</span>
+<span class="sd">            Aggregation function to apply to the selected values.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        dict[str, float]</span>
+<span class="sd">            Contact probs score for each member of the ensemble.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            If neither `chain` and `tokens` are provided, both are provided, or if either argument is invalid based on the data</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_all</span><span class="p">(</span>
+            <span class="s2">&quot;get_contact_probs&quot;</span><span class="p">,</span>
+            <span class="n">chain1</span><span class="o">=</span><span class="n">chain1</span><span class="p">,</span>
+            <span class="n">chain2</span><span class="o">=</span><span class="n">chain2</span><span class="p">,</span>
+            <span class="n">tokens1</span><span class="o">=</span><span class="n">tokens1</span><span class="p">,</span>
+            <span class="n">tokens2</span><span class="o">=</span><span class="n">tokens2</span><span class="p">,</span>
+            <span class="n">agg</span><span class="o">=</span><span class="n">agg</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="AF3Ensemble.get_ensemble_contact_probs">
+<a class="viewcode-back" href="../../generated/foldkit.af3_ensemble.AF3Ensemble.html#foldkit.af3_ensemble.AF3Ensemble.get_ensemble_contact_probs">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_ensemble_contact_probs</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">chain1</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">chain2</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">tokens1</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">tokens2</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">agg</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">,</span>
+        <span class="n">ensemble_agg</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the contact probs score aggregated over the ensemble.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        chain1, chain2 : str, optional</span>
+<span class="sd">            If provided, computes the contact probs for this specific pair of chains.</span>
+<span class="sd">            Only optional if `tokens1` and `tokens2` are provided</span>
+<span class="sd">        tokens1, tokens2 : list[int], optional</span>
+<span class="sd">            If provided, computes the contact probs for this specific pair of token lists.</span>
+<span class="sd">            Only optional if `chain1` and `chain2` are provided</span>
+<span class="sd">        agg : callable, default=np.mean</span>
+<span class="sd">            Aggregation function to apply to the selected values.</span>
+<span class="sd">        ensemble_agg : callable, default=np.mean</span>
+<span class="sd">            Aggregation function to apply to the ensemble of values.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        float</span>
+<span class="sd">            Contact probs score aggregated across the ensemble.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            If neither `chain` and `tokens` are provided, both are provided, or if either argument is invalid based on the data</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_ensemble</span><span class="p">(</span>
+            <span class="s2">&quot;get_contact_probs&quot;</span><span class="p">,</span>
+            <span class="n">ensemble_agg</span><span class="o">=</span><span class="n">ensemble_agg</span><span class="p">,</span>
+            <span class="n">chain1</span><span class="o">=</span><span class="n">chain1</span><span class="p">,</span>
+            <span class="n">chain2</span><span class="o">=</span><span class="n">chain2</span><span class="p">,</span>
+            <span class="n">tokens1</span><span class="o">=</span><span class="n">tokens1</span><span class="p">,</span>
+            <span class="n">tokens2</span><span class="o">=</span><span class="n">tokens2</span><span class="p">,</span>
+            <span class="n">agg</span><span class="o">=</span><span class="n">agg</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+    <span class="c1"># ------------------------------------------------------------------</span>
+    <span class="c1"># plddt</span>
+    <span class="c1"># ------------------------------------------------------------------</span>
+
+<div class="viewcode-block" id="AF3Ensemble.get_all_plddt">
+<a class="viewcode-back" href="../../generated/foldkit.af3_ensemble.AF3Ensemble.html#foldkit.af3_ensemble.AF3Ensemble.get_all_plddt">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_all_plddt</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">chain</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">atoms</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">agg</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the plddt score for all structures in the ensemble.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        chain : str, optional</span>
+<span class="sd">            If provided, computes the plddt for this specific chain.</span>
+<span class="sd">            If None, returns the score across all atoms in the structure.</span>
+<span class="sd">        atoms : list[int], optional</span>
+<span class="sd">            If provided, computes the plddt for specific atoms.</span>
+<span class="sd">            If None, returns the score across all atoms in the structure.</span>
+<span class="sd">            Cannot be used in combination with &quot;chain&quot;</span>
+<span class="sd">        agg : callable, default=np.mean</span>
+<span class="sd">            Aggregation function to apply to the selected values.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        dict[str, float]</span>
+<span class="sd">            per structure plddt score.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            If both `chain` and `atoms` are provided, or if either argument is invalid based on the data</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_all</span><span class="p">(</span><span class="s2">&quot;get_plddt&quot;</span><span class="p">,</span> <span class="n">chain</span><span class="o">=</span><span class="n">chain</span><span class="p">,</span> <span class="n">atoms</span><span class="o">=</span><span class="n">atoms</span><span class="p">,</span> <span class="n">agg</span><span class="o">=</span><span class="n">agg</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="AF3Ensemble.get_ensemble_plddt">
+<a class="viewcode-back" href="../../generated/foldkit.af3_ensemble.AF3Ensemble.html#foldkit.af3_ensemble.AF3Ensemble.get_ensemble_plddt">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_ensemble_plddt</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">chain</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">atoms</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">agg</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">,</span>
+        <span class="n">ensemble_agg</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the ensemble-aggregated plddt score.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        chain : str, optional</span>
+<span class="sd">            If provided, computes the plddt for this specific chain.</span>
+<span class="sd">            If None, returns the score across all tokens (residues) in the structure.</span>
+<span class="sd">        atoms : list[int], optional</span>
+<span class="sd">            If provided, computes the plddt for specific atoms.</span>
+<span class="sd">            If None, returns the score across all atoms in the structure.</span>
+<span class="sd">            Cannot be used in combination with &quot;chain&quot;</span>
+<span class="sd">        agg : callable, default=np.mean</span>
+<span class="sd">            Aggregation function to apply to the selected values.</span>
+<span class="sd">        ensemble_agg : callable, default=np.mean</span>
+<span class="sd">            Aggregation function to apply to the ensemble of values.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        float</span>
+<span class="sd">            Aggregated plddt score.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            If both `chain` and `atoms` are provided, or if either argument is invalid based on the data</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_ensemble</span><span class="p">(</span>
+            <span class="s2">&quot;get_plddt&quot;</span><span class="p">,</span> <span class="n">ensemble_agg</span><span class="o">=</span><span class="n">ensemble_agg</span><span class="p">,</span> <span class="n">chain</span><span class="o">=</span><span class="n">chain</span><span class="p">,</span> <span class="n">atoms</span><span class="o">=</span><span class="n">atoms</span><span class="p">,</span> <span class="n">agg</span><span class="o">=</span><span class="n">agg</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="AF3Ensemble.load_af3_result">
+<a class="viewcode-back" href="../../generated/foldkit.af3_ensemble.AF3Ensemble.html#foldkit.af3_ensemble.AF3Ensemble.load_af3_result">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">load_af3_result</span><span class="p">(</span><span class="n">result_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;AF3Ensemble&quot;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Generate an AF3Ensemble for each of the samples from a run on the AF3 webserver.</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">            result_dir: path to directory storing results.</span>
+<span class="sd">            id: optional ID. If unset, will set to directory name</span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        AF3Ensemble</span>
+<span class="sd">            loaded AF3Ensemble </span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">result_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">result_dir</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">result_dir</span><span class="o">.</span><span class="n">is_dir</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Result directory not found: </span><span class="si">{</span><span class="n">result_dir</span><span class="si">}</span><span class="s2"> does not exist or is not a directory&quot;</span>
+            <span class="p">)</span>
+        <span class="n">new_ensemble</span> <span class="o">=</span> <span class="n">AF3Ensemble</span><span class="p">()</span>
+        <span class="nb">id</span> <span class="o">=</span> <span class="nb">id</span> <span class="k">if</span> <span class="nb">id</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">result_dir</span><span class="o">.</span><span class="n">name</span>
+        <span class="n">new_ensemble</span><span class="o">.</span><span class="n">_build_from_af3_output</span><span class="p">(</span><span class="nb">id</span><span class="p">,</span> <span class="n">result_dir</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">new_ensemble</span></div>
+
+
+<div class="viewcode-block" id="AF3Ensemble.load_compressed_result">
+<a class="viewcode-back" href="../../generated/foldkit.af3_ensemble.AF3Ensemble.html#foldkit.af3_ensemble.AF3Ensemble.load_compressed_result">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">load_compressed_result</span><span class="p">(</span>
+        <span class="n">result_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;AF3Ensemble&quot;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Generate an AF3Ensemble for each of the samples stored via export.</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">            result_dir: path to directory storing results.</span>
+<span class="sd">            id: optional ID. If unset, will set to directory name</span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        AF3Ensemble</span>
+<span class="sd">            loaded AF3Ensemble </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">result_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">result_dir</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">result_dir</span><span class="o">.</span><span class="n">is_dir</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Result directory not found: </span><span class="si">{</span><span class="n">result_dir</span><span class="si">}</span><span class="s2"> does not exist or is not a directory&quot;</span>
+            <span class="p">)</span>
+        <span class="n">new_ensemble</span> <span class="o">=</span> <span class="n">AF3Ensemble</span><span class="p">()</span>
+        <span class="nb">id</span> <span class="o">=</span> <span class="nb">id</span> <span class="k">if</span> <span class="nb">id</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">result_dir</span><span class="o">.</span><span class="n">name</span>
+        <span class="n">new_ensemble</span><span class="o">.</span><span class="n">_build_from_af3_output</span><span class="p">(</span><span class="nb">id</span><span class="p">,</span> <span class="n">result_dir</span><span class="p">,</span> <span class="n">compressed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">new_ensemble</span></div>
+
+
+<div class="viewcode-block" id="AF3Ensemble.load_webserver_result">
+<a class="viewcode-back" href="../../generated/foldkit.af3_ensemble.AF3Ensemble.html#foldkit.af3_ensemble.AF3Ensemble.load_webserver_result">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">load_webserver_result</span><span class="p">(</span>
+        <span class="n">result_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">seed</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">id_stem</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;AF3Ensemble&quot;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Generate an AF3Ensemble for each of the samples from a run on the AF3 webserver.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">            result_dir: path to directory storing results.</span>
+<span class="sd">            seed: Model seed. If unset, will try to infer these from a request file in result_dir.</span>
+<span class="sd">            id_stem: Job name. If unset, will try to infer these from a request file in result_dir.</span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        AF3Ensemble</span>
+<span class="sd">            loaded AF3Ensemble </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">result_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">result_dir</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">result_dir</span><span class="o">.</span><span class="n">is_dir</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Result directory not found: </span><span class="si">{</span><span class="n">result_dir</span><span class="si">}</span><span class="s2"> or is not a directory&quot;</span>
+            <span class="p">)</span>
+
+        <span class="n">new_ensemble</span> <span class="o">=</span> <span class="n">AF3Ensemble</span><span class="p">()</span>
+        <span class="n">new_ensemble</span><span class="o">.</span><span class="n">top_level_directory</span> <span class="o">=</span> <span class="n">result_dir</span>
+
+        <span class="c1"># load from webserver results</span>
+        <span class="n">summary_files</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">result_dir</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;*summary_confidences*.json&quot;</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">seed</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">id_stem</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">request_files</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">result_dir</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;*request*.json&quot;</span><span class="p">))</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">request_files</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;Expected exactly one request.json, found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">request_files</span><span class="p">)</span><span class="si">}</span><span class="s2">.&quot;</span>
+                <span class="p">)</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">request_files</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">request_json</span><span class="p">:</span>
+                <span class="n">request_json</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">request_json</span><span class="p">)</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">request_json</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span>
+                        <span class="sa">f</span><span class="s2">&quot;Expected exactly one request inside the JSON, found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">request_json</span><span class="p">)</span><span class="si">}</span><span class="s2">.&quot;</span>
+                    <span class="p">)</span>
+                <span class="n">request</span> <span class="o">=</span> <span class="n">request_json</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">id_stem</span> <span class="o">=</span> <span class="n">request</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="n">id_stem</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">id_stem</span>
+
+                <span class="n">seed</span> <span class="o">=</span> <span class="n">request</span><span class="p">[</span><span class="s2">&quot;modelSeeds&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="n">seed</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">seed</span>
+
+        <span class="n">num_samples</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">summary_files</span><span class="p">)</span>  <span class="c1"># usually this is 5</span>
+
+        <span class="n">new_ensemble</span><span class="o">.</span><span class="n">seeds</span> <span class="o">=</span> <span class="p">[</span><span class="n">seed</span><span class="p">]</span>
+        <span class="n">new_ensemble</span><span class="o">.</span><span class="n">samples</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">num_samples</span><span class="p">))</span>
+        <span class="n">new_ensemble</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="n">num_samples</span>
+        <span class="n">new_ensemble</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">id_stem</span>
+
+        <span class="c1"># Find full JSON</span>
+        <span class="n">full_files</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">result_dir</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;*full_data*.json&quot;</span><span class="p">))</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">full_files</span><span class="p">)</span> <span class="o">!=</span> <span class="n">num_samples</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Expected exactly </span><span class="si">{</span><span class="n">num_samples</span><span class="si">}</span><span class="s2"> full_data*.json (non-summary), found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">full_files</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+        <span class="n">structure_files</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">result_dir</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;*.cif&quot;</span><span class="p">))</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">structure_files</span><span class="p">)</span> <span class="o">!=</span> <span class="n">num_samples</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Expected exactly </span><span class="si">{</span><span class="n">num_samples</span><span class="si">}</span><span class="s2"> *.cif files, found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">structure_files</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">summary_file</span><span class="p">,</span> <span class="n">full_file</span><span class="p">,</span> <span class="n">structure_file</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span>
+            <span class="nb">sorted</span><span class="p">(</span><span class="n">summary_files</span><span class="p">),</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">full_files</span><span class="p">),</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">structure_files</span><span class="p">)</span>
+        <span class="p">):</span>
+
+            <span class="k">if</span> <span class="n">match</span> <span class="o">:=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;summary_confidences_(\d)\.json&quot;</span><span class="p">,</span> <span class="n">summary_file</span><span class="o">.</span><span class="n">name</span><span class="p">):</span>
+                <span class="n">sample_num</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;Improperly formatted summary_confidences filename:</span><span class="se">\n</span><span class="si">{</span><span class="n">summary_file</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="p">)</span>
+
+            <span class="n">sample_stem</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">id_stem</span><span class="si">}</span><span class="s2">_seed</span><span class="si">{</span><span class="n">seed</span><span class="si">}</span><span class="s2">_sample</span><span class="si">{</span><span class="n">sample_num</span><span class="si">}</span><span class="s2">&quot;</span>
+
+            <span class="n">res</span> <span class="o">=</span> <span class="n">AF3Result</span><span class="p">()</span>
+            <span class="n">res</span><span class="o">.</span><span class="n">_build_from_af3_output</span><span class="p">(</span>
+                <span class="nb">id</span><span class="o">=</span><span class="n">sample_stem</span><span class="p">,</span>
+                <span class="n">summary_json_path</span><span class="o">=</span><span class="n">summary_file</span><span class="p">,</span>
+                <span class="n">full_json_path</span><span class="o">=</span><span class="n">full_file</span><span class="p">,</span>
+                <span class="n">cif_path</span><span class="o">=</span><span class="n">structure_file</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="n">new_ensemble</span><span class="o">.</span><span class="n">af3_results</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;seed-</span><span class="si">{</span><span class="n">seed</span><span class="si">}</span><span class="s2">_sample-</span><span class="si">{</span><span class="n">sample_num</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">res</span>
+
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">summary_file</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">j</span><span class="p">:</span>
+                <span class="n">summary</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
+            <span class="n">ranking</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">summary</span><span class="p">[</span><span class="s2">&quot;ranking_score&quot;</span><span class="p">])</span>
+            <span class="n">new_ensemble</span><span class="o">.</span><span class="n">af3_ranking_scores</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;seed-</span><span class="si">{</span><span class="n">seed</span><span class="si">}</span><span class="s2">_sample-</span><span class="si">{</span><span class="n">sample_num</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="n">ranking</span>
+            <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">new_ensemble</span></div>
+</div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2026, Jonathan Levine.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.0.4.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.20.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

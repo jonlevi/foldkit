@@ -1,0 +1,1147 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" data-theme="auto">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>foldkit.af3_result &#8212; FoldKit</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "auto";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "auto";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=720ed60b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=741d8101" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+
+    <script src="../../_static/documentation_options.js?v=92734c54"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/foldkit/af3_result';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="0.1.3" />
+  
+    
+    <script src="../../_static/searchtools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script src="../../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="auto">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">FoldKit</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../tutorial.html">
+    Tutorial
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../api.html">
+    API Reference
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/jonlevi/foldkit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/jonlevi/foldkit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/foldkit/" title="PyPI" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-custom fa-lg" data-prefix="fa-custom" data-icon="pypi" aria-hidden="true"></i><span class="visually-hidden">PyPI</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../tutorial.html">
+    Tutorial
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../api.html">
+    API Reference
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/jonlevi/foldkit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/jonlevi/foldkit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/foldkit/" title="PyPI" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-custom fa-lg" data-prefix="fa-custom" data-icon="pypi" aria-hidden="true"></i><span class="visually-hidden">PyPI</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">foldkit.af3_result</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for foldkit.af3_result</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">foldkit.core</span>
+<span class="sd">Core functionality for working with AlphaFold3 results.</span>
+<span class="sd"> </span>
+<span class="sd">Features:</span>
+<span class="sd">- Load AF3 results from metadata (.json).</span>
+<span class="sd">- Interface for global and local confidence metrics, including ipSAE</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Generator</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">shutil</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">.ipsae</span><span class="w"> </span><span class="kn">import</span> <span class="n">ipsae</span><span class="p">,</span> <span class="n">read_pdb</span>
+
+
+<div class="viewcode-block" id="AF3Result">
+<a class="viewcode-back" href="../../generated/foldkit.af3_result.AF3Result.html#foldkit.af3_result.AF3Result">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">AF3Result</span><span class="p">:</span>
+    <span class="c1"># Confidence data</span>
+    <span class="n">chains</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">plddt</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">pae</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">contact_probs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="n">global_ptm</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">global_iptm</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">chain_pair_iptm</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">chain_ptm</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="c1"># Structural data needed for ipSAE</span>
+    <span class="n">cif_residues</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">cif_chains</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="c1"># Metadata</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">cif_path</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Path</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">summary_json_path</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Path</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">full_json_path</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Path</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="c1"># ------------------------------------------------------------------</span>
+    <span class="c1"># Construction / loading</span>
+    <span class="c1"># ------------------------------------------------------------------</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_build_from_af3_output</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">summary_json_path</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">full_json_path</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">cif_path</span><span class="p">:</span> <span class="n">Path</span>
+    <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="nb">id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cif_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">cif_path</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">summary_json_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">summary_json_path</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">full_json_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">full_json_path</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_extract_confidences</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_load_cif_information</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_load_cif_information</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cif_path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">residues</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">chains</span> <span class="o">=</span> <span class="n">read_pdb</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="s2">&quot;cif&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cif_residues</span> <span class="o">=</span> <span class="n">residues</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cif_chains</span> <span class="o">=</span> <span class="n">chains</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_extract_confidences</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">summary_json_path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">jfile1</span><span class="p">:</span>
+            <span class="n">summary_confidence</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">jfile1</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">global_ptm</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">summary_confidence</span><span class="p">[</span><span class="s2">&quot;ptm&quot;</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">global_iptm</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">summary_confidence</span><span class="p">[</span><span class="s2">&quot;iptm&quot;</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">chain_pair_iptm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">summary_confidence</span><span class="p">[</span><span class="s2">&quot;chain_pair_iptm&quot;</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">chain_ptm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">summary_confidence</span><span class="p">[</span><span class="s2">&quot;chain_ptm&quot;</span><span class="p">])</span>
+
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">full_json_path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">jfile2</span><span class="p">:</span>
+            <span class="n">confidence</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">jfile2</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">residue_chain_ids</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">confidence</span><span class="p">[</span><span class="s2">&quot;token_chain_ids&quot;</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">atom_chain_ids</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">confidence</span><span class="p">[</span><span class="s2">&quot;atom_chain_ids&quot;</span><span class="p">])</span>
+            <span class="c1"># Note: pd.unique instead of np.unique because it preserves order, and so chains are in the right order</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">chains</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">residue_chain_ids</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">plddt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">confidence</span><span class="p">[</span><span class="s2">&quot;atom_plddts&quot;</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pae</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">confidence</span><span class="p">[</span><span class="s2">&quot;pae&quot;</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">contact_probs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">confidence</span><span class="p">[</span><span class="s2">&quot;contact_probs&quot;</span><span class="p">])</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_from_npz_data</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;AF3Result&quot;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Build an AF3Result from an already-loaded .npz archive (shared by</span>
+<span class="sd">        `load_result` and `load_stored_webserver_results`).&quot;&quot;&quot;</span>
+        <span class="n">obj</span> <span class="o">=</span> <span class="n">AF3Result</span><span class="p">()</span>
+        <span class="n">obj</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">])</span>
+        <span class="n">obj</span><span class="o">.</span><span class="n">chains</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;chains&quot;</span><span class="p">])</span>
+        <span class="n">obj</span><span class="o">.</span><span class="n">residue_chain_ids</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;residue_chain_ids&quot;</span><span class="p">]</span>
+        <span class="n">obj</span><span class="o">.</span><span class="n">atom_chain_ids</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;atom_chain_ids&quot;</span><span class="p">]</span>
+        <span class="n">obj</span><span class="o">.</span><span class="n">plddt</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;plddt&quot;</span><span class="p">]</span>
+        <span class="n">obj</span><span class="o">.</span><span class="n">pae</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;pae&quot;</span><span class="p">]</span>
+        <span class="n">obj</span><span class="o">.</span><span class="n">contact_probs</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;contact_probs&quot;</span><span class="p">]</span>
+        <span class="n">obj</span><span class="o">.</span><span class="n">global_ptm</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;global_ptm&quot;</span><span class="p">])</span>
+        <span class="n">obj</span><span class="o">.</span><span class="n">global_iptm</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;global_iptm&quot;</span><span class="p">])</span>
+        <span class="n">obj</span><span class="o">.</span><span class="n">chain_pair_iptm</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;chain_pair_iptm&quot;</span><span class="p">]</span>
+        <span class="n">obj</span><span class="o">.</span><span class="n">chain_ptm</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;chain_ptm&quot;</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">obj</span>
+
+    <span class="c1"># ------------------------------------------------------------------</span>
+    <span class="c1"># Shared validation / indexing helpers</span>
+    <span class="c1"># ------------------------------------------------------------------</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_validate_chain</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">chain</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Raise ValueError if `chain` isn&#39;t a known chain.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">chain</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">chains</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Chain </span><span class="si">{</span><span class="n">chain</span><span class="si">}</span><span class="s2"> not in </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">chains</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_chain_residue_indices</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">chain</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Residue (token) indices belonging to `chain`.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_validate_chain</span><span class="p">(</span><span class="n">chain</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span> <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">residue_chain_ids</span> <span class="o">==</span> <span class="n">chain</span><span class="p">)[</span><span class="mi">0</span><span class="p">]]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_chain_atom_indices</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">chain</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Atom indices belonging to `chain`.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_validate_chain</span><span class="p">(</span><span class="n">chain</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span> <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">atom_chain_ids</span> <span class="o">==</span> <span class="n">chain</span><span class="p">)[</span><span class="mi">0</span><span class="p">]]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_validate_pair_selector</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">chain1</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+        <span class="n">chain2</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+        <span class="n">tokens1</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]],</span>
+        <span class="n">tokens2</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]],</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Validate the chain1/chain2 vs. tokens1/tokens2 arguments shared by</span>
+<span class="sd">        `get_ipae` and `get_contact_probs`, and report which selector is active.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        (&quot;chains&quot;, (chain1, chain2)) or (&quot;tokens&quot;, (tokens1, tokens2))</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            If neither pair is fully specified, both pairs are specified, or</span>
+<span class="sd">            only one member of a pair is given.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">both_chains</span> <span class="o">=</span> <span class="n">chain1</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">chain2</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+        <span class="n">one_chain_only</span> <span class="o">=</span> <span class="p">(</span><span class="n">chain1</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span> <span class="o">!=</span> <span class="p">(</span><span class="n">chain2</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="n">both_tokens</span> <span class="o">=</span> <span class="n">tokens1</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">tokens2</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+        <span class="n">one_token_only</span> <span class="o">=</span> <span class="p">(</span><span class="n">tokens1</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span> <span class="o">!=</span> <span class="p">(</span><span class="n">tokens2</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">one_chain_only</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Must provide both chains for chain-based aggregation&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">one_token_only</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;Must provide both tokens lists for token-based aggregation&quot;</span>
+            <span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">both_chains</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">both_tokens</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;Must provide either chain1 and chain2, or tokens1 and tokens2&quot;</span>
+            <span class="p">)</span>
+        <span class="k">if</span> <span class="n">both_chains</span> <span class="ow">and</span> <span class="n">both_tokens</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;Cannot provide both `chain` and `tokens` at the same time.&quot;</span>
+            <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">both_chains</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_validate_chain</span><span class="p">(</span><span class="n">chain1</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_validate_chain</span><span class="p">(</span><span class="n">chain2</span><span class="p">)</span>
+            <span class="k">return</span> <span class="s2">&quot;chains&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">chain1</span><span class="p">,</span> <span class="n">chain2</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s2">&quot;tokens&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">tokens1</span><span class="p">,</span> <span class="n">tokens2</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_pairwise_submatrices</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">matrix</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">selector</span><span class="p">:</span> <span class="nb">tuple</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Extract the two off-diagonal blocks of `matrix` between a pair of</span>
+<span class="sd">        chains or a pair of token lists (shared by `get_ipae` and</span>
+<span class="sd">        `get_contact_probs`).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;chains&quot;</span><span class="p">:</span>
+            <span class="n">chain1</span><span class="p">,</span> <span class="n">chain2</span> <span class="o">=</span> <span class="n">selector</span>
+            <span class="n">residues_1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_chain_residue_indices</span><span class="p">(</span><span class="n">chain1</span><span class="p">)</span>
+            <span class="n">residues_2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_chain_residue_indices</span><span class="p">(</span><span class="n">chain2</span><span class="p">)</span>
+            <span class="n">sub1</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">[</span>
+                <span class="n">residues_1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">:</span> <span class="n">residues_1</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">residues_2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">:</span> <span class="n">residues_2</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="p">]</span>
+            <span class="n">sub2</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">[</span>
+                <span class="n">residues_2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">:</span> <span class="n">residues_2</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">residues_1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">:</span> <span class="n">residues_1</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>  <span class="c1"># mode == &quot;tokens&quot;</span>
+            <span class="n">tokens1</span><span class="p">,</span> <span class="n">tokens2</span> <span class="o">=</span> <span class="n">selector</span>
+            <span class="n">sub1</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ix_</span><span class="p">(</span><span class="n">tokens1</span><span class="p">,</span> <span class="n">tokens2</span><span class="p">)]</span>
+            <span class="n">sub2</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ix_</span><span class="p">(</span><span class="n">tokens2</span><span class="p">,</span> <span class="n">tokens1</span><span class="p">)]</span>
+        <span class="k">return</span> <span class="n">sub1</span><span class="p">,</span> <span class="n">sub2</span>
+
+    <span class="c1"># ------------------------------------------------------------------</span>
+    <span class="c1"># Confidence metrics</span>
+    <span class="c1"># ------------------------------------------------------------------</span>
+
+<div class="viewcode-block" id="AF3Result.get_ptm">
+<a class="viewcode-back" href="../../generated/foldkit.af3_result.AF3Result.html#foldkit.af3_result.AF3Result.get_ptm">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_ptm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">chain</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the ptm score.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        chain : str, optional</span>
+<span class="sd">            If provided, computes the ptm for this specific chain.</span>
+<span class="sd">            If None, returns the global score across all chains in the structure.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        float</span>
+<span class="sd">           ptm score.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            If `chain` is invalid based on the data</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">chain</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">global_ptm</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_validate_chain</span><span class="p">(</span><span class="n">chain</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">chain_ptm</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">chains</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">chain</span><span class="p">)])</span></div>
+
+
+<div class="viewcode-block" id="AF3Result.get_iptm">
+<a class="viewcode-back" href="../../generated/foldkit.af3_result.AF3Result.html#foldkit.af3_result.AF3Result.get_iptm">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_iptm</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">chain1</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">chain2</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the interchain ptm (iptm) score.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        chain1, chain2 : str, optional</span>
+<span class="sd">            If provided, computes the iptm for this specific pair of chains. Otherwise, returns the global iptm score for all pairs of chains</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        float</span>
+<span class="sd">           iptm score.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            If `chain` is invalid based on the data</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">chain1</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">chain2</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">global_iptm</span>
+        <span class="k">if</span> <span class="n">chain1</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">chain2</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Must provide both chains for chain-based aggregation&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_validate_chain</span><span class="p">(</span><span class="n">chain1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_validate_chain</span><span class="p">(</span><span class="n">chain2</span><span class="p">)</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">chains</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">chain1</span><span class="p">)</span>
+        <span class="n">j</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">chains</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">chain2</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">chain_pair_iptm</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">])</span></div>
+
+
+<div class="viewcode-block" id="AF3Result.get_pae">
+<a class="viewcode-back" href="../../generated/foldkit.af3_result.AF3Result.html#foldkit.af3_result.AF3Result.get_pae">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_pae</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">chain</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">tokens</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">agg</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the pae (predicted alignment error) score.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        chain : str, optional</span>
+<span class="sd">            If provided, computes the pae for this specific chain.</span>
+<span class="sd">            If None, returns the score across all tokens (residues) in the structure.</span>
+
+<span class="sd">        tokens : list[int], optional</span>
+<span class="sd">            If provided, computes the pae for specific tokens.</span>
+<span class="sd">            If None, returns the score across all tokens (residues) in the structure.</span>
+<span class="sd">            Cannot be used in combination with &quot;chain&quot;</span>
+
+<span class="sd">        agg : callable, default=np.mean</span>
+<span class="sd">            Aggregation function to apply to the selected values.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        float</span>
+<span class="sd">            Aggregated pae score.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            If both `chain` and `tokens` are provided, or if either argument is invalid based on the data</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">chain</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">tokens</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;Cannot provide both `chain` and `tokens` at the same time.&quot;</span>
+            <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">chain</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">residues</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_chain_residue_indices</span><span class="p">(</span><span class="n">chain</span><span class="p">)</span>
+            <span class="n">sub_pae</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pae</span><span class="p">[</span>
+                <span class="n">residues</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">:</span> <span class="n">residues</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">residues</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">:</span> <span class="n">residues</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="p">]</span>
+        <span class="k">elif</span> <span class="n">tokens</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">sub_pae</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pae</span><span class="p">[</span><span class="n">tokens</span><span class="p">,</span> <span class="n">tokens</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">sub_pae</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pae</span>
+
+        <span class="k">return</span> <span class="n">agg</span><span class="p">(</span><span class="n">sub_pae</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="AF3Result.get_ipae">
+<a class="viewcode-back" href="../../generated/foldkit.af3_result.AF3Result.html#foldkit.af3_result.AF3Result.get_ipae">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_ipae</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">chain1</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">chain2</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">tokens1</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">tokens2</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">agg</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the interface pae (predicted alignment error) score.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        chain1, chain2 : str, optional</span>
+<span class="sd">            If provided, computes the ipae for this specific pair of chains.</span>
+<span class="sd">            Only optional if `tokens1` and `tokens2` are provided</span>
+
+<span class="sd">        tokens1, tokens2 : list[int], optional</span>
+<span class="sd">            If provided, computes the ipae for this specific pair of token lists.</span>
+<span class="sd">             Only optional if `chain1` and `chain2`  are provided</span>
+
+<span class="sd">        agg : callable, default=np.mean</span>
+<span class="sd">            Aggregation function to apply to the selected values.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        float</span>
+<span class="sd">            Aggregated ipae score.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            If neither `chain` and `tokens` are provided, both are provided, or if either argument is invalid based on the data</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">mode</span><span class="p">,</span> <span class="n">selector</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_validate_pair_selector</span><span class="p">(</span><span class="n">chain1</span><span class="p">,</span> <span class="n">chain2</span><span class="p">,</span> <span class="n">tokens1</span><span class="p">,</span> <span class="n">tokens2</span><span class="p">)</span>
+        <span class="n">sub1</span><span class="p">,</span> <span class="n">sub2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pairwise_submatrices</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pae</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="n">selector</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">agg</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">sub1</span><span class="p">,</span> <span class="n">sub2</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="kc">None</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="AF3Result.get_contact_probs">
+<a class="viewcode-back" href="../../generated/foldkit.af3_result.AF3Result.html#foldkit.af3_result.AF3Result.get_contact_probs">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_contact_probs</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">chain1</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">chain2</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">tokens1</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">tokens2</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">agg</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the contact probs score.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        chain1, chain2 : str, optional</span>
+<span class="sd">            If provided, computes the contact probs for this specific pair of chains.</span>
+<span class="sd">            Only optional if `tokens1` and `tokens2` are provided</span>
+
+<span class="sd">        tokens1, tokens2 : list[int], optional</span>
+<span class="sd">            If provided, computes the contact probs for this specific pair of token lists.</span>
+<span class="sd">             Only optional if `chain1` and `chain2`  are provided</span>
+
+<span class="sd">        agg : callable, default=np.mean</span>
+<span class="sd">            Aggregation function to apply to the selected values.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        float</span>
+<span class="sd">            Aggregated contact probs score.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            If neither `chain` and `tokens` are provided, both are provided, or if either argument is invalid based on the data</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">mode</span><span class="p">,</span> <span class="n">selector</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_validate_pair_selector</span><span class="p">(</span><span class="n">chain1</span><span class="p">,</span> <span class="n">chain2</span><span class="p">,</span> <span class="n">tokens1</span><span class="p">,</span> <span class="n">tokens2</span><span class="p">)</span>
+        <span class="n">sub1</span><span class="p">,</span> <span class="n">sub2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pairwise_submatrices</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">contact_probs</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="n">selector</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">agg</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">sub1</span><span class="p">,</span> <span class="n">sub2</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="kc">None</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="AF3Result.get_plddt">
+<a class="viewcode-back" href="../../generated/foldkit.af3_result.AF3Result.html#foldkit.af3_result.AF3Result.get_plddt">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_plddt</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">chain</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">atoms</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">agg</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the plddt score.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        chain : str, optional</span>
+<span class="sd">            If provided, computes the plddt for this specific chain.</span>
+<span class="sd">            If None, returns the score across all tokens (residues) in the structure.</span>
+
+<span class="sd">        atoms : list[int], optional</span>
+<span class="sd">            If provided, computes the plddt for specific atoms.</span>
+<span class="sd">            If None, returns the score across all atoms in the structure.</span>
+<span class="sd">            Cannot be used in combination with &quot;chain&quot;</span>
+
+<span class="sd">        agg : callable, default=np.mean</span>
+<span class="sd">            Aggregation function to apply to the selected values.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        float</span>
+<span class="sd">            Aggregated plddt score.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            If both `chain` and `atoms` are provided, or if either argument is invalid based on the data</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">chain</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">atoms</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;Cannot provide both `chain` and `atoms` at the same time.&quot;</span>
+            <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">chain</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">atoms</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_chain_atom_indices</span><span class="p">(</span><span class="n">chain</span><span class="p">)</span>
+
+        <span class="n">sub_plddt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">plddt</span> <span class="k">if</span> <span class="n">atoms</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">plddt</span><span class="p">[</span><span class="n">atoms</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">agg</span><span class="p">(</span><span class="n">sub_plddt</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="AF3Result.get_ipsae">
+<a class="viewcode-back" href="../../generated/foldkit.af3_result.AF3Result.html#foldkit.af3_result.AF3Result.get_ipsae">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_ipsae</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">chain1</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">chain2</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">pae_cutoff</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">d0</span><span class="o">=</span><span class="s2">&quot;d0res&quot;</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the asymmetric ipSAE score.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        chain1, chain2 : str</span>
+<span class="sd">            Computes the ipSAE for this specific pair of chains.</span>
+<span class="sd">            Note that the score is asymmetric so the order of chains matters.</span>
+<span class="sd">        pae_cutoff : float, default=10</span>
+<span class="sd">            PAE cutoff (in Angstroms) passed through to the ipSAE calculation.</span>
+<span class="sd">        d0: str, default=d0res</span>
+<span class="sd">            d0 used for calculation. Options are:</span>
+<span class="sd">            d0res: d0 determined by number of residues in 2nd chain with PAE&lt;cutoff</span>
+<span class="sd">            d0chn: sum of chain lengths</span>
+<span class="sd">            d0dom: d0 = total number of residues in both chains with any interchain PAE&lt;cutoff</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        float</span>
+<span class="sd">            ipSAE score.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cif_chains_unique</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cif_chains</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="p">(</span>
+            <span class="n">chain1</span> <span class="ow">in</span> <span class="n">cif_chains_unique</span>
+        <span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">chain1</span><span class="si">}</span><span class="s2"> not found in .cif chains: </span><span class="si">{</span><span class="n">cif_chains_unique</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="k">assert</span> <span class="p">(</span>
+            <span class="n">chain2</span> <span class="ow">in</span> <span class="n">cif_chains_unique</span>
+        <span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">chain2</span><span class="si">}</span><span class="s2"> not found in .cif chains: </span><span class="si">{</span><span class="n">cif_chains_unique</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="k">assert</span> <span class="n">chain1</span> <span class="o">!=</span> <span class="n">chain2</span><span class="p">,</span> <span class="s2">&quot;ipSAE is undefined for the case chain1==chain2&quot;</span>
+        <span class="n">d0_values</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;d0res&quot;</span><span class="p">,</span> <span class="s2">&quot;d0dom&quot;</span><span class="p">,</span> <span class="s2">&quot;d0chn&quot;</span><span class="p">]</span>
+        <span class="k">assert</span> <span class="n">d0</span> <span class="ow">in</span> <span class="n">d0_values</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Invalid d0 value </span><span class="si">{</span><span class="n">d0</span><span class="si">}</span><span class="s2">. Valid choices are: </span><span class="si">{</span><span class="n">d0_values</span><span class="si">}</span><span class="s2">&quot;</span>
+
+        <span class="n">ipsae_dict</span> <span class="o">=</span> <span class="n">ipsae</span><span class="p">(</span>
+            <span class="n">residues</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">cif_residues</span><span class="p">,</span>
+            <span class="n">chains</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">cif_chains</span><span class="p">,</span>
+            <span class="n">pae_matrix</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">pae</span><span class="p">,</span>
+            <span class="n">pae_cutoff</span><span class="o">=</span><span class="n">pae_cutoff</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;ipsae_</span><span class="si">{</span><span class="n">d0</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="n">ipsae_df</span> <span class="o">=</span> <span class="n">ipsae_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ipsae_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">chain1</span><span class="p">,</span> <span class="n">chain2</span><span class="p">]</span></div>
+
+
+    <span class="c1"># ------------------------------------------------------------------</span>
+    <span class="c1"># Object Creation Factory Methods</span>
+    <span class="c1"># ------------------------------------------------------------------</span>
+
+<div class="viewcode-block" id="AF3Result.load_af3_result">
+<a class="viewcode-back" href="../../generated/foldkit.af3_result.AF3Result.html#foldkit.af3_result.AF3Result.load_af3_result">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">load_af3_result</span><span class="p">(</span><span class="n">result_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;AF3Result&quot;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Loads a new single AF3 Result from AF3 output directory (`result_dir`), with optional name (`id`)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">result_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">result_dir</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">result_dir</span><span class="o">.</span><span class="n">is_dir</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Result directory not found: </span><span class="si">{</span><span class="n">result_dir</span><span class="si">}</span><span class="s2"> does not exist or is not a directory&quot;</span>
+            <span class="p">)</span>
+
+        <span class="c1"># Find CIF</span>
+        <span class="n">cif_files</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">result_dir</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;*.cif&quot;</span><span class="p">))</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">cif_files</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Expected exactly one *.cif file, found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">cif_files</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+        <span class="n">cif_file</span> <span class="o">=</span> <span class="n">cif_files</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="c1"># Find summary JSON</span>
+        <span class="n">summary_files</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">result_dir</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;*summary_confidences.json&quot;</span><span class="p">))</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">summary_files</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Expected exactly one *summary_confidences.json, found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">summary_files</span><span class="p">)</span><span class="si">}</span><span class="s2">. For data in .npz format, use flag &#39;from_npz=True&#39;.&quot;</span>
+            <span class="p">)</span>
+
+        <span class="c1"># Find full JSON</span>
+        <span class="n">full_files</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">result_dir</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;*confidences.json&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="ow">not</span> <span class="s2">&quot;summary&quot;</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">name</span>
+        <span class="p">]</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">full_files</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Expected exactly one confidences.json (non-summary), found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">full_files</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">id</span><span class="p">:</span>
+            <span class="nb">id</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">result_dir</span><span class="p">)</span><span class="o">.</span><span class="n">name</span>
+
+        <span class="n">res</span> <span class="o">=</span> <span class="n">AF3Result</span><span class="p">()</span>
+        <span class="n">res</span><span class="o">.</span><span class="n">_build_from_af3_output</span><span class="p">(</span>
+            <span class="nb">id</span><span class="o">=</span><span class="nb">id</span><span class="p">,</span>
+            <span class="n">summary_json_path</span><span class="o">=</span><span class="n">summary_files</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+            <span class="n">full_json_path</span><span class="o">=</span><span class="n">full_files</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+            <span class="n">cif_path</span><span class="o">=</span><span class="n">cif_file</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">res</span></div>
+
+
+<div class="viewcode-block" id="AF3Result.load_webserver_result">
+<a class="viewcode-back" href="../../generated/foldkit.af3_result.AF3Result.html#foldkit.af3_result.AF3Result.load_webserver_result">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">load_webserver_result</span><span class="p">(</span>
+        <span class="n">result_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">sample</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">seed</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">id_stem</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;AF3Result&quot;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate an AF3Result file for one of the 5 samples from a run on the AF3 webserver.</span>
+
+<span class="sd">        Inputs:</span>
+<span class="sd">        result_dir: path to directory storing results.</span>
+<span class="sd">        sample: which sample to load</span>
+<span class="sd">        seed: Model seed. If unset, will try to infer these from a request file in result_dir.</span>
+<span class="sd">        id_stem: Job name. If unset, will try to infer these from a request file in result_dir.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">result_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">result_dir</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">result_dir</span><span class="o">.</span><span class="n">is_dir</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Result directory not found: </span><span class="si">{</span><span class="n">result_dir</span><span class="si">}</span><span class="s2"> does not exist or is not a directory&quot;</span>
+            <span class="p">)</span>
+
+        <span class="n">summary_files</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">result_dir</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;*summary_confidences*.json&quot;</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="n">seed</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">id_stem</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">request_files</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">result_dir</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;*request*.json&quot;</span><span class="p">))</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">request_files</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;Expected exactly one request.json, found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">request_files</span><span class="p">)</span><span class="si">}</span><span class="s2">.&quot;</span>
+                <span class="p">)</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">request_files</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">request_data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">request_data</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;Expected exactly one request inside the JSON, found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">request_data</span><span class="p">)</span><span class="si">}</span><span class="s2">.&quot;</span>
+                <span class="p">)</span>
+            <span class="n">request</span> <span class="o">=</span> <span class="n">request_data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">id_stem</span> <span class="o">=</span> <span class="n">request</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="n">id_stem</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">id_stem</span>
+            <span class="n">seed</span> <span class="o">=</span> <span class="n">request</span><span class="p">[</span><span class="s2">&quot;modelSeeds&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="n">seed</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">seed</span>
+
+        <span class="n">num_samples</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">summary_files</span><span class="p">)</span>  <span class="c1"># usually this is 5</span>
+        <span class="k">if</span> <span class="n">sample</span> <span class="o">&gt;=</span> <span class="n">num_samples</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Sample </span><span class="si">{</span><span class="n">sample</span><span class="si">}</span><span class="s2"> not found. Job was only run with </span><span class="si">{</span><span class="n">num_samples</span><span class="si">}</span><span class="s2"> and is 0-indexed.&quot;</span>
+            <span class="p">)</span>
+
+        <span class="c1"># Find full JSON</span>
+        <span class="n">full_files</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">result_dir</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;*full_data*.json&quot;</span><span class="p">))</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">full_files</span><span class="p">)</span> <span class="o">!=</span> <span class="n">num_samples</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Expected exactly </span><span class="si">{</span><span class="n">num_samples</span><span class="si">}</span><span class="s2"> full_data*.json (non-summary), found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">full_files</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+        <span class="n">structure_files</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">result_dir</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;*.cif&quot;</span><span class="p">))</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">structure_files</span><span class="p">)</span> <span class="o">!=</span> <span class="n">num_samples</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Expected exactly </span><span class="si">{</span><span class="n">num_samples</span><span class="si">}</span><span class="s2"> *.cif files, found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">structure_files</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">summary_file</span><span class="p">,</span> <span class="n">full_file</span><span class="p">,</span> <span class="n">structure_file</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span>
+            <span class="nb">sorted</span><span class="p">(</span><span class="n">summary_files</span><span class="p">),</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">full_files</span><span class="p">),</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">structure_files</span><span class="p">)</span>
+        <span class="p">):</span>
+            <span class="n">match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;summary_confidences_(\d)\.json&quot;</span><span class="p">,</span> <span class="n">summary_file</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">match</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;Improperly formatted summary_confidences filename:</span><span class="se">\n</span><span class="si">{</span><span class="n">summary_file</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="p">)</span>
+            <span class="n">sample_num</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+
+            <span class="k">if</span> <span class="n">sample_num</span> <span class="o">!=</span> <span class="n">sample</span><span class="p">:</span>
+                <span class="k">continue</span>
+
+            <span class="n">sample_stem</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">id_stem</span><span class="si">}</span><span class="s2">_seed</span><span class="si">{</span><span class="n">seed</span><span class="si">}</span><span class="s2">_sample</span><span class="si">{</span><span class="n">sample_num</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="n">AF3Result</span><span class="p">()</span>
+            <span class="n">res</span><span class="o">.</span><span class="n">_build_from_af3_output</span><span class="p">(</span>
+                <span class="nb">id</span><span class="o">=</span><span class="n">sample_stem</span><span class="p">,</span>
+                <span class="n">summary_json_path</span><span class="o">=</span><span class="n">summary_file</span><span class="p">,</span>
+                <span class="n">full_json_path</span><span class="o">=</span><span class="n">full_file</span><span class="p">,</span>
+                <span class="n">cif_path</span><span class="o">=</span><span class="n">structure_file</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="k">return</span> <span class="n">res</span>
+
+        <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Sample </span><span class="si">{</span><span class="n">sample</span><span class="si">}</span><span class="s2"> not found among parsed summary_confidences files in </span><span class="si">{</span><span class="n">result_dir</span><span class="si">}</span><span class="s2">.&quot;</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="AF3Result.load_compressed_result">
+<a class="viewcode-back" href="../../generated/foldkit.af3_result.AF3Result.html#foldkit.af3_result.AF3Result.load_compressed_result">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">load_compressed_result</span><span class="p">(</span>
+        <span class="n">result_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;AF3Result&quot;</span><span class="p">:</span>
+
+        <span class="n">result_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">result_dir</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">result_dir</span><span class="o">.</span><span class="n">is_dir</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Result directory not found: </span><span class="si">{</span><span class="n">result_dir</span><span class="si">}</span><span class="s2"> does not exist or is not a directory&quot;</span>
+            <span class="p">)</span>
+
+        <span class="c1"># Find npz</span>
+        <span class="n">npz_files</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">result_dir</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;*.npz&quot;</span><span class="p">))</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">npz_files</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Expected exactly one *.npz, found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">npz_files</span><span class="p">)</span><span class="si">}</span><span class="s2">. For data not in compressed format, use regular load function.&quot;</span>
+            <span class="p">)</span>
+        <span class="c1"># Find CIF</span>
+        <span class="n">cif_files</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">result_dir</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;*.cif&quot;</span><span class="p">))</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">cif_files</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Expected exactly one *.cif file, found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">cif_files</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+        <span class="n">cif_file</span> <span class="o">=</span> <span class="n">cif_files</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">npz_files</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">allow_pickle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">obj</span> <span class="o">=</span> <span class="n">AF3Result</span><span class="o">.</span><span class="n">_from_npz_data</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">obj</span><span class="o">.</span><span class="n">cif_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">cif_file</span><span class="p">)</span>
+        <span class="n">obj</span><span class="o">.</span><span class="n">_load_cif_information</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">obj</span></div>
+</div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2026, Jonathan Levine.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.0.4.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.20.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
