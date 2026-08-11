@@ -1,0 +1,33 @@
+/* Small polish on top of pydata-sphinx-theme, in the spirit of scanpy/anndata docs */
+
+:root {
+  --pst-color-primary: #2b6a4d;      /* deep green accent, change to taste */
+  --pst-color-link: #2b6a4d;
+  --pst-color-link-hover: #1d4b36;
+}
+
+/* Slightly tighter, more "library docs" heading rhythm */
+h1 {
+  font-weight: 700;
+  border-bottom: 1px solid var(--pst-color-border);
+  padding-bottom: 0.3em;
+}
+
+/* Make autosummary tables read like scanpy's API tables: monospace names,
+   normal-weight descriptions */
+table.autosummary code {
+  font-size: 0.9em;
+}
+
+/* Rounder, friendlier code blocks */
+div.highlight {
+  border-radius: 6px;
+}
+
+/* Give the sidebar caption a bit more presence */
+.bd-sidebar-primary .caption-text {
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.03em;
+}

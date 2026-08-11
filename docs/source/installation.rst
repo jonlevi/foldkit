@@ -1,27 +1,26 @@
 Installation
 ============
-
-FoldKit can be installed easily via PyPI.
-
+ 
+FoldKit can be installed from PyPI.
+ 
 Installing from PyPI
 ---------------------
-
-The recommended way to install FoldKit is using `pip`:
-
+ 
 .. code-block:: bash
-
+ 
     pip install foldkit
-
-Once installed, you can verify the installation by importing FoldKit in Python:
-
+ 
+Once installed, verify it by importing FoldKit in Python:
+ 
 .. code-block:: python
-
+ 
     >>> import foldkit
     >>> foldkit.__version__
-    '0.1.0'
-
-Optional: To upgrade to the latest version:
-
+    '0.1.3'
+ 
+Upgrading
+---------
+ 
 .. code-block:: bash
-
+ 
     pip install --upgrade foldkit

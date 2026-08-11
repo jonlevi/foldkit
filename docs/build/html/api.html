@@ -1,478 +1,551 @@
 
-
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" data-content_root="./">
-<head>
-  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>API Reference &mdash; foldkit 0.1.3 documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
 
+<html lang="en" data-content_root="./" data-theme="auto">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>API Reference &#8212; FoldKit</title>
   
-      <script src="_static/jquery.js?v=5d32c60e"></script>
-      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=360bc84d"></script>
-      <script src="_static/doctools.js?v=9bcbadda"></script>
-      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="_static/js/theme.js"></script>
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "auto";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "auto";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=720ed60b" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=741d8101" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="_static/documentation_options.js?v=92734c54"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Python API Usage" href="tutorial.html" /> 
-</head>
+    <link rel="next" title="foldkit.af3_result.AF3Result" href="generated/foldkit.af3_result.AF3Result.html" />
+    <link rel="prev" title="Tutorial" href="tutorial.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="0.1.3" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="auto">
 
-<body class="wy-body-for-nav"> 
-  <div class="wy-grid-for-nav">
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
-          
-          
-          <a href="index.html" class="icon icon-home">
-            foldkit
-          </a>
-<div role="search">
-  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
-    <input type="hidden" name="check_keywords" value="yes" />
-    <input type="hidden" name="area" value="default" />
-  </form>
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
 </div>
-        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Python API Usage</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">API Reference</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#foldkit.af3_result.AF3Result"><code class="docutils literal notranslate"><span class="pre">AF3Result</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#foldkit.af3_result.AF3Result.chain_pair_iptm"><code class="docutils literal notranslate"><span class="pre">AF3Result.chain_pair_iptm</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#foldkit.af3_result.AF3Result.chain_ptm"><code class="docutils literal notranslate"><span class="pre">AF3Result.chain_ptm</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#foldkit.af3_result.AF3Result.chains"><code class="docutils literal notranslate"><span class="pre">AF3Result.chains</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#foldkit.af3_result.AF3Result.cif_chains"><code class="docutils literal notranslate"><span class="pre">AF3Result.cif_chains</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#foldkit.af3_result.AF3Result.cif_path"><code class="docutils literal notranslate"><span class="pre">AF3Result.cif_path</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#foldkit.af3_result.AF3Result.cif_residues"><code class="docutils literal notranslate"><span class="pre">AF3Result.cif_residues</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#foldkit.af3_result.AF3Result.contact_probs"><code class="docutils literal notranslate"><span class="pre">AF3Result.contact_probs</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#foldkit.af3_result.AF3Result.full_json_path"><code class="docutils literal notranslate"><span class="pre">AF3Result.full_json_path</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#foldkit.af3_result.AF3Result.get_contact_probs"><code class="docutils literal notranslate"><span class="pre">AF3Result.get_contact_probs()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#foldkit.af3_result.AF3Result.get_ipae"><code class="docutils literal notranslate"><span class="pre">AF3Result.get_ipae()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#foldkit.af3_result.AF3Result.get_ipsae"><code class="docutils literal notranslate"><span class="pre">AF3Result.get_ipsae()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#foldkit.af3_result.AF3Result.get_iptm"><code class="docutils literal notranslate"><span class="pre">AF3Result.get_iptm()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#foldkit.af3_result.AF3Result.get_pae"><code class="docutils literal notranslate"><span class="pre">AF3Result.get_pae()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#foldkit.af3_result.AF3Result.get_plddt"><code class="docutils literal notranslate"><span class="pre">AF3Result.get_plddt()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#foldkit.af3_result.AF3Result.get_ptm"><code class="docutils literal notranslate"><span class="pre">AF3Result.get_ptm()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#foldkit.af3_result.AF3Result.global_iptm"><code class="docutils literal notranslate"><span class="pre">AF3Result.global_iptm</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#foldkit.af3_result.AF3Result.global_ptm"><code class="docutils literal notranslate"><span class="pre">AF3Result.global_ptm</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#foldkit.af3_result.AF3Result.id"><code class="docutils literal notranslate"><span class="pre">AF3Result.id</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#foldkit.af3_result.AF3Result.load_af3_result"><code class="docutils literal notranslate"><span class="pre">AF3Result.load_af3_result()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#foldkit.af3_result.AF3Result.load_compressed_result"><code class="docutils literal notranslate"><span class="pre">AF3Result.load_compressed_result()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#foldkit.af3_result.AF3Result.load_webserver_result"><code class="docutils literal notranslate"><span class="pre">AF3Result.load_webserver_result()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#foldkit.af3_result.AF3Result.pae"><code class="docutils literal notranslate"><span class="pre">AF3Result.pae</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#foldkit.af3_result.AF3Result.plddt"><code class="docutils literal notranslate"><span class="pre">AF3Result.plddt</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#foldkit.af3_result.AF3Result.summary_json_path"><code class="docutils literal notranslate"><span class="pre">AF3Result.summary_json_path</span></code></a></li>
-</ul>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">FoldKit</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="installation.html">
+    Installation
+  </a>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#foldkit.cli.batch_export"><code class="docutils literal notranslate"><span class="pre">batch_export()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#foldkit.cli.export_ensemble_result"><code class="docutils literal notranslate"><span class="pre">export_ensemble_result()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#foldkit.cli.export_single_result"><code class="docutils literal notranslate"><span class="pre">export_single_result()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#foldkit.cli.export_webserver_result"><code class="docutils literal notranslate"><span class="pre">export_webserver_result()</span></code></a></li>
-</ul>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="tutorial.html">
+    Tutorial
+  </a>
 </li>
-</ul>
 
-        </div>
-      </div>
-    </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">foldkit</a>
-      </nav>
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="#">
+    API Reference
+  </a>
+</li>
 
-      <div class="wy-nav-content">
-        <div class="rst-content">
-          <div role="navigation" aria-label="Page navigation">
-  <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">API Reference</li>
-      <li class="wy-breadcrumbs-aside">
-            <a href="_sources/api.rst.txt" rel="nofollow"> View page source</a>
-      </li>
   </ul>
-  <hr/>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/jonlevi/foldkit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/jonlevi/foldkit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/foldkit/" title="PyPI" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-custom fa-pypi fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">PyPI</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
 </div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-           <div itemprop="articleBody">
-             
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="tutorial.html">
+    Tutorial
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="#">
+    API Reference
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/jonlevi/foldkit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/jonlevi/foldkit" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/foldkit/" title="PyPI" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-custom fa-pypi fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">PyPI</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="generated/foldkit.af3_result.AF3Result.html">foldkit.af3_result.AF3Result</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generated/foldkit.af3_ensemble.AF3Ensemble.html">foldkit.af3_ensemble.AF3Ensemble</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="generated/foldkit.cli.export_single_result.html">foldkit.cli.export_single_result</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generated/foldkit.cli.export_ensemble_result.html">foldkit.cli.export_ensemble_result</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generated/foldkit.cli.export_webserver_result.html">foldkit.cli.export_webserver_result</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generated/foldkit.cli.batch_export.html">foldkit.cli.batch_export</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">API Reference</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
   <section id="api-reference">
-<h1>API Reference<a class="headerlink" href="#api-reference" title="Link to this heading"></a></h1>
-<dl class="py class">
-<dt class="sig sig-object py" id="foldkit.af3_result.AF3Result">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">foldkit.af3_result.</span></span><span class="sig-name descname"><span class="pre">AF3Result</span></span><a class="headerlink" href="#foldkit.af3_result.AF3Result" title="Link to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="foldkit.af3_result.AF3Result.chain_pair_iptm">
-<span class="sig-name descname"><span class="pre">chain_pair_iptm</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code><span class="pre">[</span><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code><span class="pre">]</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#foldkit.af3_result.AF3Result.chain_pair_iptm" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="foldkit.af3_result.AF3Result.chain_ptm">
-<span class="sig-name descname"><span class="pre">chain_ptm</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code><span class="pre">[</span><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code><span class="pre">]</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#foldkit.af3_result.AF3Result.chain_ptm" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="foldkit.af3_result.AF3Result.chains">
-<span class="sig-name descname"><span class="pre">chains</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code><span class="pre">[</span><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code><span class="pre">[</span><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code><span class="pre">]]</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#foldkit.af3_result.AF3Result.chains" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="foldkit.af3_result.AF3Result.cif_chains">
-<span class="sig-name descname"><span class="pre">cif_chains</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code><span class="pre">[</span><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code><span class="pre">]</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#foldkit.af3_result.AF3Result.cif_chains" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="foldkit.af3_result.AF3Result.cif_path">
-<span class="sig-name descname"><span class="pre">cif_path</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code><span class="pre">[</span><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code><span class="pre">]</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#foldkit.af3_result.AF3Result.cif_path" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="foldkit.af3_result.AF3Result.cif_residues">
-<span class="sig-name descname"><span class="pre">cif_residues</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code><span class="pre">[</span><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code><span class="pre">]</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#foldkit.af3_result.AF3Result.cif_residues" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="foldkit.af3_result.AF3Result.contact_probs">
-<span class="sig-name descname"><span class="pre">contact_probs</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code><span class="pre">[</span><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code><span class="pre">]</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#foldkit.af3_result.AF3Result.contact_probs" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="foldkit.af3_result.AF3Result.full_json_path">
-<span class="sig-name descname"><span class="pre">full_json_path</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code><span class="pre">[</span><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code><span class="pre">]</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#foldkit.af3_result.AF3Result.full_json_path" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="foldkit.af3_result.AF3Result.get_contact_probs">
-<span class="sig-name descname"><span class="pre">get_contact_probs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chain1=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chain2=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tokens1=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tokens2=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">agg=&lt;function</span> <span class="pre">mean&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#foldkit.af3_result.AF3Result.get_contact_probs" title="Link to this definition"></a></dt>
-<dd><p>Return the contact probs score.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>chain1</strong> (<em>str</em><em>, </em><em>optional</em>) – If provided, computes the contact probs for this specific pair of chains.
-Only optional if <cite>tokens1</cite> and <cite>tokens2</cite> are provided</p></li>
-<li><p><strong>chain2</strong> (<em>str</em><em>, </em><em>optional</em>) – If provided, computes the contact probs for this specific pair of chains.
-Only optional if <cite>tokens1</cite> and <cite>tokens2</cite> are provided</p></li>
-<li><p><strong>tokens1</strong> (<em>list</em><em>[</em><em>int</em><em>]</em><em>, </em><em>optional</em>) – <dl class="simple">
-<dt>If provided, computes the contact probs for this specific pair of token lists.</dt><dd><p>Only optional if <cite>chain1</cite> and <cite>chain2</cite>  are provided</p>
-</dd>
-</dl>
-</p></li>
-<li><p><strong>tokens2</strong> (<em>list</em><em>[</em><em>int</em><em>]</em><em>, </em><em>optional</em>) – <dl class="simple">
-<dt>If provided, computes the contact probs for this specific pair of token lists.</dt><dd><p>Only optional if <cite>chain1</cite> and <cite>chain2</cite>  are provided</p>
-</dd>
-</dl>
-</p></li>
-<li><p><strong>agg</strong> (<em>callable</em><em>, </em><em>default=np.mean</em>) – Aggregation function to apply to the selected values.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Aggregated contact probs score.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>float</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>ValueError</strong> – If neither <cite>chain</cite> and <cite>tokens</cite> are provided, both are provided, or if either argument is invalid based on the data</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="foldkit.af3_result.AF3Result.get_ipae">
-<span class="sig-name descname"><span class="pre">get_ipae</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chain1=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chain2=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tokens1=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tokens2=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">agg=&lt;function</span> <span class="pre">mean&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#foldkit.af3_result.AF3Result.get_ipae" title="Link to this definition"></a></dt>
-<dd><p>Return the interface pae (predicted alignment error) score.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>chain1</strong> (<em>str</em><em>, </em><em>optional</em>) – If provided, computes the ipae for this specific pair of chains.
-Only optional if <cite>tokens1</cite> and <cite>tokens2</cite> are provided</p></li>
-<li><p><strong>chain2</strong> (<em>str</em><em>, </em><em>optional</em>) – If provided, computes the ipae for this specific pair of chains.
-Only optional if <cite>tokens1</cite> and <cite>tokens2</cite> are provided</p></li>
-<li><p><strong>tokens1</strong> (<em>list</em><em>[</em><em>int</em><em>]</em><em>, </em><em>optional</em>) – <dl class="simple">
-<dt>If provided, computes the ipae for this specific pair of token lists.</dt><dd><p>Only optional if <cite>chain1</cite> and <cite>chain2</cite>  are provided</p>
-</dd>
-</dl>
-</p></li>
-<li><p><strong>tokens2</strong> (<em>list</em><em>[</em><em>int</em><em>]</em><em>, </em><em>optional</em>) – <dl class="simple">
-<dt>If provided, computes the ipae for this specific pair of token lists.</dt><dd><p>Only optional if <cite>chain1</cite> and <cite>chain2</cite>  are provided</p>
-</dd>
-</dl>
-</p></li>
-<li><p><strong>agg</strong> (<em>callable</em><em>, </em><em>default=np.mean</em>) – Aggregation function to apply to the selected values.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Aggregated ipae score.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>float</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>ValueError</strong> – If neither <cite>chain</cite> and <cite>tokens</cite> are provided, both are provided, or if either argument is invalid based on the data</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="foldkit.af3_result.AF3Result.get_ipsae">
-<span class="sig-name descname"><span class="pre">get_ipsae</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chain1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chain2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pae_cutoff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'d0res'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#foldkit.af3_result.AF3Result.get_ipsae" title="Link to this definition"></a></dt>
-<dd><p>Return the asymmetric ipSAE score.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>chain1</strong> (<em>str</em>) – Computes the ipSAE for this specific pair of chains.
-Note that the score is asymmetric so the order of chains matters.</p></li>
-<li><p><strong>chain2</strong> (<em>str</em>) – Computes the ipSAE for this specific pair of chains.
-Note that the score is asymmetric so the order of chains matters.</p></li>
-<li><p><strong>pae_cutoff</strong> (<em>float</em><em>, </em><em>default=10</em>) – PAE cutoff (in Angstroms) passed through to the ipSAE calculation.</p></li>
-<li><p><strong>d0</strong> (<em>str</em><em>, </em><em>default=d0res</em>) – d0 used for calculation. Options are:
-d0res: d0 determined by number of residues in 2nd chain with PAE&lt;cutoff
-d0chn: sum of chain lengths
-d0dom: d0 = total number of residues in both chains with any interchain PAE&lt;cutoff</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>ipSAE score.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>float</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="foldkit.af3_result.AF3Result.get_iptm">
-<span class="sig-name descname"><span class="pre">get_iptm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chain1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chain2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#foldkit.af3_result.AF3Result.get_iptm" title="Link to this definition"></a></dt>
-<dd><p>Return the interchain ptm (iptm) score.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>chain1</strong> (<em>str</em><em>, </em><em>optional</em>) – If provided, computes the iptm for this specific pair of chains. Otherwise, returns the global iptm score for all pairs of chains</p></li>
-<li><p><strong>chain2</strong> (<em>str</em><em>, </em><em>optional</em>) – If provided, computes the iptm for this specific pair of chains. Otherwise, returns the global iptm score for all pairs of chains</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>iptm score.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>float</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>ValueError</strong> – If <cite>chain</cite> is invalid based on the data</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="foldkit.af3_result.AF3Result.get_pae">
-<span class="sig-name descname"><span class="pre">get_pae</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chain=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tokens=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">agg=&lt;function</span> <span class="pre">mean&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#foldkit.af3_result.AF3Result.get_pae" title="Link to this definition"></a></dt>
-<dd><p>Return the pae (predicted alignment error) score.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>chain</strong> (<em>str</em><em>, </em><em>optional</em>) – If provided, computes the pae for this specific chain.
-If None, returns the score across all tokens (residues) in the structure.</p></li>
-<li><p><strong>tokens</strong> (<em>list</em><em>[</em><em>int</em><em>]</em><em>, </em><em>optional</em>) – If provided, computes the pae for specific tokens.
-If None, returns the score across all tokens (residues) in the structure.
-Cannot be used in combination with “chain”</p></li>
-<li><p><strong>agg</strong> (<em>callable</em><em>, </em><em>default=np.mean</em>) – Aggregation function to apply to the selected values.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Aggregated pae score.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>float</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>ValueError</strong> – If both <cite>chain</cite> and <cite>tokens</cite> are provided, or if either argument is invalid based on the data</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="foldkit.af3_result.AF3Result.get_plddt">
-<span class="sig-name descname"><span class="pre">get_plddt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chain=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atoms=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">agg=&lt;function</span> <span class="pre">mean&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#foldkit.af3_result.AF3Result.get_plddt" title="Link to this definition"></a></dt>
-<dd><p>Return the plddt score.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>chain</strong> (<em>str</em><em>, </em><em>optional</em>) – If provided, computes the plddt for this specific chain.
-If None, returns the score across all tokens (residues) in the structure.</p></li>
-<li><p><strong>atoms</strong> (<em>list</em><em>[</em><em>int</em><em>]</em><em>, </em><em>optional</em>) – If provided, computes the plddt for specific atoms.
-If None, returns the score across all atoms in the structure.
-Cannot be used in combination with “chain”</p></li>
-<li><p><strong>agg</strong> (<em>callable</em><em>, </em><em>default=np.mean</em>) – Aggregation function to apply to the selected values.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Aggregated plddt score.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>float</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>ValueError</strong> – If both <cite>chain</cite> and <cite>atoms</cite> are provided, or if either argument is invalid based on the data</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="foldkit.af3_result.AF3Result.get_ptm">
-<span class="sig-name descname"><span class="pre">get_ptm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#foldkit.af3_result.AF3Result.get_ptm" title="Link to this definition"></a></dt>
-<dd><p>Return the ptm score.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>chain</strong> (<em>str</em><em>, </em><em>optional</em>) – If provided, computes the ptm for this specific chain.
-If None, returns the global score across all chains in the structure.</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>ptm score.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>float</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>ValueError</strong> – If <cite>chain</cite> is invalid based on the data</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="foldkit.af3_result.AF3Result.global_iptm">
-<span class="sig-name descname"><span class="pre">global_iptm</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code><span class="pre">[</span><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code><span class="pre">]</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#foldkit.af3_result.AF3Result.global_iptm" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="foldkit.af3_result.AF3Result.global_ptm">
-<span class="sig-name descname"><span class="pre">global_ptm</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code><span class="pre">[</span><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code><span class="pre">]</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#foldkit.af3_result.AF3Result.global_ptm" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="foldkit.af3_result.AF3Result.id">
-<span class="sig-name descname"><span class="pre">id</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#foldkit.af3_result.AF3Result.id" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="foldkit.af3_result.AF3Result.load_af3_result">
-<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">load_af3_result</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#foldkit.af3_result.AF3Result.load_af3_result" title="Link to this definition"></a></dt>
-<dd><p>Loads a new single AF3 Result from AF3 output directory (<cite>result_dir</cite>), with optional name (<cite>id</cite>)</p>
-<dl class="field-list simple">
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#foldkit.af3_result.AF3Result" title="foldkit.af3_result.AF3Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">AF3Result</span></code></a></span></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="foldkit.af3_result.AF3Result.load_compressed_result">
-<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">load_compressed_result</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result_dir</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#foldkit.af3_result.AF3Result.load_compressed_result" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#foldkit.af3_result.AF3Result" title="foldkit.af3_result.AF3Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">AF3Result</span></code></a></span></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="foldkit.af3_result.AF3Result.load_webserver_result">
-<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">load_webserver_result</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id_stem</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#foldkit.af3_result.AF3Result.load_webserver_result" title="Link to this definition"></a></dt>
-<dd><p>Generate an AF3Result file for one of the 5 samples from a run on the AF3 webserver.</p>
-<p>Inputs:
-result_dir: path to directory storing results.
-sample: which sample to load
-seed: Model seed. If unset, will try to infer these from a request file in result_dir.
-id_stem: Job name. If unset, will try to infer these from a request file in result_dir.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#foldkit.af3_result.AF3Result" title="foldkit.af3_result.AF3Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">AF3Result</span></code></a></span></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="foldkit.af3_result.AF3Result.pae">
-<span class="sig-name descname"><span class="pre">pae</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code><span class="pre">[</span><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code><span class="pre">]</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#foldkit.af3_result.AF3Result.pae" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="foldkit.af3_result.AF3Result.plddt">
-<span class="sig-name descname"><span class="pre">plddt</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code><span class="pre">[</span><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code><span class="pre">]</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#foldkit.af3_result.AF3Result.plddt" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="foldkit.af3_result.AF3Result.summary_json_path">
-<span class="sig-name descname"><span class="pre">summary_json_path</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code><span class="pre">[</span><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code><span class="pre">]</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#foldkit.af3_result.AF3Result.summary_json_path" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<p id="module-foldkit.cli">foldkit.cli
-Command-line interface for converting AlphaFold3 confidence outputs to NPZ format.</p>
-<dl class="py function">
-<dt class="sig sig-object py" id="foldkit.cli.batch_export">
-<span class="sig-prename descclassname"><span class="pre">foldkit.cli.</span></span><span class="sig-name descname"><span class="pre">batch_export</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#foldkit.cli.batch_export" title="Link to this definition"></a></dt>
-<dd><p>Export multiple AlphaFold3 Ensemble Results, each with multiple subdirectories for each seed and sample.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="foldkit.cli.export_ensemble_result">
-<span class="sig-prename descclassname"><span class="pre">foldkit.cli.</span></span><span class="sig-name descname"><span class="pre">export_ensemble_result</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#foldkit.cli.export_ensemble_result" title="Link to this definition"></a></dt>
-<dd><p>Export a single AlphaFold3 Ensemble Result with multiple subdirectories for each seed and sample.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="foldkit.cli.export_single_result">
-<span class="sig-prename descclassname"><span class="pre">foldkit.cli.</span></span><span class="sig-name descname"><span class="pre">export_single_result</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#foldkit.cli.export_single_result" title="Link to this definition"></a></dt>
-<dd><p>Export a single AlphaFold3 Result subdirectory to compressed format.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="foldkit.cli.export_webserver_result">
-<span class="sig-prename descclassname"><span class="pre">foldkit.cli.</span></span><span class="sig-name descname"><span class="pre">export_webserver_result</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#foldkit.cli.export_webserver_result" title="Link to this definition"></a></dt>
-<dd><p>Export a single AlphaFold3 Webserver result with multiple subdirectories for each sample.</p>
-</dd></dl>
-
+<h1>API Reference<a class="headerlink" href="#api-reference" title="Link to this heading">#</a></h1>
+<section id="core-objects">
+<h2>Core objects<a class="headerlink" href="#core-objects" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/foldkit.af3_result.AF3Result.html#foldkit.af3_result.AF3Result" title="foldkit.af3_result.AF3Result"><code class="xref py py-obj docutils literal notranslate"><span class="pre">af3_result.AF3Result</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/foldkit.af3_ensemble.AF3Ensemble.html#foldkit.af3_ensemble.AF3Ensemble" title="foldkit.af3_ensemble.AF3Ensemble"><code class="xref py py-obj docutils literal notranslate"><span class="pre">af3_ensemble.AF3Ensemble</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="command-line-batch-export">
+<h2>Command-line / batch export<a class="headerlink" href="#command-line-batch-export" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/foldkit.cli.export_single_result.html#foldkit.cli.export_single_result" title="foldkit.cli.export_single_result"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cli.export_single_result</span></code></a></p></td>
+<td><p>Export a single AlphaFold3 Result subdirectory to compressed format.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/foldkit.cli.export_ensemble_result.html#foldkit.cli.export_ensemble_result" title="foldkit.cli.export_ensemble_result"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cli.export_ensemble_result</span></code></a></p></td>
+<td><p>Export a single AlphaFold3 Ensemble Result with multiple subdirectories for each seed and sample.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/foldkit.cli.export_webserver_result.html#foldkit.cli.export_webserver_result" title="foldkit.cli.export_webserver_result"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cli.export_webserver_result</span></code></a></p></td>
+<td><p>Export a single AlphaFold3 Webserver result with multiple subdirectories for each sample.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/foldkit.cli.batch_export.html#foldkit.cli.batch_export" title="foldkit.cli.batch_export"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cli.batch_export</span></code></a></p></td>
+<td><p>Export multiple AlphaFold3 Ensemble Results, each with multiple subdirectories for each seed and sample.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
 </section>
 
 
-           </div>
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#core-objects">Core objects</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#command-line-batch-export">Command-line / batch export</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/api.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
           </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="tutorial.html" class="btn btn-neutral float-left" title="Python API Usage" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
     </div>
-
-  <hr/>
-
-  <div role="contentinfo">
-    <p>&#169; Copyright 2026, Jonathan Levine.</p>
   </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
 
-  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    provided by <a href="https://readthedocs.org">Read the Docs</a>.
-   
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
 
-</footer>
-        </div>
-      </div>
-    </section>
-  </div>
-  <script>
-      jQuery(function () {
-          SphinxRtdTheme.Navigation.enable(true);
-      });
-  </script> 
+  <p class="copyright">
+    
+      © Copyright 2026, Jonathan Levine.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
 
-</body>
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
 </html>
