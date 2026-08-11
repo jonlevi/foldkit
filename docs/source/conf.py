@@ -15,8 +15,8 @@ sys.path.insert(0, os.path.abspath("../../src"))  # So autodoc can find your pac
 project = "foldkit"
 copyright = "2026, Jonathan Levine"
 author = "Jonathan Levine"
-release = "0.1.3"
-version = "0.1.3"
+release = "1.0.0"
+version = "1.0.0"
  
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration

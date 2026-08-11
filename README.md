@@ -603,4 +603,5 @@ git commit -m "Update docs"
 ```bash
 git push
 ```
-### 3. Check Actions tab
+
+### 3. Check Actions tab to make sure deploy was successful
