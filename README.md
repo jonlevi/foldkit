@@ -589,9 +589,9 @@ cd ..
 ```
 
 ### 3. Copy the generated HTML to the repository root
-
+#### This is dangerous! Make sure you know what you are doing!
 ```bash
-rsync -av --delete docs/build/html/ .
+rsync -av --delete --exclude='.git' docs/build/html/ .
 ```
 
 ### 4. Commit the changes
