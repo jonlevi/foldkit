@@ -1,56 +1,102 @@
+# PYTHON_ARGCOMPLETE_OK
 """
 foldkit.cli
 Command-line interface for converting AlphaFold3 confidence outputs to NPZ format.
 """
-
 import argparse
+import argcomplete
+from argcomplete.completers import DirectoriesCompleter
+import csv
 import os
 from pathlib import Path
+import re
 import shutil
 import tqdm
 from .af3_result import AF3Result
+from .af3_ensemble import AF3Ensemble
 from .storage import save_af3_result
 
 
-def export_single_result(
-    input_directory: str, output_directory: str, verbose: bool, print_error: bool = True
-):
+def write_ranking_csv(ranking_scores, output_file):
+    with open(output_file, "w", newline="") as f:
+        writer = csv.writer(f)
+
+        # Header
+        writer.writerow(["seed", "sample", "ranking_score"])
+
+        for key, ranking_score in ranking_scores.items():
+            match = re.match(r"seed-(\d+)_sample-(\d+)", key)
+
+            if match is None:
+                raise ValueError(f"Invalid key format: {key}")
+
+            seed = int(match.group(1))
+            sample = int(match.group(2))
+
+            writer.writerow([seed, sample, ranking_score])
+
+
+def get_cif_paths(top):
+
+    sample_paths = {}
+
+    for _path in top.iterdir():
+        path = Path(_path)
+        if "cif" not in _path.name:
+            continue
+
+        match = re.search(r"_model_(\d+)\.cif$", path.name)
+
+        if match is None:
+            raise ValueError(f"Could not extract sample number from: {path}")
+
+        sample = int(match.group(1))
+        sample_paths[sample] = str(path)
+
+    return sample_paths
+
+
+def export_single_result(input_directory: str, output_directory: str, verbose: bool):
     """Export a single AlphaFold3 Result subdirectory to compressed format."""
     input_path = Path(input_directory)
     output_path = Path(output_directory)
     output_path.mkdir(parents=True, exist_ok=True)
 
     try:
-        res = AF3Result.load_result(input_path)
-        outfile = os.path.join(output_path, "confidences.npz")
-        save_af3_result(res, outfile)
-        if verbose:
-            print(f"✅ Exported Confidence Data to : {output_path}")
+        cif_path = None
         for p in input_path.iterdir():
             if "json" not in p.name and not p.is_dir():
                 shutil.copyfile(p, os.path.join(output_path, p.name))
+                if "cif" in p.name:
+                    cif_path = os.path.join(output_path, p.name)
+        res = AF3Result.load_af3_result(input_path)
+        outfile = os.path.join(output_path, "confidences.npz")
+        save_af3_result(res, outfile, override_cif_path=cif_path)
         if verbose:
-            print(f"✅ Copied non Confidence Data to : {output_path}")
+            print(f"✅ Exported Data to : {output_path}")
+
     except Exception as e:
-        if print_error:
-            print(f"❌ Failed to export {input_path}: {e}")
+        print(f"❌ Failed to export {input_path}: {e}")
 
 
-def export_multi_result(input_directory: str, output_directory: str, verbose: bool):
-    """Export a single AlphaFold3 Result with multiple subdirectories for each seed and sample."""
+def export_ensemble_result(input_directory: str, output_directory: str, verbose: bool):
+    """Export a single AlphaFold3 Ensemble Result with multiple subdirectories for each seed and sample."""
     input_path = Path(input_directory)
     output_path = Path(output_directory)
     output_path.mkdir(parents=True, exist_ok=True)
 
-    # First, if needed, save the top level results to the top level
-    try:
-        export_single_result(input_path, output_path, verbose, print_error=verbose)
-    except:
-        if verbose:
-            print("No top level results found -- moving to subdirectories")
-        pass
+    ranking_files = list(input_path.glob("*ranking_scores.csv"))
+    if len(ranking_files) == 0:
+        raise Exception("Could not find ranking_scores.csv file")
+    if len(ranking_files) > 1:
+        raise Exception(
+            "Found multiple ranking_scores.csv files and don't know which to use."
+        )
+    ranking_file = ranking_files[0]
 
-    # Second, save each subdirectory
+    shutil.copyfile(ranking_file, os.path.join(output_path, "ranking_scores.csv"))
+
+    # Save each subdirectory
     subdirectories = [p for p in input_path.iterdir() if p.is_dir()]
 
     for path in subdirectories:
@@ -62,10 +108,43 @@ def export_multi_result(input_directory: str, output_directory: str, verbose: bo
             print(f"❌ Failed to process {path}: {e}")
 
 
-def batch_export_multi_result(
-    input_directory: str, output_directory: str, verbose: bool
-):
-    """Export multiple AlphaFold3 Results, each with multiple subdirectories for each seed and sample."""
+def export_webserver_result(input_directory: str, output_directory: str, verbose: bool):
+    """Export a single AlphaFold3 Webserver result with multiple subdirectories for each sample."""
+    input_path = Path(input_directory)
+    output_path = Path(output_directory)
+    output_path.mkdir(parents=True, exist_ok=True)
+
+    try:
+        for p in input_path.iterdir():
+            if "json" not in p.name and not p.is_dir():
+                shutil.copyfile(p, os.path.join(output_path, p.name))
+
+        ensemble = AF3Ensemble.load_webserver_result(input_path)
+        cif_paths = get_cif_paths(output_path)
+        for key, res in ensemble.af3_results.items():
+            subdir = Path(os.path.join(output_path, key))
+            subdir.mkdir(parents=True, exist_ok=True)
+            outfile = os.path.join(subdir, "confidences.npz")
+            match = re.match(r"seed-(\d+)_sample-(\d+)", key)
+            seed = int(match.group(1))
+            sample = int(match.group(2))
+            new_cif_path = os.path.join(subdir, "model.cif")
+            shutil.move(cif_paths[sample], new_cif_path)
+            save_af3_result(res, outfile, override_cif_path=new_cif_path)
+
+        write_ranking_csv(
+            ensemble.af3_ranking_scores, os.path.join(output_path, "ranking_scores.csv")
+        )
+
+        if verbose:
+            print(f"✅ Exported Data to : {output_path}")
+
+    except Exception as e:
+        print(f"❌ Failed to export {input_path}: {e}")
+
+
+def batch_export(input_directory: str, output_directory: str, verbose: bool):
+    """Export multiple AlphaFold3 Ensemble Results, each with multiple subdirectories for each seed and sample."""
     input_path = Path(input_directory)
     output_path = Path(output_directory)
     output_path.mkdir(parents=True, exist_ok=True)
@@ -74,13 +153,13 @@ def batch_export_multi_result(
     for path in tqdm.tqdm(subdirectories):
         suboutput_dir = Path(os.path.join(output_path, path.name))
         suboutput_dir.mkdir(exist_ok=True)
-        export_multi_result(path, suboutput_dir, verbose)
+        export_ensemble_result(path, suboutput_dir, verbose)
 
 
 def main():
     parser = argparse.ArgumentParser(
         description="Export AlphaFold3 result directories into compressed format."
-        "Converts confidences into npz format and copies over the rest of the data as is( except the _input_data.json which is redundant)."
+        "Converts confidences into npz format and copies over the rest of the data as is (except the _input_data.json which is redundant)."
     )
 
     parser.add_argument(
@@ -99,35 +178,56 @@ def main():
     )
     parser_file.add_argument(
         "input_directory", help="Path to AlphaFold3 result directory"
-    )
-    parser_file.add_argument("output_directory", help="Output directory path")
+    ).completer = DirectoriesCompleter()
+    parser_file.add_argument(
+        "output_directory", help="Output directory path"
+    ).completer = DirectoriesCompleter()
 
     parser_dir = subparsers.add_parser(
-        "export-multi-result",
-        help="Export multiseed/multisample AlphaFold3 results to compressed format.",
+        "export-ensemble-result",
+        help="Export multiseed/multisample AlphaFold3 Ensemble of results to compressed format.",
     )
     parser_dir.add_argument(
         "input_directory",
         help="Path to parent directory containing subdirectories with AF3 results.",
-    )
-    parser_dir.add_argument("output_directory", help="Parent output directory path")
+    ).completer = DirectoriesCompleter()
+    parser_dir.add_argument(
+        "output_directory", help="Parent output directory path"
+    ).completer = DirectoriesCompleter()
 
-    parser_dir = subparsers.add_parser(
-        "batch-export-multi-result",
+    parser_web = subparsers.add_parser(
+        "webserver-export",
+        help="Export AlphaFold3 server results to compressed format.",
+    )
+    parser_web.add_argument(
+        "input_directory",
+        help="Path to parent directory containing webserver AF3 results.",
+    ).completer = DirectoriesCompleter()
+    parser_web.add_argument(
+        "output_directory", help="Parent output directory path"
+    ).completer = DirectoriesCompleter()
+
+    parser_batch = subparsers.add_parser(
+        "batch-export",
         help="Export multiple AlphaFold3 results to compressed format.",
     )
-    parser_dir.add_argument(
+    parser_batch.add_argument(
         "input_directory",
         help="Path to parent directory containing subdirectories with subdirectories of AF3 results.",
-    )
-    parser_dir.add_argument("output_directory", help="Parent output directory path")
+    ).completer = DirectoriesCompleter()
+    parser_batch.add_argument(
+        "output_directory", help="Parent output directory path"
+    ).completer = DirectoriesCompleter()
+
+    argcomplete.autocomplete(parser)
 
     args = parser.parse_args()
 
     command_mappers = {
         "export-single-result": export_single_result,
-        "export-multi-result": export_multi_result,
-        "batch-export-multi-result": batch_export_multi_result,
+        "export-ensemble-result": export_ensemble_result,
+        "batch-export": batch_export,
+        "webserver-export": export_webserver_result,
     }
 
     command = command_mappers.get(args.command)

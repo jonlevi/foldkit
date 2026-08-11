@@ -1,9 +1,12 @@
 import numpy as np
-from foldkit import AF3Result
 from pathlib import Path
+from typing import Optional
+from .af3_result import AF3Result
 
 
-def save_af3_result(af3_result: AF3Result, path: str):
+def save_af3_result(
+    af3_result: AF3Result, path: str, override_cif_path: Optional[str] = None
+) -> None:
     """
     Save this AF3Result to a compressed NPZ file.
     """
@@ -11,7 +14,9 @@ def save_af3_result(af3_result: AF3Result, path: str):
     np.savez_compressed(
         path,
         id=af3_result.id,
-        cif_path=af3_result.cif_path,
+        cif_path=(
+            af3_result.cif_path if override_cif_path is None else override_cif_path
+        ),
         chains=np.array(af3_result.chains),
         residue_chain_ids=af3_result.residue_chain_ids,
         atom_chain_ids=af3_result.atom_chain_ids,
