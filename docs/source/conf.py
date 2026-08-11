@@ -8,37 +8,28 @@
 
 import os
 import sys
+
 sys.path.insert(0, os.path.abspath("../../src"))  # So autodoc can find your package
 
-project = 'foldkit'
-copyright = '2025, Jonathan Levine'
-author = 'Jonathan Levine'
-release = '0.1.0'
+project = "foldkit"
+copyright = "2026, Jonathan Levine"
+author = "Jonathan Levine"
+release = "0.1.3"
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
 
-templates_path = ['_templates']
+templates_path = ["_templates"]
 exclude_patterns = []
-
-
 
 
 extensions = [
     "sphinx.ext.autodoc",
-    "sphinx.ext.napoleon",         # For Google-style docstrings
-    "sphinx_autodoc_typehints",    # Show type hints in docs
+    "sphinx.ext.napoleon",  # For Google-style docstrings
+    "sphinx_autodoc_typehints",  # Show type hints in docs
 ]
 
-html_theme = "pydata_sphinx_theme"
+html_theme = "sphinx_rtd_theme"
 
-html_theme_options = {
-    "navigation_depth": 2,
-    "show_toc_level": 2,
-    "github_url": "https://github.com/jonlevi/foldkit",
-}
-
-html_sidebars = {
-    "**": ["search-field.html", "sidebar-nav-bs.html"]
-}
+html_static_path = ["_static"]

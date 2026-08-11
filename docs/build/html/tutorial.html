@@ -1,0 +1,353 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Python API Usage &mdash; foldkit 0.1.3 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=360bc84d"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="API Reference" href="api.html" />
+    <link rel="prev" title="Installation" href="installation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            foldkit
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Python API Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">foldkit</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Python API Usage</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/tutorial.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <p>—</p>
+<p>## <strong>2️⃣ `tutorial.rst`</strong></p>
+<p>Create <cite>docs/source/tutorial.rst</cite>:</p>
+<p><a href="#id1"><span class="problematic" id="id2">``</span></a><a href="#id3"><span class="problematic" id="id4">`</span></a>rst
+Tutorial
+========</p>
+<p>This tutorial covers basic usage of FoldKit, including <strong>Python API</strong> and <strong>command-line interface (CLI)</strong>.</p>
+<p>—</p>
+<section id="python-api-usage">
+<h1>Python API Usage<a class="headerlink" href="#python-api-usage" title="Link to this heading"></a></h1>
+<p>## Python Interface Tutorial</p>
+<p>### Single predicted structure
+Let’s say you have a directory that contains the results of an AlphaFold3 prediction for a protein complex. For example, let’s look at a protein complex that is a TCR with the following 4 chains: [“A”, “B”, “M”, “P”] (which is the TCRa, TCRb, MHCa, peptide). The AF3 run results are stored in a directory (which you can look at in the tutorial_example directory):
+<cite>“tutorial_example/single_result”</cite>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">ls</span> <span class="pre">tutorial_example/single_result</span>
+<span class="pre">confidences.json</span>&#160; <span class="pre">model.cif</span>&#160; <span class="pre">summary_confidences.json</span>
+<span class="pre">`</span></code>
+We can can load the results:
+<code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">import</span> <span class="pre">foldkit</span>
+<span class="pre">result_obj</span> <span class="pre">=</span> <span class="pre">foldkit.AF3Result.load_af3_result(&quot;tutorial_example/single_result&quot;)</span>
+<span class="pre">`</span></code>
+This object has access to all of the confidence metadata, as well as the ability to compute specific statistics on the metadata.
+<code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">&gt;&gt;&gt;</span> <span class="pre">result_obj.chains</span>
+<span class="pre">[np.str_('A'),</span> <span class="pre">np.str_('B'),</span> <span class="pre">np.str_('M'),</span> <span class="pre">np.str_('P')]</span>
+<span class="pre">`</span></code>
+For example:
+<a href="#id5"><span class="problematic" id="id6">``</span></a>`
+&gt;&gt;&gt; result_obj.get_ptm() # mean global PTM
+0.81</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">result_obj</span><span class="o">.</span><span class="n">get_ptm</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">)</span> <span class="c1"># mean PTM for chain A:</span>
+<span class="go">0.82</span>
+</pre></div>
+</div>
+<p># ipae between chain B and chain P
+&gt;&gt;&gt; result_obj.get_ipae(chain1=”B”, chain2=”P”)
+np.float64(6.245691056910569)</p>
+<p># ipsae between chain B and chain P
+# see <a class="reference external" href="https://github.com/DunbrackLab/IPSAE">https://github.com/DunbrackLab/IPSAE</a>
+&gt;&gt;&gt; result_obj.get_ipsae(chain1=”B”, chain2=”P”)
+np.float64(0.292483968491584)
+<code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">By</span> <span class="pre">default,</span> <span class="pre">these</span> <span class="pre">methods</span> <span class="pre">compute</span> <span class="pre">the</span> <span class="pre">mean</span> <span class="pre">over</span> <span class="pre">the</span> <span class="pre">confidence</span> <span class="pre">metrics</span> <span class="pre">aggregated</span> <span class="pre">per</span> <span class="pre">chain/chain-pair.</span> <span class="pre">But</span> <span class="pre">maybe</span> <span class="pre">you</span> <span class="pre">want</span> <span class="pre">a</span> <span class="pre">different</span> <span class="pre">aggregation</span> <span class="pre">function?</span> <span class="pre">You</span> <span class="pre">can</span> <span class="pre">pass</span> <span class="pre">in</span> <span class="pre">a</span> <span class="pre">custom</span> <span class="pre">`agg`:</span>
+<span class="pre">`</span></code>
+&gt;&gt;&gt; result_obj.get_ipae(chain1=”B”, chain2=”P”, agg=max)
+np.float64(29.8)
+<a href="#id7"><span class="problematic" id="id8">``</span></a><a href="#id9"><span class="problematic" id="id10">`</span></a></p>
+<p>### Ensemble of predicted structures
+Let’s say you have a directory that contains the results of an AlphaFold3 prediction for a protein complex, with multiple predictions across several seeds and samples. For example, let’s look at the same TCR, with AF3 run results stored in a directory of directories (which you can look at in the tutorial_example directory):
+<cite>“tutorial_example/ensemble_result”</cite>.
+<a href="#id11"><span class="problematic" id="id12">``</span></a>`
+ensemble_result/
+├── ranking_scores.csv
+│
+├── seed-1_sample-0/
+├── seed-1_sample-1/
+├── …</p>
+<p>├── seed-5_sample-0/
+├── seed-5_sample-1/
+├── …
+…</p>
+<p><a href="#id13"><span class="problematic" id="id14">``</span></a><a href="#id15"><span class="problematic" id="id16">`</span></a></p>
+<p>First, load the Ensemble:
+<a href="#id17"><span class="problematic" id="id18">``</span></a>`
+&gt;&gt;&gt; ensemble_obj = foldkit.AF3Ensemble.load_af3_result(“tutorial_example/ensemble_result”)
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 20/20 [00:03&lt;00:00,  5.05it/s]</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ensemble_obj</span><span class="o">.</span><span class="n">size</span>
+<span class="go">20</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ensemble_obj</span><span class="o">.</span><span class="n">seeds</span>
+<span class="go">[1, 2, 5, 10]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ensemble_obj</span><span class="o">.</span><span class="n">samples</span>
+<span class="go">[0, 1, 2, 3, 4]</span>
+<span class="go">```</span>
+</pre></div>
+</div>
+<p>The individual results are stored in <cite>ensemble_obj.af3_results</cite>. You get easy access to an individual structure in the ensemble by using its seed and sample:
+<code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">&gt;&gt;&gt;</span> <span class="pre">ensemble_obj.get_result_by_seed_and_sample(seed=5,sample=2)</span>
+<span class="pre">&lt;foldkit.af3_result.AF3Result</span> <span class="pre">object</span> <span class="pre">at</span> <span class="pre">0x7f59d8a344b0&gt;</span>
+<span class="pre">`</span></code>
+The ranking scores are stored in <cite>ensemble_obj.af3_ranking_scores</cite>. Access to the top-ranked structure:
+<code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">&gt;&gt;&gt;</span> <span class="pre">ensemble_obj.get_top_ranked_result()</span>
+<span class="pre">&lt;foldkit.af3_result.AF3Result</span> <span class="pre">object</span> <span class="pre">at</span> <span class="pre">0x7f215e6497f0&gt;</span>
+<span class="pre">`</span></code></p>
+<p>You can also get any of the confidence metrics, either by structure, or aggregated over the entire ensemble:</p>
+<p><a href="#id19"><span class="problematic" id="id20">``</span></a>`
+&gt;&gt;&gt; &gt;&gt;&gt; ensemble_obj.get_all_plddt(‘M’)
+{‘seed-1_sample-3’: np.float64(78.71985788561527), ‘seed-2_sample-4’: np.float64(77.89603812824957), ‘seed-1_sample-4’: np.float64(78.20608318890814), …}</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ensemble_obj</span><span class="o">.</span><span class="n">get_ensemble_plddt</span><span class="p">(</span><span class="s1">&#39;M&#39;</span><span class="p">)</span> <span class="c1"># default is mean over ensemble</span>
+<span class="go">np.float64(78.2713937608319)</span>
+</pre></div>
+</div>
+<p>ensemble_obj.get_ensemble_plddt(‘M’,ensemble_agg=max) # use max instead
+np.float64(78.91594800693241)
+<a href="#id21"><span class="problematic" id="id22">``</span></a><a href="#id23"><span class="problematic" id="id24">`</span></a></p>
+<p>Be careful not to mix up matrix agg with ensemble agg</p>
+<p><a href="#id25"><span class="problematic" id="id26">``</span></a>`
+# this is max of the plddt matrix, but mean over the ensemble
+ensemble_obj.get_ensemble_plddt(‘M’,agg=max, ensemble_agg=np.mean)
+np.float64(98.647)</p>
+<p># this is mean of the plddt matrix, but max over the ensemble
+&gt;&gt;&gt; ensemble_obj.get_ensemble_plddt(‘M’,agg=numpy.mean, ensemble_agg=max)
+np.float64(78.91594800693241)</p>
+<p><a href="#id27"><span class="problematic" id="id28">``</span></a><a href="#id29"><span class="problematic" id="id30">`</span></a></p>
+<p>### Full list of included metrics:
+1) pLDDT
+2) pAE and iPAE
+4) pTM and ipTM
+5) Contact Probs
+6) ipSAE (see <a class="reference external" href="https://github.com/DunbrackLab/IPSAE">https://github.com/DunbrackLab/IPSAE</a>)</p>
+<p>### Loading from exported, compressed format
+From the CLI, let’s say you had previously exported the result of a AF3 run (see below), so that the result from before is now at <cite>“tutorial_example/single_result_export”</cite>. This second directory will have a .npz file in it instead of JSON files. You can load it in a very similar way:
+<code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">foldkit.AF3Result.load_compressed_result('tutorial_example/single_result_export')</span>
+<span class="pre">&lt;foldkit.af3_result.AF3Result</span> <span class="pre">object</span> <span class="pre">at</span> <span class="pre">0x7fe0bba2a120&gt;</span>
+<span class="pre">`</span></code>
+Similarly, for an ensemble that was exported in compressed format:
+<code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">&gt;&gt;&gt;</span> <span class="pre">foldkit.AF3Ensemble.load_compressed_result('tutorial_example/ensemble_result_export')</span>
+<span class="pre">100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████|</span> <span class="pre">20/20</span> <span class="pre">[00:00&lt;00:00,</span> <span class="pre">22.16it/s]</span>
+<span class="pre">&lt;foldkit.af3_ensemble.AF3Ensemble</span> <span class="pre">object</span> <span class="pre">at</span> <span class="pre">0x7f3a374ea120&gt;</span>
+<span class="pre">`</span></code></p>
+<p>### Loading from AF3 Server format
+From the CLI, let’s say you had previously exported the result of a AF3 run, so that the result from before
+at <cite>“structures/tcr_pmhc_1/”</cite> is now at <cite>“structures_compressed/tcr_pmhc_1/”</cite>. This second directory will have a .npz file in it instead of JSON files. You can load it in a very similar way by adding the <cite>from_npz=True</cite> flag
+<code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">result_obj</span> <span class="pre">=</span> <span class="pre">foldkit.AF3Result.load_result(&quot;structures/tcr_pmhc_1/&quot;,</span> <span class="pre">from_npz=True)</span>
+<span class="pre">`</span></code></p>
+<p>## folkdkit - CLI Tutorial
+<a href="#id31"><span class="problematic" id="id32">``</span></a>`
+foldkit -h
+usage: foldkit [-h] [–verbose] {export-single-result,export-ensemble-result,webserver-export,batch-export} …</p>
+<p>Export AlphaFold3 result directories into compressed format.Converts confidences into npz format and copies over the rest of the data as is (except the
+_input_data.json which is redundant).</p>
+<dl>
+<dt>positional arguments:</dt><dd><dl>
+<dt>{export-single-result,export-ensemble-result,webserver-export,batch-export}</dt><dd><dl class="simple">
+<dt>export-single-result</dt><dd><p>Export a single AlphaFold3 result directory to compressed format</p>
+</dd>
+<dt>export-ensemble-result</dt><dd><p>Export multiseed/multisample AlphaFold3 Ensemble of results to compressed format.</p>
+</dd>
+</dl>
+<p>webserver-export    Export AlphaFold3 server results to compressed format.
+batch-export        Export multiple AlphaFold3 results to compressed format.</p>
+</dd>
+</dl>
+</dd>
+<dt>options:</dt><dd><dl class="option-list">
+<dt><kbd><span class="option">-h</span>, <span class="option">--help</span></kbd></dt>
+<dd><p>show this help message and exit</p>
+</dd>
+<dt><kbd><span class="option">--verbose</span>, <span class="option">-v</span></kbd></dt>
+<dd><p>Print detailed output.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p><a href="#id33"><span class="problematic" id="id34">``</span></a>`
+There are 4 main entry points, depending on the data you are exporting:
+1) A single prediction directory (i.e. one prediction corresponding to a single seed and sample)
+2) An ensemble prediction directory (i.e. N*K predictions corresponding to the same input with N seeds and K samples)
+3) A directory of AF3 server results, one seed and multiple samples in a slightly diferent output format than the AF3 installation version.
+4) A directory of ensemble directories (i.e. a directory containing many “ensemble directories” like in (2)).</p>
+<p>After running the export successfully, you can safely delete the source directory.</p>
+<blockquote>
+<div><p>### 1- Export a single result (i.e. one single structure from a single seed and sample)
+<a href="#id35"><span class="problematic" id="id36">``</span></a><a href="#id37"><span class="problematic" id="id38">`</span></a></p>
+</div></blockquote>
+<p>foldkit export-single-result -h
+usage: foldkit export-single-result [-h] input_directory output_directory</p>
+<dl>
+<dt>positional arguments:</dt><dd><p>input_directory   Path to AlphaFold3 result directory
+output_directory  Output directory path</p>
+</dd>
+<dt>options:</dt><dd><dl class="option-list">
+<dt><kbd><span class="option">-h</span>, <span class="option">--help</span></kbd></dt>
+<dd><p>show this help message and exit</p>
+</dd>
+</dl>
+<p><a href="#id39"><span class="problematic" id="id40">``</span></a><a href="#id41"><span class="problematic" id="id42">`</span></a></p>
+</dd>
+</dl>
+<p>Example:
+<code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">foldkit</span> <span class="pre">-v</span> <span class="pre">export-single-result</span> <span class="pre">tutorial_example/single_result</span> <span class="pre">tutorial_example/single_result_export</span>
+<span class="pre">✅</span> <span class="pre">Exported</span> <span class="pre">Data</span> <span class="pre">to</span> <span class="pre">:</span> <span class="pre">tutorial_example/single_result_export</span>
+<span class="pre">`</span></code></p>
+<blockquote>
+<div><p>### 2- Export an ensemble of results with multiple seeds and/or samples
+<a href="#id43"><span class="problematic" id="id44">``</span></a><a href="#id45"><span class="problematic" id="id46">`</span></a></p>
+</div></blockquote>
+<p>foldkit export-ensemble-result -h
+usage: foldkit export-ensemble-result [-h] input_directory output_directory</p>
+<dl>
+<dt>positional arguments:</dt><dd><p>input_directory   Path to parent directory containing subdirectories with AF3 results.
+output_directory  Parent output directory path</p>
+</dd>
+<dt>options:</dt><dd><dl class="option-list">
+<dt><kbd><span class="option">-h</span>, <span class="option">--help</span></kbd></dt>
+<dd><p>show this help message and exit</p>
+</dd>
+</dl>
+<p><code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">Example:</span>
+<span class="pre">`</span></code>
+(foldkit) [<a class="reference external" href="mailto:levinej4&#37;&#52;&#48;isca027">levinej4<span>&#64;</span>isca027</a> foldkit]$  foldkit -v export-ensemble-result tutorial_example/ensemble_result tutorial_example/ensemble_result_export</p>
+</dd>
+</dl>
+<p>✅ Exported Data to : tutorial_example/ensemble_result_export/seed-1_sample-3
+✅ Exported Data to : tutorial_example/ensemble_result_export/seed-2_sample-4
+✅ Exported Data to : tutorial_example/ensemble_result_export/seed-2_sample-1
+…</p>
+<blockquote>
+<div><p><a href="#id47"><span class="problematic" id="id48">``</span></a><a href="#id49"><span class="problematic" id="id50">`</span></a></p>
+</div></blockquote>
+<p>### 4- Export webserver result
+Example:
+<code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">foldkit</span> <span class="pre">-v</span> <span class="pre">webserver-export</span> <span class="pre">tutorial_example/server</span> <span class="pre">tutorial_example/server_export</span>
+<span class="pre">✅</span> <span class="pre">Exported</span> <span class="pre">Data</span> <span class="pre">to</span> <span class="pre">:</span> <span class="pre">tutorial_example/server_export</span>
+<span class="pre">`</span></code></p>
+<dl class="simple">
+<dt>### 5- Batch export many results</dt><dd><p><a href="#id51"><span class="problematic" id="id52">``</span></a><a href="#id53"><span class="problematic" id="id54">`</span></a></p>
+</dd>
+</dl>
+<p>foldkit batch-export -h
+usage: foldkit batch-export [-h] input_directory output_directory</p>
+<dl>
+<dt>positional arguments:</dt><dd><p>input_directory   Path to parent directory containing subdirectories with subdirectories of AF3 results.
+output_directory  Parent output directory path</p>
+</dd>
+<dt>options:</dt><dd><dl class="option-list">
+<dt><kbd><span class="option">-h</span>, <span class="option">--help</span></kbd></dt>
+<dd><p>show this help message and exit</p>
+</dd>
+</dl>
+<p><a href="#id55"><span class="problematic" id="id56">``</span></a><a href="#id57"><span class="problematic" id="id58">`</span></a></p>
+</dd>
+<dt>### Cleanup</dt><dd><p>After running any of the above exports successfully, you can safely delete the source directory/directories.</p>
+</dd>
+</dl>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="installation.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="api.html" class="btn btn-neutral float-right" title="API Reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Jonathan Levine.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

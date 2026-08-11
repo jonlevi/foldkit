@@ -3,15 +3,13 @@ import foldkit
 import os
 from numpy.testing import assert_array_equal
 
-#  PYTHONPATH=src pytest tests/
-
 
 def test_example():
-    aa = foldkit.AF3Result.load_result("tests/test_data/structure1")
+    aa = foldkit.AF3Result.load_af3_result("tests/test_data/compressed/structure1")
 
-    foldkit.save_af3_result(aa, "tests/test_data/structure1.npz")
+    foldkit.save_af3_result(aa, "tests/test_data/test-s-1/structure1.npz")
 
-    bb = foldkit.load_af3_result("tests/test_data/structure1.npz")
+    bb = foldkit.AF3Result.load_compressed_result("tests/test_data/test-s-1")
 
     assert aa.id == bb.id
     assert aa.chains == bb.chains

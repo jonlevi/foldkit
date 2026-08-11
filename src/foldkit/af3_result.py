@@ -1,18 +1,23 @@
 """
 foldkit.core
 Core functionality for working with AlphaFold3 results.
-
+ 
 Features:
 - Load AF3 results from metadata (.json).
-- Interface for global and local confidence metrics
-- Not yet implemented: Interface for predicted structure from cif (TODO: coming soon!)
+- Interface for global and local confidence metrics, including ipSAE
 """
 
 import json
-from typing import Optional, Callable
+import re
+from typing import Optional, Callable, Generator
 from pathlib import Path
+import logging
+import shutil
+
 import numpy as np
 import pandas as pd
+
+from .ipsae import ipsae, read_pdb
 
 
 class AF3Result:
@@ -27,27 +32,36 @@ class AF3Result:
     chain_pair_iptm: Optional[np.ndarray] = None
     chain_ptm: Optional[np.ndarray] = None
 
+    # Structural data needed for ipSAE
+    cif_residues: Optional[np.ndarray] = None
+    cif_chains: Optional[np.ndarray] = None
+
     # Metadata
     id: str = None
-    # cif_path: Path = None
-    summary_json_path: Path = None
-    full_json_path: Path = None
+    cif_path: Optional[Path] = None
+    summary_json_path: Optional[Path] = None
+    full_json_path: Optional[Path] = None
+
+    # ------------------------------------------------------------------
+    # Construction / loading
+    # ------------------------------------------------------------------
 
     def _build_from_af3_output(
-        self, id: str, summary_json_path: Path, full_json_path: Path
+        self, id: str, summary_json_path: Path, full_json_path: Path, cif_path: Path
     ):
         self.id = id
-        # self.cif_path = Path(cif_path)
+        self.cif_path = Path(cif_path)
         self.summary_json_path = Path(summary_json_path)
         self.full_json_path = Path(full_json_path)
 
-        # TODO: Access structures
-        # self.residues: List[ResidueConfidence] = []
-        # self.chain_residue_idx: Dict[str, List[int]] = {}
-
-        # Load data immediately
-        # TODO: self._load_cif()
         self._extract_confidences()
+        self._load_cif_information()
+
+    def _load_cif_information(self):
+        with open(self.cif_path, "r") as f:
+            residues, _, _, chains = read_pdb(f, "cif")
+            self.cif_residues = residues
+            self.cif_chains = chains
 
     def _extract_confidences(self):
         with open(self.summary_json_path, "r") as jfile1:
@@ -67,6 +81,118 @@ class AF3Result:
             self.pae = np.array(confidence["pae"])
             self.contact_probs = np.array(confidence["contact_probs"])
 
+    @staticmethod
+    def _from_npz_data(data) -> "AF3Result":
+        """Build an AF3Result from an already-loaded .npz archive (shared by
+        `load_result` and `load_stored_webserver_results`)."""
+        obj = AF3Result()
+        obj.id = str(data["id"])
+        obj.chains = list(data["chains"])
+        obj.residue_chain_ids = data["residue_chain_ids"]
+        obj.atom_chain_ids = data["atom_chain_ids"]
+        obj.plddt = data["plddt"]
+        obj.pae = data["pae"]
+        obj.contact_probs = data["contact_probs"]
+        obj.global_ptm = float(data["global_ptm"])
+        obj.global_iptm = float(data["global_iptm"])
+        obj.chain_pair_iptm = data["chain_pair_iptm"]
+        obj.chain_ptm = data["chain_ptm"]
+        return obj
+
+    # ------------------------------------------------------------------
+    # Shared validation / indexing helpers
+    # ------------------------------------------------------------------
+
+    def _validate_chain(self, chain: str) -> None:
+        """Raise ValueError if `chain` isn't a known chain."""
+        if chain not in self.chains:
+            raise ValueError(f"Chain {chain} not in {self.chains}")
+
+    def _chain_residue_indices(self, chain: str) -> list[int]:
+        """Residue (token) indices belonging to `chain`."""
+        self._validate_chain(chain)
+        return [int(idx) for idx in np.where(self.residue_chain_ids == chain)[0]]
+
+    def _chain_atom_indices(self, chain: str) -> list[int]:
+        """Atom indices belonging to `chain`."""
+        self._validate_chain(chain)
+        return [int(idx) for idx in np.where(self.atom_chain_ids == chain)[0]]
+
+    def _validate_pair_selector(
+        self,
+        chain1: Optional[str],
+        chain2: Optional[str],
+        tokens1: Optional[list[int]],
+        tokens2: Optional[list[int]],
+    ) -> tuple[str, tuple]:
+        """
+        Validate the chain1/chain2 vs. tokens1/tokens2 arguments shared by
+        `get_ipae` and `get_contact_probs`, and report which selector is active.
+
+        Returns
+        -------
+        ("chains", (chain1, chain2)) or ("tokens", (tokens1, tokens2))
+
+        Raises
+        ------
+        ValueError
+            If neither pair is fully specified, both pairs are specified, or
+            only one member of a pair is given.
+        """
+        both_chains = chain1 is not None and chain2 is not None
+        one_chain_only = (chain1 is not None) != (chain2 is not None)
+        both_tokens = tokens1 is not None and tokens2 is not None
+        one_token_only = (tokens1 is not None) != (tokens2 is not None)
+
+        if one_chain_only:
+            raise ValueError("Must provide both chains for chain-based aggregation")
+        if one_token_only:
+            raise ValueError(
+                "Must provide both tokens lists for token-based aggregation"
+            )
+        if not both_chains and not both_tokens:
+            raise ValueError(
+                "Must provide either chain1 and chain2, or tokens1 and tokens2"
+            )
+        if both_chains and both_tokens:
+            raise ValueError(
+                "Cannot provide both `chain` and `tokens` at the same time."
+            )
+
+        if both_chains:
+            self._validate_chain(chain1)
+            self._validate_chain(chain2)
+            return "chains", (chain1, chain2)
+        return "tokens", (tokens1, tokens2)
+
+    def _pairwise_submatrices(
+        self, matrix: np.ndarray, mode: str, selector: tuple
+    ) -> tuple[np.ndarray, np.ndarray]:
+        """
+        Extract the two off-diagonal blocks of `matrix` between a pair of
+        chains or a pair of token lists (shared by `get_ipae` and
+        `get_contact_probs`).
+        """
+        if mode == "chains":
+            chain1, chain2 = selector
+            residues_1 = self._chain_residue_indices(chain1)
+            residues_2 = self._chain_residue_indices(chain2)
+            sub1 = matrix[
+                residues_1[0] : residues_1[-1] + 1, residues_2[0] : residues_2[-1] + 1
+            ]
+            sub2 = matrix[
+                residues_2[0] : residues_2[-1] + 1, residues_1[0] : residues_1[-1] + 1
+            ]
+        else:  # mode == "tokens"
+            tokens1, tokens2 = selector
+            sub1 = matrix[np.ix_(tokens1, tokens2)]
+            sub2 = matrix[np.ix_(tokens2, tokens1)]
+        return sub1, sub2
+
+    # ------------------------------------------------------------------
+    # Confidence metrics
+    # ------------------------------------------------------------------
+
     def get_ptm(self, chain: Optional[str] = None) -> float:
         """
         Return the ptm score.
@@ -74,7 +200,7 @@ class AF3Result:
         Parameters
         ----------
         chain : str, optional
-            If provided, computes the pae for this specific chain.
+            If provided, computes the ptm for this specific chain.
             If None, returns the global score across all chains in the structure.
 
         Returns
@@ -87,16 +213,10 @@ class AF3Result:
         ValueError
             If `chain` is invalid based on the data
         """
-
-        if chain is not None:
-            if chain not in self.chains:
-                raise ValueError(f"Chain {chain} not in {self.chains}")
-
-            index = self.chains.index(chain)
-            return float(self.chain_ptm[index])
-
-        else:
+        if chain is None:
             return self.global_ptm
+        self._validate_chain(chain)
+        return float(self.chain_ptm[self.chains.index(chain)])
 
     def get_iptm(
         self, chain1: Optional[str] = None, chain2: Optional[str] = None
@@ -119,27 +239,16 @@ class AF3Result:
         ValueError
             If `chain` is invalid based on the data
         """
-
-        both_chains_present = chain1 is not None and chain2 is not None
-        chain_one_only = chain1 is not None and chain2 is None
-        chain_two_only = chain1 is None and chain2 is not None
-        neither_chains_present = chain1 is None and chain2 is None
-
-        if neither_chains_present:
+        if chain1 is None and chain2 is None:
             return self.global_iptm
-
-        if chain_one_only or chain_two_only:
+        if chain1 is None or chain2 is None:
             raise ValueError("Must provide both chains for chain-based aggregation")
 
-        if both_chains_present:
-            if chain1 not in self.chains:
-                raise ValueError(f"Chain {chain1} not in {self.chains}")
-            if chain2 not in self.chains:
-                raise ValueError(f"Chain {chain2} not in {self.chains}")
-
-            i = self.chains.index(chain1)
-            j = self.chains.index(chain2)
-            return float(self.chain_pair_iptm[i][j])
+        self._validate_chain(chain1)
+        self._validate_chain(chain2)
+        i = self.chains.index(chain1)
+        j = self.chains.index(chain2)
+        return float(self.chain_pair_iptm[i][j])
 
     def get_pae(
         self,
@@ -174,26 +283,18 @@ class AF3Result:
         ValueError
             If both `chain` and `tokens` are provided, or if either argument is invalid based on the data
         """
-
         if chain is not None and tokens is not None:
             raise ValueError(
                 "Cannot provide both `chain` and `tokens` at the same time."
             )
 
         if chain is not None:
-            if chain not in self.chains:
-                raise ValueError(f"Chain {chain} not in {self.chains}")
-
-            residues = [
-                int(idx) for idx in np.where(self.residue_chain_ids == chain)[0]
-            ]
+            residues = self._chain_residue_indices(chain)
             sub_pae = self.pae[
                 residues[0] : residues[-1] + 1, residues[0] : residues[-1] + 1
             ]
-
         elif tokens is not None:
             sub_pae = self.pae[tokens, tokens]
-
         else:
             sub_pae = self.pae
 
@@ -208,7 +309,7 @@ class AF3Result:
         agg: Callable[[np.ndarray], float] = np.mean,
     ) -> float:
         """
-        Return the pae (predicted alignment error) score.
+        Return the interface pae (predicted alignment error) score.
 
         Parameters
         ----------
@@ -233,62 +334,9 @@ class AF3Result:
         ValueError
             If neither `chain` and `tokens` are provided, both are provided, or if either argument is invalid based on the data
         """
-
-        both_chains_present = chain1 is not None and chain2 is not None
-        chain_one_only = chain1 is not None and chain2 is None
-        chain_two_only = chain1 is None and chain2 is not None
-        neither_chains_present = chain1 is None and chain2 is None
-
-        both_tokens_present = tokens1 is not None and tokens2 is not None
-        tokens_one_only = tokens1 is not None and tokens2 is None
-        tokens_two_only = tokens1 is None and tokens2 is not None
-        neither_tokens_present = tokens1 is None and tokens2 is None
-
-        if neither_chains_present and neither_tokens_present:
-            raise ValueError(
-                "Must provide either chain1 and chain2, or tokens1 and tokens2"
-            )
-
-        if chain_one_only or chain_two_only:
-            raise ValueError("Must provide both chains for chain-based aggregation")
-
-        if tokens_one_only or tokens_two_only:
-            raise ValueError(
-                "Must provide both tokens lists for token-based aggregation"
-            )
-
-        if (both_chains_present and not neither_tokens_present) or (
-            both_tokens_present and not neither_chains_present
-        ):
-            raise ValueError(
-                "Cannot provide both `chain` and `tokens` at the same time."
-            )
-
-        if both_chains_present:
-            if chain1 not in self.chains:
-                raise ValueError(f"Chain {chain1} not in {self.chains}")
-            if chain2 not in self.chains:
-                raise ValueError(f"Chain {chain2} not in {self.chains}")
-
-            residues_1 = [
-                int(idx) for idx in np.where(self.residue_chain_ids == chain1)[0]
-            ]
-            residues_2 = [
-                int(idx) for idx in np.where(self.residue_chain_ids == chain2)[0]
-            ]
-            sub_pae1 = self.pae[
-                residues_1[0] : residues_1[-1] + 1, residues_2[0] : residues_2[-1] + 1
-            ]
-            sub_pae2 = self.pae[
-                residues_2[0] : residues_2[-1] + 1, residues_1[0] : residues_1[-1] + 1
-            ]
-
-        else:
-            sub_pae1 = self.pae[tokens1, tokens2]
-            sub_pae2 = self.pae[tokens2, tokens1]
-
-        pae_submatrix = np.concatenate((sub_pae1, sub_pae2), axis=None)
-        return agg(pae_submatrix)
+        mode, selector = self._validate_pair_selector(chain1, chain2, tokens1, tokens2)
+        sub1, sub2 = self._pairwise_submatrices(self.pae, mode, selector)
+        return agg(np.concatenate((sub1, sub2), axis=None))
 
     def get_contact_probs(
         self,
@@ -296,7 +344,7 @@ class AF3Result:
         chain2: Optional[str] = None,
         tokens1: Optional[list[int]] = None,
         tokens2: Optional[list[int]] = None,
-        agg: Callable[[np.ndarray], float] = np.max,
+        agg: Callable[[np.ndarray], float] = np.mean,
     ) -> float:
         """
         Return the contact probs score.
@@ -308,10 +356,10 @@ class AF3Result:
             Only optional if `tokens1` and `tokens2` are provided
 
         tokens1, tokens2 : list[int], optional
-            If provided, computes the ipae for this specific pair of token lists.
+            If provided, computes the contact probs for this specific pair of token lists.
              Only optional if `chain1` and `chain2`  are provided
 
-        agg : callable, default=np.max
+        agg : callable, default=np.mean
             Aggregation function to apply to the selected values.
 
         Returns
@@ -324,62 +372,9 @@ class AF3Result:
         ValueError
             If neither `chain` and `tokens` are provided, both are provided, or if either argument is invalid based on the data
         """
-
-        both_chains_present = chain1 is not None and chain2 is not None
-        chain_one_only = chain1 is not None and chain2 is None
-        chain_two_only = chain1 is None and chain2 is not None
-        neither_chains_present = chain1 is None and chain2 is None
-
-        both_tokens_present = tokens1 is not None and tokens2 is not None
-        tokens_one_only = tokens1 is not None and tokens2 is None
-        tokens_two_only = tokens1 is None and tokens2 is not None
-        neither_tokens_present = tokens1 is None and tokens2 is None
-
-        if neither_chains_present and neither_tokens_present:
-            raise ValueError(
-                "Must provide either chain1 and chain2, or tokens1 and tokens2"
-            )
-
-        if chain_one_only or chain_two_only:
-            raise ValueError("Must provide both chains for chain-based aggregation")
-
-        if tokens_one_only or tokens_two_only:
-            raise ValueError(
-                "Must provide both tokens lists for token-based aggregation"
-            )
-
-        if (both_chains_present and not neither_tokens_present) or (
-            both_tokens_present and not neither_chains_present
-        ):
-            raise ValueError(
-                "Cannot provide both `chain` and `tokens` at the same time."
-            )
-
-        if both_chains_present:
-            if chain1 not in self.chains:
-                raise ValueError(f"Chain {chain1} not in {self.chains}")
-            if chain2 not in self.chains:
-                raise ValueError(f"Chain {chain2} not in {self.chains}")
-
-            residues_1 = [
-                int(idx) for idx in np.where(self.residue_chain_ids == chain1)[0]
-            ]
-            residues_2 = [
-                int(idx) for idx in np.where(self.residue_chain_ids == chain2)[0]
-            ]
-            sub_contacts1 = self.contact_probs[
-                residues_1[0] : residues_1[-1] + 1, residues_2[0] : residues_2[-1] + 1
-            ]
-            sub_contacts2 = self.contact_probs[
-                residues_2[0] : residues_2[-1] + 1, residues_1[0] : residues_1[-1] + 1
-            ]
-
-        else:
-            sub_contacts1 = self.pae[tokens1, tokens2]
-            sub_contacts2 = self.pae[tokens2, tokens1]
-
-        contacts_submatrix = np.concatenate((sub_contacts1, sub_contacts2), axis=None)
-        return agg(contacts_submatrix)
+        mode, selector = self._validate_pair_selector(chain1, chain2, tokens1, tokens2)
+        sub1, sub2 = self._pairwise_submatrices(self.contact_probs, mode, selector)
+        return agg(np.concatenate((sub1, sub2), axis=None))
 
     def get_plddt(
         self,
@@ -393,7 +388,7 @@ class AF3Result:
         Parameters
         ----------
         chain : str, optional
-            If provided, computes the pae for this specific chain.
+            If provided, computes the plddt for this specific chain.
             If None, returns the score across all tokens (residues) in the structure.
 
         atoms : list[int], optional
@@ -414,155 +409,225 @@ class AF3Result:
         ValueError
             If both `chain` and `atoms` are provided, or if either argument is invalid based on the data
         """
-
         if chain is not None and atoms is not None:
             raise ValueError(
                 "Cannot provide both `chain` and `atoms` at the same time."
             )
 
         if chain is not None:
-            if chain not in self.chains:
-                raise ValueError(f"Chain {chain} not in {self.chains}")
+            atoms = self._chain_atom_indices(chain)
 
-            atoms = [int(idx) for idx in np.where(self.atom_chain_ids == chain)[0]]
-            sub_plddt = self.plddt[atoms]
-
-        elif atoms is not None:
-            sub_plddt = self.plddt[atoms]
-
-        else:
-            sub_plddt = self.plddt
-
+        sub_plddt = self.plddt if atoms is None else self.plddt[atoms]
         return agg(sub_plddt)
 
-    # --------------------
-    # Object Creation Factory Method
-    # see https://github.com/google-deepmind/alphafold3/blob/main/docs/output.md
-    # --------------------
-    @staticmethod
-    def load_result(
-        result_dir: str, id: Optional[str] = None, from_npz: bool = False
-    ) -> "AF3Result":
-
+    def get_ipsae(
+        self, chain1: str, chain2: str, pae_cutoff: float = 10, d0="d0res"
+    ) -> float:
         """
-        Factory method to create the AF3 Result object.
+        Return the asymmetric ipSAE score.
 
         Parameters
         ----------
-        result_dir: str
-            Path containing the results. Should eiter have the confidence JSONs or a confidences .npz file
+        chain1, chain2 : str
+            Computes the ipSAE for this specific pair of chains.
+            Note that the score is asymmetric so the order of chains matters.
+        pae_cutoff : float, default=10
+            PAE cutoff (in Angstroms) passed through to the ipSAE calculation.
+        d0: str, default=d0res
+            d0 used for calculation. Options are:
+            d0res: d0 determined by number of residues in 2nd chain with PAE<cutoff
+            d0chn: sum of chain lengths
+            d0dom: d0 = total number of residues in both chains with any interchain PAE<cutoff
 
-        id: str, optional
-
-        from_npz: bool, default=False
-            Loads from a .npz file if True. Loads from JSON files if False
-            
         Returns
         -------
-        AF3Result
-           result object
-
-        Raises
-        ------
-        FileNotFoundError
-            If directory parsing files
-        ValueError
-            If parsing confidences failed based on the data in directory
+        float
+            ipSAE score.
         """
+        cif_chains_unique = pd.unique(self.cif_chains)
+        assert (
+            chain1 in cif_chains_unique
+        ), f"{chain1} not found in .cif chains: {cif_chains_unique}"
+        assert (
+            chain2 in cif_chains_unique
+        ), f"{chain2} not found in .cif chains: {cif_chains_unique}"
+        assert chain1 != chain2, "ipSAE is undefined for the case chain1==chain2"
+        d0_values = ["d0res", "d0dom", "d0chn"]
+        assert d0 in d0_values, f"Invalid d0 value {d0}. Valid choices are: {d0_values}"
 
-        # # Find CIF
-        # cif_files = list(result_dir.glob("*.cif"))
-        # if len(cif_files) != 1:
-        #     raise FileNotFoundError(
-        #         f"Expected exactly one *.cif file, found {len(cif_files)}"
-        #     )
+        ipsae_dict = ipsae(
+            residues=self.cif_residues,
+            chains=self.cif_chains,
+            pae_matrix=self.pae,
+            pae_cutoff=pae_cutoff,
+        )
+        key = f"ipsae_{d0}"
+        ipsae_df = ipsae_dict.get(key)
+        return ipsae_df.loc[chain1, chain2]
+
+    # ------------------------------------------------------------------
+    # Object Creation Factory Methods
+    # ------------------------------------------------------------------
+
+    @staticmethod
+    def load_af3_result(result_dir: str, id: Optional[str] = None) -> "AF3Result":
+        """
+        Loads a new single AF3 Result from AF3 output directory (`result_dir`), with optional name (`id`)
+        """
 
         result_dir = Path(result_dir)
         if not result_dir.is_dir():
             raise FileNotFoundError(
-                f"Result directory not found: {result_dir} or is not a directory"
+                f"Result directory not found: {result_dir} does not exist or is not a directory"
             )
 
-        if from_npz:
-            # Find npz
-            npz_files = list(result_dir.glob("*.npz"))
-            if len(npz_files) != 1:
+        # Find CIF
+        cif_files = list(result_dir.glob("*.cif"))
+        if len(cif_files) != 1:
+            raise FileNotFoundError(
+                f"Expected exactly one *.cif file, found {len(cif_files)}"
+            )
+        cif_file = cif_files[0]
+
+        # Find summary JSON
+        summary_files = list(result_dir.glob("*summary_confidences.json"))
+        if len(summary_files) != 1:
+            raise FileNotFoundError(
+                f"Expected exactly one *summary_confidences.json, found {len(summary_files)}. For data in .npz format, use flag 'from_npz=True'."
+            )
+
+        # Find full JSON
+        full_files = [
+            f for f in result_dir.glob("*confidences.json") if not "summary" in f.name
+        ]
+        if len(full_files) != 1:
+            raise FileNotFoundError(
+                f"Expected exactly one confidences.json (non-summary), found {len(full_files)}"
+            )
+
+        if not id:
+            id = Path(result_dir).name
+
+        res = AF3Result()
+        res._build_from_af3_output(
+            id=id,
+            summary_json_path=summary_files[0],
+            full_json_path=full_files[0],
+            cif_path=cif_file,
+        )
+        return res
+
+    @staticmethod
+    def load_webserver_result(
+        result_dir: str,
+        sample: int,
+        seed: Optional[int] = None,
+        id_stem: Optional[str] = None,
+    ) -> "AF3Result":
+        """Generate an AF3Result file for one of the 5 samples from a run on the AF3 webserver.
+
+        Inputs:
+        result_dir: path to directory storing results.
+        sample: which sample to load
+        seed: Model seed. If unset, will try to infer these from a request file in result_dir.
+        id_stem: Job name. If unset, will try to infer these from a request file in result_dir.
+        """
+        result_dir = Path(result_dir)
+        if not result_dir.is_dir():
+            raise FileNotFoundError(
+                f"Result directory not found: {result_dir} does not exist or is not a directory"
+            )
+
+        summary_files = list(result_dir.glob("*summary_confidences*.json"))
+
+        if seed is None or id_stem is None:
+            request_files = list(result_dir.glob("*request*.json"))
+            if len(request_files) != 1:
                 raise FileNotFoundError(
-                    f"Expected exactly one *.npz, found {len(npz_files)}. For data not in .npz format, use flag 'from_npz=False'."
+                    f"Expected exactly one request.json, found {len(request_files)}."
                 )
-            data = np.load(npz_files[0], allow_pickle=True)
-            obj = AF3Result()
-            obj.id = str(data["id"])
-
-            # Restore arrays
-            obj.chains = list(data["chains"])
-            obj.residue_chain_ids = data["residue_chain_ids"]
-            obj.atom_chain_ids = data["atom_chain_ids"]
-            obj.plddt = data["plddt"]
-            obj.pae = data["pae"]
-            obj.contact_probs = data["contact_probs"]
-            obj.global_ptm = float(data["global_ptm"])
-            obj.global_iptm = float(data["global_iptm"])
-            obj.chain_pair_iptm = data["chain_pair_iptm"]
-            obj.chain_ptm = data["chain_ptm"]
-
-            return obj
-        else:
-            # Find summary JSON
-            summary_files = list(result_dir.glob("*summary_confidences.json"))
-            if len(summary_files) != 1:
+            with open(request_files[0], "r") as f:
+                request_data = json.load(f)
+            if len(request_data) != 1:
                 raise FileNotFoundError(
-                    f"Expected exactly one *summary_confidences.json, found {len(summary_files)}. For data in .npz format, use flag 'from_npz=True'."
+                    f"Expected exactly one request inside the JSON, found {len(request_data)}."
                 )
+            request = request_data[0]
+            id_stem = request["name"] if id_stem is None else id_stem
+            seed = request["modelSeeds"][0] if seed is None else seed
 
-            # Find full JSON
-            full_files = [
-                f
-                for f in result_dir.glob("*confidences.json")
-                if not "summary" in f.name
-            ]
-            if len(full_files) != 1:
-                raise FileNotFoundError(
-                    f"Expected exactly one confidences.json (non-summary), found {len(full_files)}"
+        num_samples = len(summary_files)  # usually this is 5
+        if sample >= num_samples:
+            raise ValueError(
+                f"Sample {sample} not found. Job was only run with {num_samples} and is 0-indexed."
+            )
+
+        # Find full JSON
+        full_files = list(result_dir.glob("*full_data*.json"))
+        if len(full_files) != num_samples:
+            raise FileNotFoundError(
+                f"Expected exactly {num_samples} full_data*.json (non-summary), found {len(full_files)}"
+            )
+        structure_files = list(result_dir.glob("*.cif"))
+        if len(structure_files) != num_samples:
+            raise FileNotFoundError(
+                f"Expected exactly {num_samples} *.cif files, found {len(structure_files)}"
+            )
+
+        for summary_file, full_file, structure_file in zip(
+            sorted(summary_files), sorted(full_files), sorted(structure_files)
+        ):
+            match = re.search(r"summary_confidences_(\d)\.json", summary_file.name)
+            if not match:
+                raise ValueError(
+                    f"Improperly formatted summary_confidences filename:\n{summary_file.name}"
                 )
+            sample_num = int(match.group(1))
 
-            if not id:
-                id = Path(result_dir).name
+            if sample_num != sample:
+                continue
 
+            sample_stem = f"{id_stem}_seed{seed}_sample{sample_num}"
             res = AF3Result()
             res._build_from_af3_output(
-                id=id,
-                summary_json_path=summary_files[0],
-                full_json_path=full_files[0],
+                id=sample_stem,
+                summary_json_path=summary_file,
+                full_json_path=full_file,
+                cif_path=structure_file,
             )
             return res
 
-    #  TODO: Add structures
-    # def _load_cif(self) -> None:
-    #     pass
-    # mm = MMCIF2Dict(str(self.cif_path))
-    # chains = mm.get("atom_site.auth_asym_id", [])
-    # resseqs = mm.get("atom_site.label_seq_id", [])
-    # bvals = mm.get("atom_site.B_iso_or_equiv", [])
+        raise FileNotFoundError(
+            f"Sample {sample} not found among parsed summary_confidences files in {result_dir}."
+        )
 
-    # seen = set()
-    # residues: List[ResidueConfidence] = []
-    # for i, chain in enumerate(chains):
-    #     resseq = resseqs[i]
-    #     bval = bvals[i] if i < len(bvals) else None
-    #     key = (chain, resseq)
-    #     if key not in seen:
-    #         seen.add(key)
-    #         try:
-    #             resid = int(resseq)
-    #         except Exception:
-    #             resid = len(seen)
-    #         residues.append(
-    #             ResidueConfidence(
-    #                 chain_id=str(chain),
-    #                 resseq=str(resseq),
-    #                 resid=resid,
-    #                 plddt=float(bval) if bval not in (".", "?", None) else None,
-    #             )
-    #         )
-    # self.residues = residues
+    @staticmethod
+    def load_compressed_result(
+        result_dir: str,
+    ) -> "AF3Result":
+
+        result_dir = Path(result_dir)
+        if not result_dir.is_dir():
+            raise FileNotFoundError(
+                f"Result directory not found: {result_dir} does not exist or is not a directory"
+            )
+
+        # Find npz
+        npz_files = list(result_dir.glob("*.npz"))
+        if len(npz_files) != 1:
+            raise FileNotFoundError(
+                f"Expected exactly one *.npz, found {len(npz_files)}. For data not in compressed format, use regular load function."
+            )
+        # Find CIF
+        cif_files = list(result_dir.glob("*.cif"))
+        if len(cif_files) != 1:
+            raise FileNotFoundError(
+                f"Expected exactly one *.cif file, found {len(cif_files)}"
+            )
+        cif_file = cif_files[0]
+
+        data = np.load(npz_files[0], allow_pickle=True)
+        obj = AF3Result._from_npz_data(data)
+        obj.cif_path = Path(cif_file)
+        obj._load_cif_information()
+        return obj
