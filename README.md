@@ -572,15 +572,9 @@ twine upload dist/* -u __token__ -p <API TOKEN>
 
 # Building the Documentation
 
-FoldKit documentation is built using Sphinx and deployed through the `gh-pages` branch.
+FoldKit documentation is built using Sphinx and deployed from main through the `gh-pages` branch.
 
-### 1. Switch to `gh-pages`
-
-```bash
-git checkout gh-pages
-```
-
-### 2. Build the HTML documentation
+### 1. Build the HTML documentation to test it
 
 ```bash
 cd docs
@@ -588,21 +582,17 @@ make html
 cd ..
 ```
 
-### 3. Copy the generated HTML to the repository root
-#### This is dangerous! Make sure you know what you are doing!
-```bash
-rsync -av --delete --exclude='.git' docs/build/html/ .
-```
 
-### 4. Commit the changes
+### 2. Commit the changes
 
 ```bash
 git add .
 git commit -m "Update docs"
 ```
 
-### 5. Push to GitHub
+### 3. Push to GitHub
 
 ```bash
-git push origin gh-pages
+git push
 ```
+### 3. Check Actions tab
