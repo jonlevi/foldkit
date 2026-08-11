@@ -688,10 +688,17 @@ class AF3Ensemble:
 
     @staticmethod
     def load_af3_result(result_dir: str, id: Optional[str] = None) -> "AF3Ensemble":
-        """Generate an AF3Ensemble for each of the samples from a run on the AF3 webserver.
-        Inputs:
+        """
+        Generate an AF3Ensemble for each of the samples from a run on the AF3 webserver.
+        Parameters
+        ----------
             result_dir: path to directory storing results.
             id: optional ID. If unset, will set to directory name
+        Returns
+        -------
+        AF3Ensemble
+            loaded AF3Ensemble 
+
         """
         result_dir = Path(result_dir)
         if not result_dir.is_dir():
@@ -707,10 +714,16 @@ class AF3Ensemble:
     def load_compressed_result(
         result_dir: str, id: Optional[str] = None
     ) -> "AF3Ensemble":
-        """Generate an AF3Ensemble for each of the samples stored via export.
-        Inputs:
+        """
+        Generate an AF3Ensemble for each of the samples stored via export.
+        Parameters
+        ----------
             result_dir: path to directory storing results.
             id: optional ID. If unset, will set to directory name
+        Returns
+        -------
+        AF3Ensemble
+            loaded AF3Ensemble 
         """
         result_dir = Path(result_dir)
         if not result_dir.is_dir():
@@ -726,12 +739,18 @@ class AF3Ensemble:
     def load_webserver_result(
         result_dir: str, seed: Optional[int] = None, id_stem: Optional[str] = None
     ) -> "AF3Ensemble":
-        """Generate an AF3Ensemble for each of the samples from a run on the AF3 webserver.
+        """
+        Generate an AF3Ensemble for each of the samples from a run on the AF3 webserver.
 
-        Inputs:
-        result_dir: path to directory storing results.
-        seed: Model seed. If unset, will try to infer these from a request file in result_dir.
-        id_stem: Job name. If unset, will try to infer these from a request file in result_dir.
+        Parameters
+        ----------
+            result_dir: path to directory storing results.
+            seed: Model seed. If unset, will try to infer these from a request file in result_dir.
+            id_stem: Job name. If unset, will try to infer these from a request file in result_dir.
+        Returns
+        -------
+        AF3Ensemble
+            loaded AF3Ensemble 
         """
 
         result_dir = Path(result_dir)
