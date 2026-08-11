@@ -10,7 +10,9 @@ It provides:
 🖥️ A command-line interface (CLI) for converting raw AF3 results into the compressed FoldKit format
 
 
-foldkit is particularly useful for large-scale protein–protein and protein–peptide modeling campaigns where hundreds or thousands of AF3 predictions need to be stored and analyzed
+foldkit is particularly useful for large-scale protein–protein and protein–peptide modeling campaigns where hundreds or thousands of AF3 predictions need to be stored and analyzed.
+
+You can find the full documentation here: https://jonlevi.github.io/foldkit/index.html 
 
 ## Installation
 `pip install foldkit`
