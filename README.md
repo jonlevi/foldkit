@@ -597,7 +597,12 @@ git commit -m "Update docs"
 ### 3. Push to GitHub
 
 ```bash
-git push -u origin/add-threading
+git push -u origin <branch name>
+```
+or if the remote branch exists already:
+
+```bash
+git push
 ```
 
 ### 4. Make a Pull Request. Review and Merge
