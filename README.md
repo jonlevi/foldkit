@@ -597,12 +597,17 @@ git commit -m "Update docs"
 ### 3. Push to GitHub
 
 ```bash
-git push
+git push -u origin/add-threading
 ```
 
-### 3. Check Actions tab to make sure deploy was successful
+### 4. Make a Pull Request. Review and Merge
+
+
+### 5. Check Actions tab to make sure post-merge deploy of documentation page was successful
 
 ## Build the package
+
+From a new pull of main with the changes, with the version number updated, run:
 
 ```bash
 python -m build
@@ -616,7 +621,3 @@ python -m build
 twine check dist/*
 twine upload dist/* -u __token__ -p <API TOKEN>
 ```
-
----
-
-
