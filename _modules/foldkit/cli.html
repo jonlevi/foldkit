@@ -52,7 +52,7 @@
     <link rel="search" title="Search" href="../../search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="1.0.0" />
+  <meta name="docsearch:version" content="1.0.1" />
   
     
     <script src="../../_static/searchtools.js"></script>
@@ -425,9 +425,20 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">shutil</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">tqdm</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">concurrent.futures</span><span class="w"> </span><span class="kn">import</span> <span class="n">ThreadPoolExecutor</span><span class="p">,</span> <span class="n">as_completed</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">threading</span>
+
 <span class="kn">from</span><span class="w"> </span><span class="nn">.af3_result</span><span class="w"> </span><span class="kn">import</span> <span class="n">AF3Result</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.af3_ensemble</span><span class="w"> </span><span class="kn">import</span> <span class="n">AF3Ensemble</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.storage</span><span class="w"> </span><span class="kn">import</span> <span class="n">save_af3_result</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">available_cpu_count</span><span class="p">():</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">sched_getaffinity</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+    <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+        <span class="c1"># sched_getaffinity is Linux-only; fall back on other platforms</span>
+        <span class="k">return</span> <span class="n">multiprocessing</span><span class="o">.</span><span class="n">cpu_count</span><span class="p">()</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">write_ranking_csv</span><span class="p">(</span><span class="n">ranking_scores</span><span class="p">,</span> <span class="n">output_file</span><span class="p">):</span>
@@ -530,7 +541,7 @@
 <div class="viewcode-block" id="export_webserver_result">
 <a class="viewcode-back" href="../../generated/foldkit.cli.export_webserver_result.html#foldkit.cli.export_webserver_result">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">export_webserver_result</span><span class="p">(</span><span class="n">input_directory</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">output_directory</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Export a single AlphaFold3 Webserver result with multiple subdirectories for each sample.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Export a single AlphaFold3 Webserver result with multiple files for each sample, usually for one seed.&quot;&quot;&quot;</span>
     <span class="n">input_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">input_directory</span><span class="p">)</span>
     <span class="n">output_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">output_directory</span><span class="p">)</span>
     <span class="n">output_path</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -567,17 +578,50 @@
 
 <div class="viewcode-block" id="batch_export">
 <a class="viewcode-back" href="../../generated/foldkit.cli.batch_export.html#foldkit.cli.batch_export">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">batch_export</span><span class="p">(</span><span class="n">input_directory</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">output_directory</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">batch_export</span><span class="p">(</span>
+    <span class="n">input_directory</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">output_directory</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="n">multithreading</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">max_workers</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Export multiple AlphaFold3 Ensemble Results, each with multiple subdirectories for each seed and sample.&quot;&quot;&quot;</span>
     <span class="n">input_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">input_directory</span><span class="p">)</span>
     <span class="n">output_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">output_directory</span><span class="p">)</span>
     <span class="n">output_path</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
     <span class="n">subdirectories</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">input_path</span><span class="o">.</span><span class="n">iterdir</span><span class="p">()</span> <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">is_dir</span><span class="p">()]</span>
-    <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="o">.</span><span class="n">tqdm</span><span class="p">(</span><span class="n">subdirectories</span><span class="p">):</span>
-        <span class="n">suboutput_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_path</span><span class="p">,</span> <span class="n">path</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_export_one</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="n">Path</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+            <span class="n">tqdm</span><span class="o">.</span><span class="n">tqdm</span><span class="o">.</span><span class="n">write</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;[</span><span class="si">{</span><span class="n">path</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">] running on thread </span><span class="si">{</span><span class="n">threading</span><span class="o">.</span><span class="n">current_thread</span><span class="p">()</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+        <span class="n">suboutput_dir</span> <span class="o">=</span> <span class="n">output_path</span> <span class="o">/</span> <span class="n">path</span><span class="o">.</span><span class="n">name</span>
         <span class="n">suboutput_dir</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="n">export_ensemble_result</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">suboutput_dir</span><span class="p">,</span> <span class="n">verbose</span><span class="p">)</span></div>
+        <span class="n">export_ensemble_result</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">suboutput_dir</span><span class="p">,</span> <span class="n">verbose</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">path</span><span class="o">.</span><span class="n">name</span>
+
+    <span class="k">if</span> <span class="n">multithreading</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">max_workers</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">max_workers</span> <span class="o">=</span> <span class="n">available_cpu_count</span><span class="p">()</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="n">max_workers</span> <span class="o">=</span> <span class="mi">4</span>  <span class="c1"># safe fallback if detection fails entirely</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Running in multithreading mode with max_workers=</span><span class="si">{</span><span class="n">max_workers</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
+        <span class="k">with</span> <span class="n">ThreadPoolExecutor</span><span class="p">(</span><span class="n">max_workers</span><span class="o">=</span><span class="n">max_workers</span><span class="p">)</span> <span class="k">as</span> <span class="n">executor</span><span class="p">:</span>
+            <span class="n">futures</span> <span class="o">=</span> <span class="p">{</span><span class="n">executor</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="n">_export_one</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span> <span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">subdirectories</span><span class="p">}</span>
+            <span class="k">for</span> <span class="n">future</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="o">.</span><span class="n">tqdm</span><span class="p">(</span><span class="n">as_completed</span><span class="p">(</span><span class="n">futures</span><span class="p">),</span> <span class="n">total</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">futures</span><span class="p">)):</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">future</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+                <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                    <span class="n">tqdm</span><span class="o">.</span><span class="n">tqdm</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;FAILED </span><span class="si">{</span><span class="n">futures</span><span class="p">[</span><span class="n">future</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Running with multithreading=False...&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="o">.</span><span class="n">tqdm</span><span class="p">(</span><span class="n">subdirectories</span><span class="p">):</span>
+            <span class="n">suboutput_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_path</span><span class="p">,</span> <span class="n">path</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+            <span class="n">suboutput_dir</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">export_ensemble_result</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">suboutput_dir</span><span class="p">,</span> <span class="n">verbose</span><span class="p">)</span></div>
 
 
 
@@ -644,6 +688,19 @@
         <span class="s2">&quot;output_directory&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Parent output directory path&quot;</span>
     <span class="p">)</span><span class="o">.</span><span class="n">completer</span> <span class="o">=</span> <span class="n">DirectoriesCompleter</span><span class="p">()</span>
 
+    <span class="n">parser_batch</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--multithreading&quot;</span><span class="p">,</span>
+        <span class="n">action</span><span class="o">=</span><span class="n">argparse</span><span class="o">.</span><span class="n">BooleanOptionalAction</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Use multithreading&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">parser_batch</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--max-workers&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Number of workers for multithreading&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+
     <span class="n">argcomplete</span><span class="o">.</span><span class="n">autocomplete</span><span class="p">(</span><span class="n">parser</span><span class="p">)</span>
 
     <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
@@ -654,10 +711,14 @@
         <span class="s2">&quot;batch-export&quot;</span><span class="p">:</span> <span class="n">batch_export</span><span class="p">,</span>
         <span class="s2">&quot;webserver-export&quot;</span><span class="p">:</span> <span class="n">export_webserver_result</span><span class="p">,</span>
     <span class="p">}</span>
-
     <span class="n">command</span> <span class="o">=</span> <span class="n">command_mappers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">command</span><span class="p">)</span>
 
-    <span class="n">command</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">input_directory</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">output_directory</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">verbose</span><span class="p">)</span>
+    <span class="n">kwargs</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">command</span> <span class="o">==</span> <span class="s2">&quot;batch-export&quot;</span><span class="p">:</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;multithreading&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">multithreading</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;max_workers&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">max_workers</span>
+
+    <span class="n">command</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">input_directory</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">output_directory</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">verbose</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 </pre></div>
 
                 </article>
