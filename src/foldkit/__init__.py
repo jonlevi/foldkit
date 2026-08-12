@@ -3,4 +3,4 @@ from .af3_ensemble import AF3Ensemble
 from .storage import save_af3_result
 
 __all__ = ["AF3Result", "AF3Ensemble", "save_af3_result"]
-__version__ = "1.0.0"
+__version__ = "1.0.1"

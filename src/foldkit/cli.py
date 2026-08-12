@@ -12,9 +12,20 @@ from pathlib import Path
 import re
 import shutil
 import tqdm
+from concurrent.futures import ThreadPoolExecutor, as_completed
+import threading
+
 from .af3_result import AF3Result
 from .af3_ensemble import AF3Ensemble
 from .storage import save_af3_result
+
+
+def available_cpu_count():
+    try:
+        return len(os.sched_getaffinity(0))
+    except AttributeError:
+        # sched_getaffinity is Linux-only; fall back on other platforms
+        return multiprocessing.cpu_count()
 
 
 def write_ranking_csv(ranking_scores, output_file):
@@ -109,7 +120,7 @@ def export_ensemble_result(input_directory: str, output_directory: str, verbose:
 
 
 def export_webserver_result(input_directory: str, output_directory: str, verbose: bool):
-    """Export a single AlphaFold3 Webserver result with multiple subdirectories for each sample."""
+    """Export a single AlphaFold3 Webserver result with multiple files for each sample, usually for one seed."""
     input_path = Path(input_directory)
     output_path = Path(output_directory)
     output_path.mkdir(parents=True, exist_ok=True)
@@ -143,17 +154,50 @@ def export_webserver_result(input_directory: str, output_directory: str, verbose
         print(f"❌ Failed to export {input_path}: {e}")
 
 
-def batch_export(input_directory: str, output_directory: str, verbose: bool):
+def batch_export(
+    input_directory: str,
+    output_directory: str,
+    verbose: bool,
+    multithreading: bool = True,
+    max_workers: int = None,
+):
     """Export multiple AlphaFold3 Ensemble Results, each with multiple subdirectories for each seed and sample."""
     input_path = Path(input_directory)
     output_path = Path(output_directory)
     output_path.mkdir(parents=True, exist_ok=True)
 
     subdirectories = [p for p in input_path.iterdir() if p.is_dir()]
-    for path in tqdm.tqdm(subdirectories):
-        suboutput_dir = Path(os.path.join(output_path, path.name))
+
+    def _export_one(path: Path):
+        if verbose:
+            tqdm.tqdm.write(
+                f"[{path.name}] running on thread {threading.current_thread().name}"
+            )
+        suboutput_dir = output_path / path.name
         suboutput_dir.mkdir(exist_ok=True)
         export_ensemble_result(path, suboutput_dir, verbose)
+        return path.name
+
+    if multithreading:
+        if max_workers is None:
+            try:
+                max_workers = available_cpu_count()
+            except Exception:
+                max_workers = 4  # safe fallback if detection fails entirely
+        print(f"Running in multithreading mode with max_workers={max_workers}...")
+        with ThreadPoolExecutor(max_workers=max_workers) as executor:
+            futures = {executor.submit(_export_one, p): p for p in subdirectories}
+            for future in tqdm.tqdm(as_completed(futures), total=len(futures)):
+                try:
+                    future.result()
+                except Exception as e:
+                    tqdm.tqdm.write(f"FAILED {futures[future].name}: {e}")
+    else:
+        print(f"Running with multithreading=False...")
+        for path in tqdm.tqdm(subdirectories):
+            suboutput_dir = Path(os.path.join(output_path, path.name))
+            suboutput_dir.mkdir(exist_ok=True)
+            export_ensemble_result(path, suboutput_dir, verbose)
 
 
 def main():
@@ -219,6 +263,19 @@ def main():
         "output_directory", help="Parent output directory path"
     ).completer = DirectoriesCompleter()
 
+    parser_batch.add_argument(
+        "--multithreading",
+        action=argparse.BooleanOptionalAction,
+        default=True,
+        help="Use multithreading",
+    )
+    parser_batch.add_argument(
+        "--max-workers",
+        type=int,
+        default=None,
+        help="Number of workers for multithreading",
+    )
+
     argcomplete.autocomplete(parser)
 
     args = parser.parse_args()
@@ -229,7 +286,11 @@ def main():
         "batch-export": batch_export,
         "webserver-export": export_webserver_result,
     }
-
     command = command_mappers.get(args.command)
 
-    command(args.input_directory, args.output_directory, args.verbose)
+    kwargs = {}
+    if args.command == "batch-export":
+        kwargs["multithreading"] = args.multithreading
+        kwargs["max_workers"] = args.max_workers
+
+    command(args.input_directory, args.output_directory, args.verbose, **kwargs)

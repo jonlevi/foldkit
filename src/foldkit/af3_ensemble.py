@@ -697,7 +697,7 @@ class AF3Ensemble:
         Returns
         -------
         AF3Ensemble
-            loaded AF3Ensemble 
+            loaded AF3Ensemble
 
         """
         result_dir = Path(result_dir)
@@ -723,7 +723,7 @@ class AF3Ensemble:
         Returns
         -------
         AF3Ensemble
-            loaded AF3Ensemble 
+            loaded AF3Ensemble
         """
         result_dir = Path(result_dir)
         if not result_dir.is_dir():
@@ -750,7 +750,7 @@ class AF3Ensemble:
         Returns
         -------
         AF3Ensemble
-            loaded AF3Ensemble 
+            loaded AF3Ensemble
         """
 
         result_dir = Path(result_dir)

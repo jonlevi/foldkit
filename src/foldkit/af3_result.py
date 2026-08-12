@@ -21,8 +21,12 @@ from .ipsae import ipsae, read_pdb
 
 
 class AF3Result:
-    # Confidence data
+
+    residue_chain_ids: Optional[np.ndarray] = None
+    atom_chain_ids: Optional[np.ndarray] = None
     chains: Optional[list[str]] = None
+
+    # Confidence data
     plddt: Optional[np.ndarray] = None
     pae: Optional[np.ndarray] = None
     contact_probs: Optional[np.ndarray] = None
