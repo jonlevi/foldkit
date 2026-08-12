@@ -284,7 +284,14 @@ Batch export many results
  
     options:
       -h, --help        show this help message and exit
- 
+    --multithreading, --no-multithreading
+                        Use multithreading
+    --max-workers MAX_WORKERS
+                        Number of workers for multithreading
+
+It is recommended to use multithreading with as many workers as you can to speed up the batch export!
+
+
 Cleanup
 ~~~~~~~
  

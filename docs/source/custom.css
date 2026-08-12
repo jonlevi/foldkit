@@ -1,4 +1,4 @@
-/* Small polish on top of pydata-sphinx-theme, in the spirit of scanpy/anndata docs */
+/* Small polish on top of pydata-sphinx-theme */
 
 :root {
   --pst-color-primary: #2b6a4d;      /* deep green accent, change to taste */

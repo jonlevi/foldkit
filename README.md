@@ -508,7 +508,7 @@ foldkit batch-export \
     <output_directory>
 ```
 
-This is useful for large-scale co-folding campaigns.
+This is useful for large-scale co-folding campaigns. It is recommended to use `--multithreading` on a node with as many workers as you can to speed up the batch export!
 
 ---
 
@@ -549,7 +549,20 @@ The storage advantage becomes increasingly important as both **ensemble size** a
 
 # Contributing
 
-Clone the repository and install the development dependencies:
+Always contribute on a feature branch with a clean pull from the main branch:
+```bash
+git checkout -b <descriptive name>
+```
+
+Now make any of your changes.
+
+Run python black:
+
+```bash
+black .
+```
+
+If you haven't already, install the dev dependencies:
 
 ```bash
 pip install -e ".[dev]"
@@ -561,24 +574,7 @@ Run the test suite:
 PYTHONPATH=src python -m pytest tests/ -vvv
 ```
 
-## Build the package
-
-```bash
-python -m build
-```
-
-## Publish to PyPI
-
-```bash
-pip install --upgrade build twine
-python -m build
-twine check dist/*
-twine upload dist/* -u __token__ -p <API TOKEN>
-```
-
----
-
-# Building the Documentation
+## Build the Documentation
 
 FoldKit documentation is built using Sphinx and deployed from main through the `gh-pages` branch.
 
@@ -601,7 +597,32 @@ git commit -m "Update docs"
 ### 3. Push to GitHub
 
 ```bash
+git push -u origin <branch name>
+```
+or if the remote branch exists already:
+
+```bash
 git push
 ```
 
-### 3. Check Actions tab to make sure deploy was successful
+### 4. Make a Pull Request. Review and Merge
+
+
+### 5. Check Actions tab to make sure post-merge deploy of documentation page was successful
+
+## Build the package
+
+From a new pull of main with the changes, with the version number updated, run:
+
+```bash
+python -m build
+```
+
+## Publish to PyPI
+
+```bash
+pip install --upgrade build twine
+python -m build
+twine check dist/*
+twine upload dist/* -u __token__ -p <API TOKEN>
+```

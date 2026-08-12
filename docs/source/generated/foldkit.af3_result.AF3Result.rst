@@ -33,6 +33,7 @@
 
    .. autosummary::
    
+      ~AF3Result.atom_chain_ids
       ~AF3Result.chain_pair_iptm
       ~AF3Result.chain_ptm
       ~AF3Result.chains
@@ -46,6 +47,7 @@
       ~AF3Result.id
       ~AF3Result.pae
       ~AF3Result.plddt
+      ~AF3Result.residue_chain_ids
       ~AF3Result.summary_json_path
    
    

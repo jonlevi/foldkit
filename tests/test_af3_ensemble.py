@@ -125,7 +125,7 @@ def test_load_af3_result_rejects_badly_named_subdirectory(ensemble_dir, tmp_path
 
 def test_extract_result_objects_skips_if_already_initialized(ensemble, capsys):
     before = dict(ensemble.af3_results)
-    ensemble._extract_result_objects()
+    ensemble._extract_result_objects(compressed=False)
     captured = capsys.readouterr()
     assert "Already initialized" in captured.out
     assert ensemble.af3_results == before
