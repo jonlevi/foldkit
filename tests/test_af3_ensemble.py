@@ -6,7 +6,6 @@ import pytest
 import foldkit
 from foldkit.af3_ensemble import AF3Ensemble
 
-
 PAE = [
     [0.0, 5.0, 6.0],
     [5.0, 0.0, 2.0],
@@ -107,6 +106,10 @@ def test_load_af3_result_extracts_seeds_and_samples(ensemble):
     assert ensemble.seeds == [1, 2]
     assert ensemble.samples == [0, 1]
     assert ensemble.size == 3
+
+
+def test_load_af3_result_extracts_chains(ensemble):
+    assert ensemble.chains == ['A', 'B']
 
 
 def test_load_af3_result_populates_af3_results(ensemble):

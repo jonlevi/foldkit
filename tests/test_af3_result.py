@@ -5,7 +5,6 @@ import pytest
 
 import foldkit
 
-
 TEST_DATA_DIR = "tests/test_data/multi_seed_1/seed-1_sample-3"
 
 
@@ -273,5 +272,7 @@ def test_load_af3_result_uses_dirname_as_default_id(tmp_path):
     res = foldkit.AF3Result.load_af3_result(str(result_dir))
     assert res.id == "my_job"
     assert res.chains == ["A", "B"]
+    assert res.get_chain_seq(chain="A") == "A"
+    assert res.get_chain_seq(chain="B") == "GG"
     assert res.get_ptm() == pytest.approx(0.5)
     assert res.get_iptm(chain1="A", chain2="B") == pytest.approx(0.4)

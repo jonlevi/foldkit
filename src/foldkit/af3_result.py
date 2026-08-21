@@ -1,7 +1,7 @@
 """
 foldkit.core
 Core functionality for working with AlphaFold3 results.
- 
+
 Features:
 - Load AF3 results from metadata (.json).
 - Interface for global and local confidence metrics, including ipSAE
@@ -17,6 +17,8 @@ import shutil
 import numpy as np
 import pandas as pd
 
+from Bio.PDB import is_aa
+from Bio.SeqUtils import seq1
 from .ipsae import ipsae, read_pdb
 
 
@@ -192,6 +194,72 @@ class AF3Result:
             sub1 = matrix[np.ix_(tokens1, tokens2)]
             sub2 = matrix[np.ix_(tokens2, tokens1)]
         return sub1, sub2
+
+    def get_chain_seq(self, chain: str) -> str:
+        """
+        Return protein, DNA, or RNA sequence in one-letter code of specified chain.
+
+        Parameters
+        ----------
+        chain : str
+            ID for protein, DNA, or RNA chain
+
+        Returns
+        -------
+        str
+            amino acid or nucleotide sequence
+
+        Raises
+        ------
+        ValueError
+            If `chain` is not protein, DNA, or RNA
+        """
+        self._validate_chain(chain)
+        residues = [
+            resi["res"] for resi in self.cif_residues if resi["chainid"] == chain
+        ]
+
+        is_protein = all([bool(is_aa(res)) for res in residues])
+        is_ligand = all([res == "ligand" for res in residues])
+
+        if is_protein:
+            protein_seq = seq1("".join(residues))
+            return protein_seq
+        elif is_ligand:
+            raise ValueError(f"Chain {chain} is not a protein or nucleic acid\n")
+        else:
+            nt_seq = "".join(
+                [nt[-1] for nt in residues if nt[-1] in ["G", "C", "T", "A", "U"]]
+            )
+            return nt_seq
+
+    def get_subchain_tokens(self, chain: str, subchain_seq: str) -> list[int]:
+        """
+        Return protein, DNA, or RNA sequence in one-letter code of specified chain.
+
+        Parameters
+        ----------
+        chain : str
+            ID for protein, DNA, or RNA chain
+
+        subchain_seq : str
+            Subchain protein or nucleotide sequence for specified chain ID
+
+        Returns
+        -------
+        list[int]
+           Token IDs corresponding to subchain residues. If subchain sequence is repeated, token IDs correspond to first instance
+        """
+        self._validate_chain(chain)
+        chain_seq = self.get_chain_seq(chain)
+        assert subchain_seq in chain_seq, f"{subchain_seq} not found in chain {chain}"
+        subchain_start = chain_seq.find(subchain_seq)
+        subchain_end = subchain_start + len(subchain_seq)
+
+        chain_tokens = self._chain_residue_indices(chain)
+        subchain_tokens = chain_tokens[subchain_start:subchain_end]
+
+        return subchain_tokens
 
     # ------------------------------------------------------------------
     # Confidence metrics

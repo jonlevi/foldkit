@@ -8,7 +8,6 @@ from collections.abc import Iterable
 import numpy as np
 import pandas as pd
 
-
 ## constants
 RESIDUE_SET = {
     "ALA",
@@ -136,7 +135,7 @@ def read_pdb(
             line = line.decode("utf-8")
         if line.startswith("_atom_site."):
             line = line.strip()
-            (atomsite, fieldname) = line.split(".")
+            atomsite, fieldname = line.split(".")
             atomsitefield_dict[fieldname] = atomsitefield_num
             atomsitefield_num += 1
 

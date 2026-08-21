@@ -3,6 +3,7 @@
 foldkit.cli
 Command-line interface for converting AlphaFold3 confidence outputs to NPZ format.
 """
+
 import argparse
 import argcomplete
 from argcomplete.completers import DirectoriesCompleter
