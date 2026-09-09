@@ -235,7 +235,7 @@ class AF3Result:
 
     def get_subchain_tokens(self, chain: str, subchain_seq: str) -> list[int]:
         """
-        Return protein, DNA, or RNA sequence in one-letter code of specified chain.
+        Return protein, DNA, or RNA sequence tokens.
 
         Parameters
         ----------
@@ -243,7 +243,7 @@ class AF3Result:
             ID for protein, DNA, or RNA chain
 
         subchain_seq : str
-            Subchain protein or nucleotide sequence for specified chain ID
+            Subchain protein or nucleotide sequence for specified chain ID in one-letter code of specified chain
 
         Returns
         -------

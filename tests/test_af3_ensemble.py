@@ -109,7 +109,7 @@ def test_load_af3_result_extracts_seeds_and_samples(ensemble):
 
 
 def test_load_af3_result_extracts_chains(ensemble):
-    assert ensemble.chains == ['A', 'B']
+    assert ensemble.chains == ["A", "B"]
 
 
 def test_load_af3_result_populates_af3_results(ensemble):
