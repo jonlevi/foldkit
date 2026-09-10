@@ -328,7 +328,16 @@ def test_get_subchain_tokens(result):
         208,
         209,
     ]
+
+    assert dna.get_subchain_tokens(chain="X", subchain_seq="AT") == [219, 220]
+    assert dna.get_subchain_tokens(chain="X", subchain_seq="AT", subchain_num=2) == [
+        221,
+        222,
+    ]
+
     with pytest.raises(AssertionError):
         dna.get_subchain_tokens(chain="P", subchain_seq="ABCD")
     with pytest.raises(AssertionError):
         dna.get_subchain_tokens(chain="X", subchain_seq="GUT")
+    with pytest.raises(AssertionError):
+        dna.get_subchain_tokens(chain="X", subchain_seq="AT", subchain_num=3)

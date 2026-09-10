@@ -233,7 +233,9 @@ class AF3Result:
             )
             return nt_seq
 
-    def get_subchain_tokens(self, chain: str, subchain_seq: str) -> list[int]:
+    def get_subchain_tokens(
+        self, chain: str, subchain_seq: str, subchain_num=1
+    ) -> list[int]:
         """
         Return protein, DNA, or RNA sequence tokens.
 
@@ -245,15 +247,28 @@ class AF3Result:
         subchain_seq : str
             Subchain protein or nucleotide sequence for specified chain ID in one-letter code of specified chain
 
+        subchain_num : int, default=1
+            If subchain sequence is repeated, specify which instance to return (1-indexed). Default is first instance.
         Returns
         -------
         list[int]
-           Token IDs corresponding to subchain residues. If subchain sequence is repeated, token IDs correspond to first instance
+           Token IDs corresponding to subchain residues.
         """
+
+        def find_nth(sequence, subsequence, n):
+            idx = sequence.find(subsequence)
+            while idx >= 0 and n > 1:
+                idx = sequence.find(subsequence, idx + 1)
+                n -= 1
+            return idx
+
         self._validate_chain(chain)
         chain_seq = self.get_chain_seq(chain)
         assert subchain_seq in chain_seq, f"{subchain_seq} not found in chain {chain}"
-        subchain_start = chain_seq.find(subchain_seq)
+        subchain_start = find_nth(chain_seq, subchain_seq, subchain_num)
+        assert (
+            subchain_start >= 0
+        ), f"{subchain_seq} not found in chain {chain} (instance {subchain_num})"
         subchain_end = subchain_start + len(subchain_seq)
 
         chain_tokens = self._chain_residue_indices(chain)
