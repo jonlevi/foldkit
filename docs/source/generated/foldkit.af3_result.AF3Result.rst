@@ -14,6 +14,7 @@
    .. autosummary::
    
       ~AF3Result.__init__
+      ~AF3Result.get_chain_seq
       ~AF3Result.get_contact_probs
       ~AF3Result.get_ipae
       ~AF3Result.get_ipsae
@@ -21,6 +22,7 @@
       ~AF3Result.get_pae
       ~AF3Result.get_plddt
       ~AF3Result.get_ptm
+      ~AF3Result.get_subchain_tokens
       ~AF3Result.load_af3_result
       ~AF3Result.load_compressed_result
       ~AF3Result.load_webserver_result

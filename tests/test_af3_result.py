@@ -5,8 +5,10 @@ import pytest
 
 import foldkit
 
-
 TEST_DATA_DIR = "tests/test_data/multi_seed_1/seed-1_sample-3"
+DNA_DATA_DIR = "tests/test_data/protein_dna_1cgp/seed-1_sample-0"
+RNA_DATA_DIR = "tests/test_data/protein_rna_1qa6/seed-1_sample-4"
+LIGAND_DATA_DIR = "tests/test_data/protein_ligand_1opl/seed-1234_sample-1"
 
 
 @pytest.fixture(scope="module")
@@ -273,5 +275,69 @@ def test_load_af3_result_uses_dirname_as_default_id(tmp_path):
     res = foldkit.AF3Result.load_af3_result(str(result_dir))
     assert res.id == "my_job"
     assert res.chains == ["A", "B"]
+    assert res.get_chain_seq(chain="A") == "A"
+    assert res.get_chain_seq(chain="B") == "GG"
     assert res.get_ptm() == pytest.approx(0.5)
     assert res.get_iptm(chain1="A", chain2="B") == pytest.approx(0.4)
+
+
+def test_get_chain_seq_dna():
+    dna = foldkit.AF3Result.load_af3_result(DNA_DATA_DIR)
+    assert dna.chains == ["P", "X", "Y"]
+    assert (
+        dna.get_chain_seq(chain="P")
+        == "VLGKPQTDPTLEWFLSHCHIHKYPSKSTLIHQGEKAETLYYIVKGSVAVLIKDEEGKEMILSYLNQGDFIGELGLFEEGQERSAWVRAKTACEVAEISYKKFRQLIQVNPDILMRLSAQMARRLQVTSEKVGNLAFLDVTGRIAQTLLNLAKQPDAMTHPDGMQIKITRQEIGQIVGCSRETVGRILKMLEDQNLISAHGKTIVV"
+    )
+    assert dna.get_chain_seq(chain="X") == "GCGAAAAGTGTGACATAT"
+    assert dna.get_chain_seq(chain="Y") == "GTCACACTTTTCG"
+
+
+def test_get_chain_seq_rna():
+    rna = foldkit.AF3Result.load_af3_result(RNA_DATA_DIR)
+    assert rna.chains == ["P", "X"]
+    assert (
+        rna.get_chain_seq(chain="P")
+        == "KTPPAAVLLKKAAGIESGSGEPNRNKVATIKRDKVREIAELKMPDLNAASIEAAMRMIEGTARSMGI"
+    )
+    assert (
+        rna.get_chain_seq(chain="X")
+        == "GCCAGGAUGUAGGCUUAGAAGCAGCCAUCAUUUAAAGAAAGCGUAAUAGCUCACUGGU"
+    )
+
+
+def test_get_chain_seq_cannot_get_ligand():
+    ligand = foldkit.AF3Result.load_af3_result(LIGAND_DATA_DIR)
+    assert ligand.chains == ["A", "B", "C", "D"]
+    assert (
+        ligand.get_chain_seq(chain="A")
+        == "HKLGGGQYGEVYEGVWKKYSLTVAVKTLKEDTMEVEEFLKEAAVMKEIKHPNLVQLLGVCTREPPFYIITEFMTYGNLLDYLRECNRQEVNAVVLLYMATQISSAMEYLEKKNFIHRDLAARNCLVGENHLVKVADFGLSRLMTGDTYTAHAGAKFPIKWTAPESLAYNKFSIKSDVWAFGVLLWEIATYGMSPYPGIDLSQVYELLEKDYRMERPEGCPEKVYELMRACWQWNPSDRPSFAEIHQAFETM"
+    )
+    with pytest.raises(ValueError):
+        ligand.get_chain_seq(chain="B")
+    with pytest.raises(ValueError):
+        ligand.get_chain_seq(chain="C")
+
+
+def test_get_subchain_tokens(result):
+    dna = foldkit.AF3Result.load_af3_result(DNA_DATA_DIR)
+    assert dna.get_subchain_tokens(chain="P", subchain_seq="VLGK") == [0, 1, 2, 3]
+    assert dna.get_subchain_tokens(chain="X", subchain_seq="GCGAA") == [
+        205,
+        206,
+        207,
+        208,
+        209,
+    ]
+
+    assert dna.get_subchain_tokens(chain="X", subchain_seq="AT") == [219, 220]
+    assert dna.get_subchain_tokens(chain="X", subchain_seq="AT", subchain_num=2) == [
+        221,
+        222,
+    ]
+
+    with pytest.raises(AssertionError):
+        dna.get_subchain_tokens(chain="P", subchain_seq="ABCD")
+    with pytest.raises(AssertionError):
+        dna.get_subchain_tokens(chain="X", subchain_seq="GUT")
+    with pytest.raises(AssertionError):
+        dna.get_subchain_tokens(chain="X", subchain_seq="AT", subchain_num=3)

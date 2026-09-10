@@ -61,6 +61,16 @@ different aggregation:
  
     >>> result_obj.get_ipae(chain1="B", chain2="P", agg=max)
     np.float64(29.8)
+
+Specify residue token IDs to compute the confidence metrics aggregated over subchains:
+
+.. code-block:: pycon
+
+    cdr3b_tokens = result_obj.get_subchain_tokens(chain="B", subchain_seq="CASSLWEKLAKNIQYF")
+    peptide_tokens = result_obj.get_subchain_tokens(chain="P")
+
+    >>> result_obj.get_ipae(tokens1=cdr3b_tokens, tokens2=peptide_tokens)
+    np.float64(2.59375)
  
 Ensemble of predicted structures
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

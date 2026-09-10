@@ -29,6 +29,7 @@ class AF3Ensemble:
         self.seeds: list[int] = []
         self.samples: list[int] = []
         self.size: int = []
+        self.chains: list[str] = []
 
         # Metadata
         self.id: str = None
@@ -93,6 +94,11 @@ class AF3Ensemble:
         self.size = len(self.af3_results)
         self.seeds = sorted(list(seeds))
         self.samples = sorted(list(samples))
+
+        results_chains = [result.chains for result in self.af3_results.values()]
+        first = results_chains[0]
+        assert all(result_chains == first for result_chains in results_chains)
+        self.chains = first
 
     def get_result_by_seed_and_sample(self, seed: int, sample: int) -> AF3Result:
         seed = int(seed)
