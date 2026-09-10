@@ -127,6 +127,36 @@ FoldKit's ipSAE implementation follows the methodology described by the [Dunbrac
 
 ---
 
+## Custom features using tokens
+
+FoldKit allows customization of AlphaFold3 confidence metrics on a per-residue or per-atom basis using token IDs. For example:
+
+Find residue token IDs corresponding to the peptide.
+
+```python
+>>> [int(idx) for idx in np.where(result_obj.residue_chain_ids == "P")[0]]
+[808, 809, 810, 811, 812, 813, 814, 815, 816, 817]
+```
+
+Find residue token IDs corresponding to the CDR3β subsequence of TCRβ.
+
+```python
+>>> result_obj.get_subchain_tokens(chain="B", subchain_seq="CASSLWEKLAKNIQYF")
+[288, 289, 290, 291, 292, 293, 294, 295, 296, 297, 298, 299, 300, 301, 302, 303]
+```
+
+Compute iPAE over CDR3β and peptide residues.
+
+```python
+cdr3b_tokens = result_obj.get_subchain_tokens(chain="B", subchain_seq="CASSLWEKLAKNIQYF")
+peptide_tokens = result_obj.get_subchain_tokens(chain="P")
+
+>>> result_obj.get_ipae(tokens1=cdr3b_tokens, tokens2=peptide_tokens)
+np.float64(2.59375)
+```
+
+---
+
 ## Custom aggregation functions
 
 By default, FoldKit aggregates residue-level confidence metrics using the mean.
